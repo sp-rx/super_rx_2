@@ -8,7 +8,7 @@
 <title>Super Position Rx</title>
 <style>
 html, body, table, {
-  font-size: 11px !important;
+  font-size: 10px !important;
   font-family: 'Manrope', sans-serif;
   box-sizing: border-box;
   margin: 0;
@@ -420,17 +420,19 @@ button.active {
     <a data-target="s-1">Intro</a>
     <a data-target="s0">Current Rx</a>
     <a data-target="s2">SP RX</a>
-    <a style="opacity:0.1;" data-target="s4">Summary</a>
-    <a style="opacity:0.1;" data-target="s3">Manual RX</a>
+    <a style="display:none; opacity:0.1;" data-target="s4">Summary</a>
+    <a style="display:none; opacity:0.1;" data-target="s3">Manual RX</a>
   </div>
 
   <!-- Second row -->
+<div style="display:none"
   <div style="display:flex; gap:10px; justify-content:flex-start;">
     <a style="opacity:0.1;" data-target="s-2">Bino Test</a>
 	<a style="opacity:0.1;" data-target="s5">Lenses</a>
     <a style="opacity:0.1;" data-target="s1">Analysis</a>
     <a style="opacity:0.1;" data-target="s6">How Eyes Work</a>
   </div>
+</div>
 </nav>
 </div>
 
@@ -547,7 +549,7 @@ Exam Date : <input style="height:20px; width:35%" type="text" id="dateInput">
 </tr>
 
 
-<tr><th class="red" colspan="4"><i>Load a file by copying everything and pasting in any input, press this button to use latest RX. </i><br>
+<tr style="display:none"><th class="red" colspan="4"><i>Load a file by copying everything and pasting in any input, press this button to use latest RX. </i><br>
 
 <button style="margin-top:5px; margin-right:15px; background-color:white; border-radius:10px; height:25px; width:180px" id="fillCurrentBtn">Use SP RX</button>
 
@@ -2113,7 +2115,7 @@ const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s
 
 </td></tr>
 
-<tr><th class="yellow" colspan="4">Please Press Update All! 
+<tr style="display:none"><th class="yellow" colspan="4">Please Press Update All! 
 <button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
 <br><br>
 Status : <button id="statusSP"
