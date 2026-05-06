@@ -420,16 +420,16 @@ button.active {
     <a data-target="s-1">Intro</a>
     <a data-target="s0">Current Rx</a>
     <a data-target="s2">SP RX</a>
-    <a style="display:none; opacity:0.1;" data-target="s4">Summary</a>
+    <a data-target="s1">Analysis</a>
     <a style="display:none; opacity:0.1;" data-target="s3">Manual RX</a>
   </div>
 
   <!-- Second row -->
 <div style="display:none"
   <div style="display:flex; gap:10px; justify-content:flex-start;">
+    <a style="display:none; opacity:0.1;" data-target="s4">Summary</a>
     <a style="opacity:0.1;" data-target="s-2">Bino Test</a>
-	<a style="opacity:0.1;" data-target="s5">Lenses</a>
-    <a style="opacity:0.1;" data-target="s1">Analysis</a>
+    <a style="opacity:0.1;" data-target="s5">Lenses</a>
     <a style="opacity:0.1;" data-target="s6">How Eyes Work</a>
   </div>
 </div>
@@ -2760,7 +2760,7 @@ NOC :
    <div id="s1" class="section">
 <div style="height:90px"></div>
 
-
+<div style="display:none">
 <div style="margin-top:20px; display:flex; justify-content:center; gap:7px;">
 
   <button class="blue" style="border-radius:10px; height:25px; width:70px" id="toggleMask1">
@@ -2783,11 +2783,11 @@ NOC :
 
 </div>
 
-
+</div>
 
 <table>
 
-<tr><th colspan="4">RX Change & Bino Imbalance Analysis <button class="toggleMask3"
+<tr style="display:none" ><th colspan="4">RX Change &amp; Bino Imbalance Analysis <button class="toggleMask3"
   style="
     border-radius:10px;
     font-size: 8px;
@@ -2801,14 +2801,6 @@ NOC :
   Hide/Show
 </button></th></tr>
 <tbody class="mask3 hidden-row">
-
-
-<tr style="border:none; height:10px;">
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-</tr>
 
 
 
@@ -2886,12 +2878,7 @@ NOC :
 </tr>
 </tbody>
 
-<tr style="border:none; height:10px;">
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-</tr>
+
 
 
 <tr><th colspan="4">Blur Value</th></tr>
@@ -2913,20 +2900,20 @@ Prescription comes in many types of errors; whether it's myopia, hyperopia or as
 
     <!-- SPH -->
     <div style="text-align:center;">
-      <label><b>SPH</b></label><br>
-      <input type="number" id="sph_test" step="0.25" value="0.00" class="rx-input"><br>
       <div>
         <button onclick="adj('sph_test',-0.25)" class="btn-minus">−0.25</button>
         <button onclick="adj('sph_test', 0.25)" class="btn-plus">+0.25</button><br>
         <button onclick="adj('sph_test',-0.50)" class="btn-minus">−0.50</button>
         <button onclick="adj('sph_test', 0.50)" class="btn-plus">+0.50</button><br>
        </div>
+<br>
+      <label><b>SPH</b></label><br>
+      <input type="number" id="sph_test" step="0.25" value="0.00" class="rx-input"><br>
+
     </div>
 
     <!-- CYL -->
     <div style="text-align:center;">
-      <label><b>CYL</b></label><br>
-      <input type="number" id="cyl_test" step="0.25" value="0.00" class="rx-input"><br>
       <div>
         <button onclick="adj('cyl_test',-0.25)" class="btn-minus">−0.25</button>
         <button onclick="adj('cyl_test', 0.25)" class="btn-plus">+0.25</button><br>
@@ -2934,21 +2921,29 @@ Prescription comes in many types of errors; whether it's myopia, hyperopia or as
         <button onclick="adj('cyl_test', 0.50)" class="btn-plus">+0.50</button><br>
 
       </div>
+<br>
+      <label><b>CYL</b></label><br>
+
+      <input type="number" id="cyl_test" step="0.25" value="0.00" class="rx-input"><br>
+
     </div>
 
     <!-- AXIS -->
     <div style="text-align:center;">
-      <label><b>AXIS</b></label><br>
-      <input type="number" id="axis_test" min="0" step="15" value="0" class="rx-input"><br>
       <div>
         <button onclick="adj('axis_test', -15)"  class="btn-minus">−15</button>
         <button onclick="adj('axis_test',  15)"  class="btn-plus">+15</button><br>        
 	<button onclick="adj('axis_test', -30)"  class="btn-minus">−30</button>
         <button onclick="adj('axis_test',  30)"  class="btn-plus">+30</button><br>
       </div>
+<br>
+      <label><b>AXIS</b></label><br>
+      <input type="number" id="axis_test" min="0" step="15" value="0" class="rx-input"><br>
+
     </div>
   </div>
 
+<div style="display:none">
 <div style="
   display:grid;
   grid-template-columns: repeat(3, 25%);
@@ -2963,6 +2958,7 @@ Prescription comes in many types of errors; whether it's myopia, hyperopia or as
   <button style="width:100%" onclick="highlightRx(this,'sph_test',-2.00)">High Near-Sighted</button>
   <button style="width:100%" onclick="highlightRx(this,'sph_test',2.00)">High Far-Sighted</button>
   <button style="width:100%" onclick="highlightRx(this,'cyl_test',-2.00)">High Astig</button>
+</div>
 </div>
 
 <style>
@@ -5543,8 +5539,8 @@ else {
   };
 
   /* ========= TUNABLES ========= */
-  const PX_PER_D = 2;
-  const K_BLUR_PER_D = 2;
+  const PX_PER_D = 4;
+  const K_BLUR_PER_D = 4;
   const EXTRA_ASTIG_BLUR_PER_D = 0;
   const OVERLAY_ALPHA = 0.5;
   const FC_BLUR_GAIN = 0.5;
