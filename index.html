@@ -2232,7 +2232,7 @@ Manual Refraction
 </th></tr>
 
 
-<tr><td colspan="4"><b><i>
+<tr style="border-bottom:none"><td style="border-bottom:none" colspan="4"><b><i>
 <b><i>Troubleshooter</b></i><br>  
 Use this to know what RX to fit next based on patient's response.
 </b></i><br>
@@ -2244,19 +2244,11 @@ Use this to know what RX to fit next based on patient's response.
 
 
   <!-- Inputs -->
-  <div class="row">
+  <div style="margin-bottom:15px" class="row">
     <label>SPH : <input id="TS_sph" type="number" step="0.25"></label>
     <label>CYL : <input id="TS_cyl" type="number" step="0.25" ></label>
     <label>AXIS : <input id="TS_axis" type="number" step="5" min="0" max="180"></label>
 </div>
-
-<br>
-  <div style="margin-top:15px" class="row">
-    <button style="width:33%; margin-right:2%" onclick="runAllCalculations()">Calculate RX</button>
-
-    <button style="width:18%; margin-right:2%"id="lockFinalBtn">Save to List</button>
-    <button style="width:18%; "id="resetBtn">Reset to 0</button>
-  </div><br>
 
   <!-- Dropdowns -->
   <div class="row">
@@ -2287,7 +2279,13 @@ Use this to know what RX to fit next based on patient's response.
       <label>Darker Axis : </label>
       <select style="width:50%" id="axisDarker"></select>
     </div>
-  </div><br>
+  </div>
+  <div style="margin-top:15px; margin-bottom:15px" class="row">
+    <button style="width:18%; margin-right:2%" onclick="runAllCalculations()">Calculate RX</button>
+
+    <button style="width:18%; margin-right:2%"id="lockFinalBtn">Save to List</button>
+    <button style="width:18%; "id="resetBtn">Reset to 0</button>
+  </div>
 
   <div style="height:90px" id="result"><i>- Press Calculate RX to see Results -</div>
   </table>
@@ -2881,7 +2879,7 @@ NOC :
 
 
 
-<tr><th colspan="4">Blur Value</th></tr>
+<tr><th class="red" colspan="4">Blur Value</th></tr>
 
 <tr>
 <td colspan="4">
