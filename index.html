@@ -449,25 +449,25 @@ button.active {
 <tr><th class="red" colspan="1">Intro</th></tr>
 
 <tr>
-  <td>
+  <td style="border:none; padding:none">
     <img src="https://raw.githubusercontent.com/sp-rx/super_rx_2/refs/heads/main/1.png" style="width:100%;">
   </td>
 </tr>
 
 <tr>
-  <td>
+  <td style="border:none; padding:none">
     <img src="https://raw.githubusercontent.com/sp-rx/super_rx_2/refs/heads/main/2.png" style="width:100%;">
   </td>
 </tr>
 
 <tr>
-  <td>
+  <td style="border:none; padding:none">
     <img src="https://raw.githubusercontent.com/sp-rx/super_rx_2/refs/heads/main/3.png" style="width:100%;">
   </td>
 </tr>
 
 <tr>
-  <td>
+  <td style="border:none; padding:none">
     <img src="https://raw.githubusercontent.com/sp-rx/super_rx_2/refs/heads/main/4.png" style="width:100%;">
   </td>
 </tr>
@@ -1799,7 +1799,7 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 </div>
 
 <table>
-<tr><td colspan="1">Import Vectors</td>
+<tr class="red"><td colspan="1">Import Vectors</td>
 	
 	
 	<td colspan="3">
@@ -1848,7 +1848,7 @@ function runBE() {
 
 
 
-<button class="vtbn" onclick="toggleSPChanges()">SP Delta</button>
+<button style="display:none" class="vtbn" onclick="toggleSPChanges()">SP Delta</button>
 </td></tr>
 
 
@@ -1878,6 +1878,12 @@ function runBE() {
   <td id="vc_crossC">-</td>
   <td id="vc_crossA">-</td>
 </tr>
+
+<tr style="display:none" ><th class="red" colspan="4">Please Press Update All! 
+<button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
+</th></tr>
+
+
 
 <tr style="border:none; height:10px;">
   <td style="border:none; height:1px; padding:0;"></td>
@@ -1916,10 +1922,15 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
   <td id="logRELE" colspan="3"><i>Loading....</i></td>
 </tr>
 
-<tr><td colspan="4" style="height:5px; border:none"></td></tr>
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
 	
 <tr>
-  <td class="red">CL</td>
+  <td class="red">Current RX CL</td>
   <td colspan="3" class="red">
 
 R : <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
@@ -1928,11 +1939,11 @@ L : <span id="CL_os_origCombined">OS -</span>
 </tr>
 
 	<tr class="yellow">
-  <td colspan="1">CL</td>
+  <td colspan="1">SP RX BE CL</td>
   <td colspan="3" id="logBE_CL"><i>Loading....</i></td>
 </tr>
 <tr class="purp">
-  <td colspan="1">CL</td>
+  <td colspan="1">SP RX RE / LE CL</td>
 
   <td id="logRELE_CL" colspan="3"><i>Loading....</i></td>
 </tr>
@@ -2030,6 +2041,9 @@ const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s
 </td>
 
 </tr>
+
+
+
 <tr><td colspan="4">Visualizer
 <button class="vtbn" onclick="togglevisualizer()">Show / Hide</button>
 </td></tr>
@@ -2172,11 +2186,8 @@ const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s
 
 </td></tr>
 
-<tr style="display:none"><th class="yellow" colspan="4">Please Press Update All! 
-<button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
-</th></tr>
 
-	<tr><th>
+	<tr style="display:none"><th class="yellow" colspan="4">
 Status : <button id="statusSP"
         data-value="Not Done - Invalid"
         style="font-size:11px; border-radius:10px; height:25px; margin-left:2px; width:120px"
