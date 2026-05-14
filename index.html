@@ -1891,14 +1891,6 @@ L: <span class="os_summary">+0.00 / +0.00 × 0</span>
 </td>
 </tr>
 
-<tr>
-  <td class="red">CL</td>
-  <td colspan="3" class="red">
-
-R : <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
-L : <span id="CL_os_origCombined">OS -</span>
-  </td>
-</tr>
 
 
 <tr style="display:none">
@@ -1913,15 +1905,26 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
   <td colspan="1">SP RX BE</td>
   <td colspan="3" id="logBE"><i>Loading....</i></td>
 </tr>
-<tr class="yellow">
-  <td colspan="1">CL</td>
-  <td colspan="3" id="logBE_CL"><i>Loading....</i></td>
-</tr>
+
 
 <tr class="purp">
   <td colspan="1">SP RX RE / LE</td>
 
   <td id="logRELE" colspan="3"><i>Loading....</i></td>
+</tr>
+	
+<tr>
+  <td class="red">CL</td>
+  <td colspan="3" class="red">
+
+R : <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
+L : <span id="CL_os_origCombined">OS -</span>
+  </td>
+</tr>
+
+	<tr class="yellow">
+  <td colspan="1">CL</td>
+  <td colspan="3" id="logBE_CL"><i>Loading....</i></td>
 </tr>
 <tr class="purp">
   <td colspan="1">CL</td>
@@ -2166,7 +2169,9 @@ const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s
 
 <tr style="display:none"><th class="yellow" colspan="4">Please Press Update All! 
 <button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
-<br><br>
+</th></tr>
+
+	<tr><th>
 Status : <button id="statusSP"
         data-value="Not Done - Invalid"
         style="font-size:11px; border-radius:10px; height:25px; margin-left:2px; width:120px"
