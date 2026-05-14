@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Super Position Rx</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 html, body, table, {
   font-size: 10px !important;
@@ -24,7 +26,58 @@ html, body, table, {
 max-width:570px;
 }
 
+    .card {width:100%; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+    .row { display: flex; align-items: flex-end; gap: 8px; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field label { font-size: 11px; color: #666; }
+    .field input, .field select {
+      font-size: 13px; padding: 6px 10px;
+      border: 1px solid #ccc; border-radius: 8px;
+      background: #f7f7f7; color: #111; width: 100px;
+    }
+    .field select { width: 160px; }
+    .field input:focus { outline: none; border-color: #888; }
+    .btn {
+      font-size: 12px; padding: 7px 14px;
+      border: 1px solid #ccc; border-radius: 8px;
+      background: transparent; color: #111;
+      cursor: pointer; white-space: nowrap;
+    }
 
+   .result-label { font-size: 11px; color: #888; margin-bottom: 2px; }
+    .result-val { font-size: 15px; font-weight: 600; color: #111; }
+    .divider { border: none; border-top: 1px solid #eee; margin: 1rem 0; }
+    .two-col { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .inline-result { font-size: 11px; color: #666; margin-top: 4px; }
+    .inline-result span { font-weight: 400; color: #111; }
+    .info-note { font-size: 12px; color: #888; line-height: 1.5; margin-top: 0.5rem; }
+.duochrome-img {
+  width: 100%;
+  aspect-ratio: 24 / 9;
+  object-fit: cover;
+  object-position: center 15%;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+
+    .toggle-btn {
+      font-size: 11px; padding: 10px 20px;
+      border: 1px solid #ddd; border-radius: 8px;
+      background: color: #888; cursor: pointer;
+    }
+    .toggle-btn:hover { background: #f0f0f0; }
+    .slider-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 0.75rem; font-size: 12px; color: #666;
+    }
+    .slider-row input[type=range] { flex: 1; }
+    .output-cell { background: #fff; border-radius: 8px; padding: 0.6rem 0.75rem; }
+    .output-cell .lbl { font-size: 11px; font-weight: 400; color: #111;; margin-bottom: 2px; }
+    .output-cell .val { font-size: 11px; font-weight: 600; color: #111; }
+    .section-title { font-size: 13px; font-weight: 500; color: #888;  
+}
 
 .SPhelper-rx span{
   margin-bottom: 6px;
@@ -60,7 +113,7 @@ th.yellow, tr.yellow, td.yellow, button.yellow {
 }
 
 th.turq, tr.turq, td.turq, button.turq {
-  background: #EEDCF5;
+  background: #E4E0FF;
   color: black;
 }
 
@@ -243,8 +296,8 @@ body, table, th, td, input, button {
 .topMenu a:hover {
   text-decoration: underline;
 }
-  .card{ background:#fff; border-radius:10px; padding:20px 10px;
-    box-shadow:0 0 10px rgba(0,0,0,.25); display:inline-block; border:1px solid #bbb; margin:8px 0 14px; }
+  .card{ border-radius:10px; padding:20px 10px;
+    display:inline-block;}
   .row input[type=number]{ width:70px; text-align:center; }
   .row b{ display:inline-block; margin-bottom:6px; }
   button{ margin:0px; padding:5px 10px; cursor:pointer; border-radius:6px }
@@ -413,6 +466,7 @@ button.active {
 
 
 <div id="topBlock">
+
  <h2>Ready?</h2>
 <nav class="topMenu" style="user-select:none;">
   <!-- First row -->
@@ -420,17 +474,19 @@ button.active {
     <a data-target="s-1">Intro</a>
     <a data-target="s0">Current Rx</a>
     <a data-target="s2">SP RX</a>
-    <a data-target="s1">Analysis</a>
-    <a opacity:0.1;" data-target="s3">Manual RX</a>
   </div>
 
   <!-- Second row -->
-<div style="display:none"
+<div>
   <div style="display:flex; gap:10px; justify-content:flex-start;">
+    <a data-target="s3">Manual RX</a>
+    <a data-target="snear">Near RX</a>
+    <a data-target="s1">Analysis</a>
+
     <a style="display:none; opacity:0.1;" data-target="s4">Summary</a>
-    <a style="opacity:0.1;" data-target="s-2">Bino Test</a>
-    <a style="opacity:0.1;" data-target="s5">Lenses</a>
-    <a style="opacity:0.1;" data-target="s6">How Eyes Work</a>
+    <a style="display:none; opacity:0.1;" data-target="s-2">Bino Test</a>
+    <a style="display:none; opacity:0.1;" data-target="s5">Lenses</a>
+    <a style="display:none; opacity:0.1;" data-target="s6">How Eyes Work</a>
   </div>
 </div>
 </nav>
@@ -440,6 +496,202 @@ button.active {
 
 <div class="layout">
   <main id="content" class="content">
+
+
+
+
+    <div id="snear" class="section">
+<div style="height:90px"></div>
+
+
+<table>
+<tr><th class="red" colspan="4">Near RX</th></tr>
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
+
+
+
+
+
+  <!-- MINIMAL & BALANCE ADD -->
+<div style="display:none" >
+    <h2>Minimal add, Red Side Blur</h2>
+    <p class="section-title" style="margin-bottom:0.75rem">Pull nearer and stop when RED side blurrier</p>
+    <div class="row">
+      <div class="field"><label>Add (D)</label><input value="1.50" type="number" step="0.25" id="add1"></div>
+      <div class="field"><label>Length (cm)</label><input value="28" type="number" step="1" id="np1"></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn" id="btn1" onclick="calcAccom()">Calculate</button>
+        <button class="btn btn-sm" onclick="clearLine1()">Clear</button>
+      </div>
+    </div>
+<div  style="display:none" >
+    <div id="res1" style="display:none" class="result-box">
+      <div class="result-label">Eye accommodation</div>
+      <div class="result-val" id="res1val">—</div>
+    </div>
+</div>
+</div>
+
+
+<tr><td class="red" style="border-bottom:none" colspan="4">
+
+<span><b> Nearest Balance - Pull until nearest point of clear balance. </b></span>
+
+</td></tr>
+
+<tr><td style="border:none" colspan="4">
+
+
+
+Add : <input style="margin-right:4%"  value="1.50" type="number" step="0.25" id="add1b">
+
+Length (cm) : <input style="margin-right:4%" value="33" type="number" step="1" id="np1b">
+
+        <button class="normal-btn" id="btn1b" onclick="calcAccomB()">Calculate</button>
+
+      <div style="display:flex;gap:8px">
+
+        <button style="display:none" class="normal-btn" onclick="clearLine2()">Clear</button>
+      </div>
+    </div>
+<div style="display:none">
+    <div id="res1b" style="display:none" class="result-box">
+      <div class="result-label">Eye accommodation (balance)</div>
+      <div class="result-val" id="res1bval">—</div>
+    </div>
+
+</td></tr>
+
+<tr><td class="red" style="border-bottom:none" colspan="4">
+
+    <span><b>Calculate Near &amp; Mid Length Add Requirement</span></b>
+
+</td></tr>
+
+<tr><td style="border:none" colspan="4">
+<div>
+Near Length (cm) : <input style="margin-right:4%" value="30" type="number" step="1" id="wd1"> 
+
+<button style="margin-right:4%" class="normal-btn" id="btnWd1" onclick="calcBothWd1()">Calculate</button>
+Near Add :  <span id="result1b">—</span>
+
+</div>
+
+
+        <div style="display:none" class="inline-result">Minimal add: <span id="result1">—</span></div>
+
+
+
+
+
+<div style="margin-top:10px">
+Mid Length (cm) : <input  style="margin-right:4%" value="50" type="number" step="1" id="wd2">
+<button  style="margin-right:4%" class="normal-btn" id="btnWd2" onclick="calcBothWd2()">Calculate</button>
+        Mid add :  <span id="result2b">—</span>
+
+
+        </div>
+        <div style="display:none" class="inline-result">Minimal add: <span id="result2">—</span></div>
+      </div>
+    </div>
+
+
+</td></tr>
+
+<tr><td class="red" style="border-bottom:none" colspan="4">
+
+  <span><b>  Inset, corridor &amp; add calculator </b></span>
+
+
+</td></tr>
+
+<tr><td style="border:none" colspan="4">
+
+<div>
+Bino PD (mm) : <input style="width:50px; margin-right:4%"  value="65" type="number" id="pd">
+      Vertex (mm) : <input style="width:50px; margin-right:4%" value="12" type="number" step="2" id="vd">
+
+      Pupil H (mm) : <input style="width:50px; margin-right:4%" value="25" type="number" id="ph"></div>
+
+<div style="margin-top:10px">
+
+    Eye-level vision : 
+        <select style="width:120px; font-size:11px; padding:2px; margin-right:4%" id="fit">
+          <option value="4">Normal</option>
+          <option value="2">Near emphasis</option>
+          <option value="6">Far emphasis</option>
+        </select>
+
+
+
+    <button class="normal-btn" id="btnMain" onclick="calculate()">Calculate</button>
+
+</div>
+
+    <div id="output" style="margin-top:0.75rem"></div>
+
+
+<div style="height:15px"></div>
+
+    <span>Ideal multifocal reading distance 40 cm. 20% visual field loss for every 10 cm shorter or further.</span>
+  </div>
+
+  <!-- WORKING DISTANCE GRAPH -->
+</td></tr>
+
+<tr><td style="border-bottom:none" colspan="4">
+      <button class="normal-btn" onclick="toggle('graph-body')">Near Vision Graph Show / Hide</button>
+    </div>
+    <div id="graph-body" style="display:none">
+      <div class="slider-row">
+        <span style="min-width:80px">Near (cm)</span>
+        <input type="range" id="leftSlider" min="10" max="60" value="30" step="5">
+        <span id="leftValue" style="min-width:24px">30</span>
+      </div>
+      <div class="slider-row">
+        <span style="min-width:80px">Mid (cm)</span>
+        <input type="range" id="rightSlider" min="20" max="170" value="80" step="5">
+        <span id="rightValue" style="min-width:24px">80</span>
+      </div>
+
+
+      <canvas id="addGraph" style="margin-top:0.5rem;width:100%;max-height:320px;max-width:550px"></canvas>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+</td></tr>
+
+
+<tr><td style="border:none" colspan="4">
+      <button class="normal-btn" onclick="toggle('duo-body')">Duochrome  Show / Hide</button>
+    </div>
+    <div id="duo-body" style="display:none">
+      <img src="https://raw.githubusercontent.com/kiaraoptometrypx/mobile_test/main/Near.png" class="duochrome-img">
+
+</td></tr>
+
+</table>
+
+
+</div>
+
+
+
+
 
     <div id="s-1" class="section">
 <div style="height:90px"></div>
@@ -1165,7 +1417,7 @@ DC SPH: <span style="margin-right:30px" id="balanceBoth"></span>FC CYL: <span id
 <tr class="befinal-row yellow" style="border-top:none; border-bottom:none">
 <td style="border-top:none; border-bottom:none" colspan="4">
 
-     DC Bal: <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouS">
+     DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouS">
  
     CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouC">
 
@@ -1459,20 +1711,19 @@ DC SPH: <span style="margin-right:30px" id="balanceRight"></span>FC CYL: <span i
 </td>
 </tr>
 
-<tr class="refinal-row purp" style="border-top:none; border-bottom:none"><td style="border-top:none; border-bottom:none" colspan="1">FC DC Bal RE<br>
+<tr class="refinal-row purp" style="border-top:none; border-bottom:none">
+<td style="border-top:none; border-bottom:none" colspan="4">
 
-</td>
+     DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_odS">
+ 
+    CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_odC">
 
-   <td style="border-top:none;">
-     Sph : <input type="number" step="0.25" id="vd_odS"><br>
-  </td>
-  <td style="border-top:none;">
-    Cyl : <input type="number" step="0.25" id="vd_odC"><br>
-  </td>
-  <td style="border-top:none;">
-    Axis : <input type="number" step="5" min="0" max="180" id="vd_odA"><br>
+    Darker Axis : <input style="width:60px" type="number" step="5" min="0" max="180" id="vd_odA">
+
   </td>
 </tr>
+
+
 <tr>
 <td style="font-weight:600;" class="purp" colspan="4">Finalized Vector RX over Right Eye Only 
     <span style="margin:0 15px" id="vd_out_odS">-</span> / 
@@ -1743,18 +1994,17 @@ DC SPH: <span style="margin-right:30px" id="balanceLeft"></span>FC CYL: <span id
 </tr>
 
 
-<tr class="turq" style="border-top:none; border-bottom:none"><td style="border-top:none; border-bottom:none" colspan="1">FC DC Bal LE<br>
-</td>
-<td style="border-top:none;">
-     Sph : <input type="number" step="0.25" id="vd_osS"><br>
-  </td>
-  <td style="border-top:none;">
-    Cyl : <input type="number" step="0.25" id="vd_osC"><br>
-  </td>
-  <td style="border-top:none;">
-    Axis : <input type="number" step="5" min="0" max="180" id="vd_osA"><br>
+<tr class="lefinal-row turq" style="border-top:none; border-bottom:none"><td style="border-top:none; border-bottom:none" colspan="4">
+
+     DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_osS">
+ 
+    CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_osC">
+
+    Darker Axis : <input style="width:60px" type="number" step="5" min="0" max="180" id="vd_osA">
+
   </td>
 </tr>
+
 <tr>
 <td style="font-weight:600;" class="turq" colspan="4">Finalized Vector RX over Left Eye Only
     <span style="margin:0 15px" id="vd_out_osS">-</span> / 
@@ -7355,6 +7605,475 @@ function resetRx(){
   setRx('axis_test', 180);
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+let eyeAccommodation = null;
+let eyeAccommodationB = null;
+let chart = null;
+
+function toggle(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function roundUp025(v) { return Math.ceil(v * 4) / 4; }
+
+function calcAccom() {
+  const add1 = parseFloat(document.getElementById('add1').value);
+  const np1 = parseFloat(document.getElementById('np1').value);
+  if (isNaN(add1) || isNaN(np1) || np1 <= 0) { alert('Enter a valid add + near point.'); return; }
+  eyeAccommodation = 100 / np1 - add1;
+  document.getElementById('res1val').textContent = eyeAccommodation.toFixed(2) + ' D';
+  document.getElementById('res1').style.display = 'block';
+  document.getElementById('btn1').classList.add('active');
+  plotGraph();
+}
+
+function calcAccomB() {
+  const add1b = parseFloat(document.getElementById('add1b').value);
+  const np1b = parseFloat(document.getElementById('np1b').value);
+  if (isNaN(add1b) || isNaN(np1b) || np1b <= 0) { alert('Enter a valid add + near point.'); return; }
+  eyeAccommodationB = 100 / np1b - add1b;
+  document.getElementById('res1bval').textContent = eyeAccommodationB.toFixed(2) + ' D';
+  document.getElementById('res1b').style.display = 'block';
+  document.getElementById('btn1b').classList.add('active');
+  plotGraph();
+}
+
+function clearLine1() {
+  eyeAccommodation = null;
+  document.getElementById('res1').style.display = 'none';
+  document.getElementById('btn1').classList.remove('active');
+  document.getElementById('add1').value = '';
+  document.getElementById('np1').value = '';
+  plotGraph();
+}
+
+function clearLine2() {
+  eyeAccommodationB = null;
+  document.getElementById('res1b').style.display = 'none';
+  document.getElementById('btn1b').classList.remove('active');
+  document.getElementById('add1b').value = '';
+  document.getElementById('np1b').value = '';
+  plotGraph();
+}
+
+function calculateAdd(inputId, resultId, accommodation) {
+  const wd = parseFloat(document.getElementById(inputId).value);
+  if (isNaN(wd) || wd <= 0) {
+    document.getElementById(resultId).textContent = '—';
+    return;
+  }
+
+  let addNeeded = 100 / wd - accommodation;
+
+  if (addNeeded < 0) addNeeded = 0;
+  if (addNeeded > 4) addNeeded = 4;
+
+  let finalAdd = roundUp025(addNeeded);
+
+
+
+  document.getElementById(resultId).textContent =
+    '+' + finalAdd.toFixed(2);
+}
+
+function calcBothWd1() {
+  if (eyeAccommodation !== null) calculateAdd('wd1', 'result1', eyeAccommodation);
+  if (eyeAccommodationB !== null) calculateAdd('wd1', 'result1b', eyeAccommodationB);
+}
+
+function calcBothWd2() {
+  if (eyeAccommodation !== null) calculateAdd('wd2', 'result2', eyeAccommodation);
+  if (eyeAccommodationB !== null) calculateAdd('wd2', 'result2b', eyeAccommodationB);
+}
+
+function roundCorridor(val) {
+  if (val < 10.5) return 9;
+  if (val < 12.5) return 11;
+  if (val < 14.5) return 13;
+  return 15;
+}
+
+const corridorDisplayMap = {
+9: '(4 + 5) 9',
+11: '(4 + 7) 11',
+13: '(4 + 9) 13',
+15: '(4 + 11) 15'
+}
+
+function getResultAdd(id) {
+  const val = document.getElementById(id).textContent;
+  return parseFloat(val.replace('+', '')) || 0;
+}
+
+function corridorAddAdjustment(realCorridor, baseAdd) {
+  if (realCorridor >= 9) return 0;
+
+  const deficit = 9 - realCorridor;
+  const addPercent = deficit * 10;
+
+  const extraAdd = baseAdd * (addPercent / 100);
+
+  return Math.round(extraAdd * 4) / 4;
+}
+
+function calculate() {
+  const pd = parseFloat(document.getElementById('pd').value);
+  const wd_cm = parseFloat(document.getElementById('wd1').value);
+  const vd = parseFloat(document.getElementById('vd').value);
+  const ph = parseFloat(document.getElementById('ph').value);
+  const offset = parseFloat(document.getElementById('fit').value);
+  if (isNaN(pd) || isNaN(wd_cm) || isNaN(vd) || isNaN(ph)) {
+    document.getElementById('output').innerHTML = '<span style="color:#888;font-size:13px">Please fill all fields above.</span>';
+    return;
+  }
+  const wd = wd_cm * 10;
+const inset = (pd / 2) * ((vd + 12)  / (12 + wd));
+const nearPd = pd - (inset * 2);
+const fittingHeight = Math.round(ph - offset);
+const fhDiff = Math.round(fittingHeight - ph);
+
+function corridor(angle) { 
+return (vd + 12) * Math.tan(angle * Math.PI / 180); 
+}
+
+const corr35Raw = corridor(35) - offset - 4;
+const corr45Raw = corridor(40) - offset - 4;
+const corr55Raw = corridor(45) - offset - 4;
+
+const corr35 = roundCorridor(corr35Raw);
+const corr45 = roundCorridor(corr45Raw);
+const corr55 = roundCorridor(corr55Raw);
+
+const baseAdd = getResultAdd('result1b');
+
+const adj35 = corridorAddAdjustment(corr35Raw, baseAdd);
+const adj45 = corridorAddAdjustment(corr45Raw, baseAdd);
+const adj55 = corridorAddAdjustment(corr55Raw, baseAdd);
+
+function corridorNote(adj) {
+  if (!adj) return '';
+  return `+${adj.add.toFixed(2)}`;
+}
+  document.getElementById('output').innerHTML = `
+
+    <div class="output-cell">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr ;gap:20px">
+
+<div><div class="lbl">Adjusted fitting height</div><div class="val"> ${Math.round(fittingHeight)} mm
+<span>( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} mm )</span></div></div>
+
+<div>
+  <div class="lbl">Near PD</div>
+  <div class="val">${nearPd.toFixed(1)} mm</div>
+</div>
+
+ <div><div class="lbl">Near Inset (per eye)</div><div class="val">${inset.toFixed(2)} mm</div></div>
+</div>
+</div>
+
+
+
+<div style="height:15px"></div>
+
+    <div class="output-cell">
+    <span>Select 1 Corridor Types</span>
+<div style="height:15px"></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr ;gap:20px">
+<div>
+  <div class="lbl">1. Easier Near Zone</div>
+  <div class="val">
+    ${corridorDisplayMap[corr35]} mm 
+${adj35 ? `+${adj35.toFixed(2)} more` : ''}
+  </div>
+</div>
+
+<div>
+  <div class="lbl">2. Balance Zone</div>
+  <div class="val">
+    ${corridorDisplayMap[corr45]} mm 
+${adj45 ? `+${adj45.toFixed(2)} more` : ''}
+ </div>
+</div>
+
+<div>
+  <div class="lbl">3. Easier Mid Zone</div>
+  <div class="val">
+    ${corridorDisplayMap[corr55]} mm 
+${adj55 ? `+${adj55.toFixed(2)} more` : ''}
+  </div>
+</div>
+</div>
+</div>
+
+
+
+      </div>
+    </div>
+  `;
+  document.getElementById('btnMain').classList.add('active');
+
+}
+
+function plotGraph() {
+  const datasets = [];
+
+  // Balance line
+
+
+
+
+  if (eyeAccommodationB !== null) {
+
+
+  // ADD dots
+  const dotData = [];
+  for (let addVal = 0.5; addVal <= 5; addVal += 0.5) {
+    if (eyeAccommodationB !== null) {
+      let wdB = 100 / (eyeAccommodationB + addVal);
+      if (wdB >= 5 && wdB <= 70) {
+        dotData.push({ x: wdB, y: addVal });
+      }
+    }
+  }
+
+  if (dotData.length) {
+    datasets.push({
+      label: 'Add',
+      data: dotData,
+      pointBackgroundColor: '#e24b4a',
+      pointRadius: 0,
+      showLine: false
+    });
+  }
+
+    const pts = [];
+    for (let d = 5; d <= 160; d++) {
+      let add = 100 / d - eyeAccommodationB;
+      if (add < 0) add = 0;
+      if (add > 5) add = 5;
+      pts.push({ x: d, y: add });
+    }
+
+    datasets.push({
+      label: 'Balance',
+      data: pts,
+      borderColor: '#ef9f27',
+      borderWidth: 0,
+      fill: false,
+      pointRadius: 0,
+      tension: 0.3
+    });
+  }
+
+  // Inverse line (cm → diopter)
+  const inversePts = [];
+  for (let cm = 5; cm <= 160; cm += 1) {
+    inversePts.push({
+      x: cm,
+      y: 100 / cm
+    });
+  }
+
+  datasets.push({
+    label: 'Max',
+    data: inversePts,
+    borderColor: '#ef9f27',
+    borderWidth: 0,
+    fill: false,
+    pointRadius: 0,
+    tension: 0
+  });
+
+// Inverse dots (every 0.5D)
+const inverseDots = [];
+for (let d = 0.5; d <= 5; d += 0.5) {
+let cm = (100 / d) * 0.9;
+  if (cm >= 5 && cm <= 300) {
+    inverseDots.push({ x: cm, y: d });
+  }
+}
+
+datasets.push({
+  label: 'Max dots',
+  data: inverseDots,
+  pointBackgroundColor: '#e24b4a',
+  pointRadius: 0,
+  showLine: false
+});
+
+// Horizontal connectors (same add plane)
+const hLines = [];
+
+for (let d = 0.5; d <= 5; d += 0.5) {
+  const xMax = (100 / d) * 0.9; // inverse line
+
+  // balance line intersection (only if available)
+  if (eyeAccommodationB !== null) {
+    const xBal = 100 / (eyeAccommodationB + d);
+
+    if (xBal >= 5 && xBal <= 160 && xMax >= 5 && xMax <= 300) {
+      hLines.push({
+        label: 'plane',
+        data: [
+          { x: xBal, y: d },
+          { x: xMax, y: d }
+        ],
+        borderColor: '#f6c27a',
+        borderWidth: 10,
+        pointRadius: 0,
+        fill: false,
+        tension: 0
+      });
+    }
+  }
+}
+
+// push all horizontal lines
+datasets.push(...hLines);
+
+
+  const ctx = document.getElementById('addGraph').getContext('2d');
+
+  if (chart) chart.destroy();
+
+  const minX = parseFloat(document.getElementById('leftSlider').value);
+  const maxX = parseFloat(document.getElementById('rightSlider').value);
+
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: { datasets },
+    options: {
+      responsive: true,
+plugins: {
+  legend: {
+    display: false
+  },
+  tooltip: {
+    callbacks: {
+      title: c => `WD: ${c[0].raw.x.toFixed(1)} cm`,
+      label: c => `Add: ${c[0].raw.y.toFixed(2)}`
+    }
+  }
+},
+      scales: {
+x: {
+  type: 'linear',
+  title: {
+    display: true,
+    text: 'Working distance (cm)',
+    font: { size: 11 }
+  },
+  min: minX,
+  max: maxX,
+  ticks: {
+    stepSize: 5   // ← THIS is what you’re missing
+  },
+  grid: { color: 'rgba(0,0,0,0.3)' }
+},
+        y: {
+          title: {
+            display: true,
+            text: 'Add',
+            font: { size: 11 }
+          },
+          min: 0,
+          max: 4,
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        }
+      }
+    }
+  });
+}
+
+document.getElementById('leftSlider').addEventListener('input', e => {
+  document.getElementById('leftValue').textContent = e.target.value;
+  if (chart) {
+    chart.options.scales.x.min = parseFloat(e.target.value);
+    chart.update();
+  }
+});
+
+document.getElementById('rightSlider').addEventListener('input', e => {
+  document.getElementById('rightValue').textContent = e.target.value;
+  if (chart) {
+    chart.options.scales.x.max = parseFloat(e.target.value);
+    chart.update();
+  }
+});
+
+['add1', 'np1'].forEach(id =>
+  document.getElementById(id).addEventListener('input', () =>
+    document.getElementById('btn1').classList.remove('active')
+  )
+);
+
+['add1b', 'np1b'].forEach(id =>
+  document.getElementById(id).addEventListener('input', () =>
+    document.getElementById('btn1b').classList.remove('active')
+  )
+);
+
+plotGraph();
+
+
+function calcBothWd1() {
+  if (eyeAccommodation !== null) calculateAdd('wd1', 'result1', eyeAccommodation);
+  if (eyeAccommodationB !== null) calculateAdd('wd1', 'result1b', eyeAccommodationB);
+
+  document.getElementById('btnWd1').classList.add('active');
+}
+
+function calcBothWd2() {
+  if (eyeAccommodation !== null) calculateAdd('wd2', 'result2', eyeAccommodation);
+  if (eyeAccommodationB !== null) calculateAdd('wd2', 'result2b', eyeAccommodationB);
+
+  document.getElementById('btnWd2').classList.add('active');
+}
+
+// WD1 depends on wd1 + accommodation inputs
+['wd1','add1','np1','add1b','np1b'].forEach(id =>
+  document.getElementById(id).addEventListener('input', () =>
+    document.getElementById('btnWd1').classList.remove('active')
+  )
+);
+
+// WD2 depends on wd2 + accommodation inputs
+['wd2','add1','np1','add1b','np1b'].forEach(id =>
+  document.getElementById(id).addEventListener('input', () =>
+    document.getElementById('btnWd2').classList.remove('active')
+  )
+);
+
+
+
+['pd','vd','ph','fit','wd1','wd2','add1','add1b','np1','np1b'].forEach(id =>
+  document.getElementById(id).addEventListener('input', () =>
+    document.getElementById('btnMain').classList.remove('active')
+  )
+);
+
+</script>
+
 
 
 
