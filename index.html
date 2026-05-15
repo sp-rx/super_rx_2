@@ -381,7 +381,7 @@ body, table, th, td, input, button {
   .duochrome, .outer-circle { margin:12px 0; }
 
   .rx-input { width:100px; font-size:10px; text-align:center; padding:6px; border-radius:6px; border:1px solid #ccc; margin-bottom:5px; }
-  .btn-plus, .btn-minus, .btn-0 { font-size:10px; border:1px dotted ; padding:0;  height:18px; width:25px; border-radius:6px; cursor:pointer; color:black; margin:0px; }
+  .btn-plus, .btn-minus, .btn-0 { font-size:10px; border:1px dotted ; padding:0;  height:18px; width:35px; border-radius:6px; cursor:pointer; color:black; margin:0px; }
   .btn-plus { background:#d1dfe4; }
   .btn-minus{ background:#D6BBB8; }
   .btn-plus:hover, .btn-minus:hover { opacity:.85; }
@@ -465,7 +465,7 @@ button.active {
   <!-- Second row -->
 <div>
   <div style="display:flex; gap:10px; justify-content:flex-start;">
-    <a data-target="s3">Manual RX</a>
+    <a data-target="s3">Subj RX</a>
     <a data-target="snear">Near RX</a>
     <a data-target="s1">Analysis</a>
 
@@ -3226,36 +3226,36 @@ NOC :
 
 
     <!-- CYL -->
-    <div style="margin-top:-10px; margin-left:30px; text-align:center;">
+    <div style="margin-top:-10px; margin-left:40px; text-align:center;">
 
       <div>
         <button onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
-        <button style="margin-left:10px" onclick="adj('cyl_test', 0.25)" class="btn-plus">+</button>
+        <button style="margin-left:5px" onclick="adj('cyl_test', 0.25)" class="btn-plus">+</button>
         <button style="display:none" onclick="adj('cyl_test',-1.00)" class="btn-minus">- -</button>
         <button style="display:none" onclick="adj('cyl_test', 1.00)" class="btn-plus">+ +</button>
 
 
       </div>
 
-      Cyl : <input style="margin-top:15px; width:50px;" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
+      Cyl : <input style="margin-top:15px; width:50px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
     </div>
 
     <!-- AXIS -->
-    <div style="margin-top:-10px; margin-left:30px; margin-right:0px; text-align:center;">
+    <div style="margin-top:-10px; margin-left:20px; margin-right:45px; text-align:center;">
 
       <div>
         <button onclick="adj('axis_test', -15)"  class="btn-minus"><</button>
-        <button style="margin-left:10px" onclick="adj('axis_test',  15)"  class="btn-plus">></button>       
+        <button style="margin-left:5px" onclick="adj('axis_test',  15)"  class="btn-plus">></button>       
 	<button style="display:none" onclick="adj('axis_test', -30)"  class="btn-minus">>></button>
         <button style="display:none" onclick="adj('axis_test',  30)"  class="btn-plus"><<</button>
       </div>
 
-       Axis :<input style="margin-left:5px; margin-top:15px; width:50px;" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
+       Axis :<input style="margin-left:5px; margin-top:15px; width:50px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
 </div>
 
 
 
-  <div style="margin-top:-10px; margin-left:90px; margin-right:90px" text-align:center;">
+  <div style="margin-top:-10px; margin-left:50px; margin-right:90px" text-align:center;">
 
       <div>
         <button style="display:none" onclick="adj('sph_test',-1.00)" class="btn-minus">- -</button>
@@ -3263,7 +3263,6 @@ NOC :
         <button style="margin-left:10px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
    <button style="display:none" onclick="adj('sph_test', 1.00)" class="btn-plus">+ +</button>
 
-  <button class="btn-0" onclick="resetRx()">0</button>
 
 </div>
 
@@ -3271,7 +3270,7 @@ NOC :
 Sph : 
 
 <input 
-  style="border:none; width:50px ; margin-left:5px"
+  style="border:none; width:50px ; margin-left:5px; background-color:#f5f5f5"
   type="text" 
   id="sph_test" 
   value="+0.00" 
@@ -3283,7 +3282,8 @@ Sph :
 
 </div>
 
-<div><span>Vision is measured by how much prescription it takes to see your balance point.</span>
+<div><span>Vision is measured by how much prescription off from the balance point.</span>   <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
+
 </div>
 
 </td></tr>
