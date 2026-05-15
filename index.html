@@ -353,31 +353,12 @@ body, table, th, td, input, button {
   transform: translate3d(0,0,0);
 }
 
-/* Fan chart */
-.outer-circle {
-  width: 213px;      /* 85% of 250px */
-  height: 213px;     /* 85% of 250px */
-  border-radius: 50%;
-  border: none;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 34px auto; /* 85% of 40px */
-  transform-origin: center;
-}
-.circular-img img {
-  width: 255px;      /* 85% of 300px */
-  height: auto;
-  object-fit: cover;
-  object-position: center;
-  transform-origin: center;
-}
+
 
 /* Fan chart */
 .outer-circle {
-  width: 160px;    /* 70% of 250px */
-  height: 160px;   /* 70% of 250px */
+  width: 140px;    /* 70% of 250px */
+  height: 140px;   /* 70% of 250px */
   border-radius: 50%;
   border: none;
   overflow: hidden;
@@ -400,8 +381,9 @@ body, table, th, td, input, button {
   .duochrome, .outer-circle { margin:12px 0; }
 
   .rx-input { width:100px; font-size:10px; text-align:center; padding:6px; border-radius:6px; border:1px solid #ccc; margin-bottom:5px; }
-  .btn-plus, .btn-minus { font-size:10px; border:1px dotted ; height:30px; width:50px; border-radius:6px; cursor:pointer; color:black; transition:opacity .2s; margin:5px; }
-  .btn-plus { background:#E0E0E0; } .btn-minus{ background:#d9534f; }
+  .btn-plus, .btn-minus, .btn-0 { font-size:10px; border:1px dotted ; padding:0;  height:18px; width:25px; border-radius:6px; cursor:pointer; color:black; margin:0px; }
+  .btn-plus { background:#d1dfe4; }
+  .btn-minus{ background:#D6BBB8; }
   .btn-plus:hover, .btn-minus:hover { opacity:.85; }
   .btn-group button { font-size:10px; padding:5px 5px; margin:5px; border:1px solid #000; border-radius:10px; cursor:pointer; background:#dcdcdc; color:#000; min-width:160px; }
   .btn-group button:hover { background:#c8c8c8; }
@@ -3150,67 +3132,19 @@ NOC :
 
 
 
-<tr><th class="red" colspan="4">Blur Value</th></tr>
+<tr><th class="red" colspan="4">Analysis</th></tr>
 
 <tr>
 <td colspan="4">
 <div>
-Prescription comes in many types of errors; whether it's myopia, hyperopia or astigmatism.<br>The test works by measuring the blur, then correcting your vision with the amount.<br><br>
+Vision is measured by how much prescription it takes to see your balance point. We call it The Clearest Comfy.<br><br>
 
 </div>  
 
-<div>
-  <button style="width:75%" onclick="resetRx()">Reset</button>
-</div>
-<!-- Participant Inputs -->
-  <div style="width:100%; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; align-items:flex-start; margin-top:10px;">
 
 
 
-    <!-- SPH -->
-    <div style="text-align:center;">
-      <div>
-        <button onclick="adj('sph_test',-0.25)" class="btn-minus">−0.25</button>
-        <button onclick="adj('sph_test', 0.25)" class="btn-plus">+0.25</button><br>
-        <button onclick="adj('sph_test',-0.50)" class="btn-minus">−0.50</button>
-        <button onclick="adj('sph_test', 0.50)" class="btn-plus">+0.50</button><br>
-       </div>
-<br>
-      <label><b>SPH</b></label><br>
-      <input type="number" id="sph_test" step="0.25" value="0.00" class="rx-input"><br>
 
-    </div>
-
-    <!-- CYL -->
-    <div style="text-align:center;">
-      <div>
-        <button onclick="adj('cyl_test',-0.25)" class="btn-minus">−0.25</button>
-        <button onclick="adj('cyl_test', 0.25)" class="btn-plus">+0.25</button><br>
-        <button onclick="adj('cyl_test',-0.50)" class="btn-minus">−0.50</button>
-        <button onclick="adj('cyl_test', 0.50)" class="btn-plus">+0.50</button><br>
-
-      </div>
-<br>
-      <label><b>CYL</b></label><br>
-
-      <input type="number" id="cyl_test" step="0.25" value="0.00" class="rx-input"><br>
-
-    </div>
-
-    <!-- AXIS -->
-    <div style="text-align:center;">
-      <div>
-        <button onclick="adj('axis_test', -15)"  class="btn-minus">−15</button>
-        <button onclick="adj('axis_test',  15)"  class="btn-plus">+15</button><br>        
-	<button onclick="adj('axis_test', -30)"  class="btn-minus">−30</button>
-        <button onclick="adj('axis_test',  30)"  class="btn-plus">+30</button><br>
-      </div>
-<br>
-      <label><b>AXIS</b></label><br>
-      <input type="number" id="axis_test" min="0" step="15" value="0" class="rx-input"><br>
-
-    </div>
-  </div>
 
 <div style="display:none">
 <div style="
@@ -3235,38 +3169,118 @@ Prescription comes in many types of errors; whether it's myopia, hyperopia or as
 </style>
 
 </div>
-<div style="height:20px"></div>
+<div style="height:10px"></div>
 
 <!-- Stage -->
+
+
 <div id="stage">
+
+
+
   <!-- Fan Chart -->
   <div id="stack" style="position:relative; width:44%; height:auto ; margin:0 0 0px 0;">
+
     <img class="bg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/FC_DIRECTIONS.png" alt="" style="width:100%; display:block;" />
-    <div class="overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;">
-      <div class="overlay-stage">
-        <div class="outer-circle" id="outerCircle" style="width:100%; aspect-ratio:1/1; border-radius:9999px; overflow:hidden;">
-          <div class="circular-img" style="width:100%; height:100%;">
+    
+<div class="overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;">
+      
+<div class="overlay-stage">
+        
+<div class="outer-circle" id="outerCircle" style="width:100%; aspect-ratio:1/1; border-radius:9999px; overflow:hidden;">
+          
+<div class="circular-img" style="width:100%; height:100%;">
             <img id="fanChart" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/C000.png" alt="" style="width:100%; height:100%; object-fit:cover;" />
           </div>
         </div>
       </div>
     </div>
   </div>
+    
+
+
 
  <!-- Duochrome (button above) -->
-<div class="duo-wrap">
+<div class="duo-wrap"  >
   <div class="duochrome">
+
     <div class="duo-side" id="redSide">
       <img class="base" id="redImg"  src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png"  alt="">
 <img class="overlay" id="redOv" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png" alt="">
     </div>
+
     <div class="duo-side" id="blueSide">
       <img class="base" id="blueImg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/BLUE_1.png" alt="">
 <img class="overlay" id="blueOv" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/BLUE_1.png" alt="">
     </div>
+
+
   </div>
+</div>
+
+
+
+
+
+    <!-- CYL -->
+    <div style="margin-top:-10px; margin-left:30px; text-align:center;">
+
+      <div>
+        <button onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
+        <button style="margin-left:10px" onclick="adj('cyl_test', 0.25)" class="btn-plus">+</button>
+        <button style="display:none" onclick="adj('cyl_test',-1.00)" class="btn-minus">- -</button>
+        <button style="display:none" onclick="adj('cyl_test', 1.00)" class="btn-plus">+ +</button>
+
+
+      </div>
+
+      Cyl : <input style="margin-top:15px; width:50px;" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
+    </div>
+
+    <!-- AXIS -->
+    <div style="margin-top:-10px; margin-left:30px; margin-right:0px; text-align:center;">
+
+      <div>
+        <button onclick="adj('axis_test', -15)"  class="btn-minus"><</button>
+        <button style="margin-left:10px" onclick="adj('axis_test',  15)"  class="btn-plus">></button>       
+	<button style="display:none" onclick="adj('axis_test', -30)"  class="btn-minus">>></button>
+        <button style="display:none" onclick="adj('axis_test',  30)"  class="btn-plus"><<</button>
+      </div>
+
+       Axis :<input style="margin-left:5px; margin-top:15px; width:50px;" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
+</div>
+
+
+
+  <div style="margin-top:-10px; margin-left:90px; margin-right:90px" text-align:center;">
+
+      <div>
+        <button style="display:none" onclick="adj('sph_test',-1.00)" class="btn-minus">- -</button>
+        <button onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
+        <button style="margin-left:10px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
+   <button style="display:none" onclick="adj('sph_test', 1.00)" class="btn-plus">+ +</button>
 
 </div>
+
+<div style="margin-top:15px; text-align:center;">
+Sph : 
+
+<input 
+  style="border:none; width:50px ; margin-left:5px"
+  type="text" 
+  id="sph_test" 
+  value="+0.00" 
+  class="rx-input"
+  oninput="formatPlus(this)"
+>
+  <button class="btn-O" style="display:none" onclick="resetRx()">0</button>
+
+</div>
+
+
+
+
+
 </td></tr>
 
 </table>
@@ -5808,8 +5822,8 @@ else {
   };
 
   /* ========= TUNABLES ========= */
-  const PX_PER_D = 4;
-  const K_BLUR_PER_D = 4;
+const PX_PER_D = 2; // spherical shift
+const K_BLUR_PER_D = 4; // astig-shift
   const EXTRA_ASTIG_BLUR_PER_D = 0;
   const OVERLAY_ALPHA = 0.5;
   const FC_BLUR_GAIN = 0.5;
@@ -8078,12 +8092,15 @@ function calcBothWd2() {
 
 </script>
 
+<script>
+function formatPlus(el) {
+  let v = parseFloat(el.value);
 
+  if (isNaN(v)) return;
 
-
-
-
-
+  el.value = (v >= 0 ? '+' : '') + v.toFixed(2);
+}
+</script>
 
 
 
