@@ -2506,8 +2506,18 @@ Manual Refraction
 
 </th></tr>
 
+<tr style="border:none"><td style="border:none">
+<button style="width:80%" id="toggleBtn2">Show / Hide Helper</button>
+</td></tr>
 
-<tr style="border-bottom:none"><td style="border-bottom:none" colspan="4"><b><i>
+</table>
+<div style="margin-top:-20px"></div>
+
+
+<div class="hide_show2" style="display:none">
+<table>
+
+<tr style="border:none"><td style="border:none" colspan="4"><b><i>
 <b><i>Troubleshooter</b></i><br>  
 Use this to know what RX to fit next based on patient's response.
 </b></i><br>
@@ -2517,7 +2527,7 @@ Use this to know what RX to fit next based on patient's response.
 4. Refill the new prescription to the top by pressing the 'Copy to Top'.<br>
 </td></tr>
 
-<tr><td colspan="4">
+<tr><td style="border:none" colspan="4">
 
   <!-- Inputs -->
   <div style="margin-bottom:15px" class="row">
@@ -2576,7 +2586,7 @@ Use this to know what RX to fit next based on patient's response.
     </thead>
     <tbody></tbody>
 </table>
-
+</div>
 
 
 <table>
@@ -6454,7 +6464,17 @@ document.getElementById('toggleBtn').addEventListener('click', ()=>{
 });
 </script>
 
-
+<script>
+document.getElementById('toggleBtn2').addEventListener('click', ()=>{
+  document.querySelectorAll('.hide_show2').forEach(el=>{
+    if(el.style.display === 'none'){
+      el.style.display = 'block';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+});
+</script>
 
 <script>
 function openSummary() {
