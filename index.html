@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Super Position Rx</title>
+<title>Super Position Rx 2</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -32,7 +32,7 @@ max-width:570px;
 
     .card {width:100%; }
     .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
-    .row { display: flex; align-items: flex-end; gap: 8px; flex-wrap: wrap; margin-bottom: 0.75rem; }
+
     .field { display: flex; flex-direction: column; gap: 4px; }
     .field label { font-size: 11px; color: #666; }
     .field input, .field select {
@@ -117,7 +117,7 @@ th.yellow, tr.yellow, td.yellow, button.yellow {
 }
 
 th.turq, tr.turq, td.turq, button.turq {
-  background: #E4E0FF;
+  background: #EEDCF5;
   color: black;
 }
 
@@ -453,21 +453,25 @@ button.active {
 
 <div id="topBlock">
 
- <h2>Ready?</h2>
+ <h2>Ready 2?</h2>
 <nav class="topMenu" style="user-select:none;">
   <!-- First row -->
   <div style="display:flex; gap:10px; justify-content:flex-start; margin-bottom:5px;">
-    <a data-target="s-1">Intro</a>
-    <a data-target="s0">Current Rx</a>
-    <a data-target="s2">SP RX</a>
+	<a data-target="s-1">Intro</a>
+	<a data-target="s0">Current Rx</a>
+	<a data-target="s2">Delta RX</a>
+	<a data-target="s3">Manual RX</a>
+	<a data-target="snear">Near RX</a>
+	<a data-target="s1">Results</a>
+
+
+
   </div>
 
   <!-- Second row -->
 <div>
   <div style="display:flex; gap:10px; justify-content:flex-start;">
-    <a data-target="s3">Subj RX</a>
-    <a data-target="snear">Near RX</a>
-    <a data-target="s1">Analysis</a>
+
 
     <a style="display:none; opacity:0.1;" data-target="s4">Summary</a>
     <a style="display:none; opacity:0.1;" data-target="s-2">Bino Test</a>
@@ -508,7 +512,7 @@ button.active {
     <h2>Minimal add, Red Side Blur</h2>
     <p class="section-title" style="margin-bottom:0.75rem">Pull nearer and stop when RED side blurrier</p>
     <div class="row">
-      <div class="field"><label>Add (D)</label><input value="1.50" type="number" step="0.25" id="add1"></div>
+      <div class="field"><label>Add (D)</label><input placeholder="1.50" type="number" step="0.25" id="add1"></div>
       <div class="field"><label>Length (cm)</label><input value="28" type="number" step="1" id="np1"></div>
       <div style="display:flex;gap:8px">
         <button class="btn" id="btn1" onclick="calcAccom()">Calculate</button>
@@ -534,9 +538,9 @@ button.active {
 
 
 
-Add : <input style="margin-right:4%"  value="1.50" type="number" step="0.25" id="add1b">
+Add : <input style="margin-right:4%"  placeholder="1.50" type="number" step="0.25" id="add1b">
 
-Length (cm) : <input style="margin-right:4%" value="33" type="number" step="1" id="np1b">
+Length (cm) : <input style="margin-right:4%" placeholder="33" type="number" step="1" id="np1b">
 
         <button class="normal-btn" id="btn1b" onclick="calcAccomB()">Calculate</button>
 
@@ -561,7 +565,7 @@ Length (cm) : <input style="margin-right:4%" value="33" type="number" step="1" i
 
 <tr><td style="border:none" colspan="4">
 <div>
-Near Length (cm) : <input style="margin-right:4%" value="30" type="number" step="1" id="wd1"> 
+Near Length (cm) : <input style="margin-right:4%" placeholder="30" type="number" step="1" id="wd1"> 
 
 <button style="margin-right:4%" class="normal-btn" id="btnWd1" onclick="calcBothWd1()">Calculate</button>
 Near Add :  <span id="result1b">—</span>
@@ -576,7 +580,7 @@ Near Add :  <span id="result1b">—</span>
 
 
 <div style="margin-top:10px">
-Mid Length (cm) : <input  style="margin-right:4%" value="50" type="number" step="1" id="wd2">
+Mid Length (cm) : <input  style="margin-right:4%" placeholder="50" type="number" step="1" id="wd2">
 <button  style="margin-right:4%" class="normal-btn" id="btnWd2" onclick="calcBothWd2()">Calculate</button>
         Mid add :  <span id="result2b">—</span>
 
@@ -599,10 +603,10 @@ Mid Length (cm) : <input  style="margin-right:4%" value="50" type="number" step=
 <tr><td style="border:none" colspan="4">
 
 <div>
-Bino PD (mm) : <input style="width:50px; margin-right:4%"  value="65" type="number" id="pd">
-      Vertex (mm) : <input style="width:50px; margin-right:4%" value="12" type="number" step="2" id="vd">
+Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type="number" id="pd">
+      Vertex (mm) : <input style="width:50px; margin-right:4%" placeholder="12" type="number" step="2" id="vd">
 
-      Pupil H (mm) : <input style="width:50px; margin-right:4%" value="25" type="number" id="ph"></div>
+      Pupil H (mm) : <input style="width:50px; margin-right:4%" placeholder="25" type="number" id="ph"></div>
 
 <div style="margin-top:10px">
 
@@ -684,7 +688,7 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  value="65" type="numb
 
 <table>
 
-<tr><th class="red" colspan="1">Intro</th></tr>
+<tr><th class="red" colspan="1">Definition</th></tr>
 
 <tr>
   <td style="border:none; padding:none">
@@ -838,7 +842,7 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
 
 <tr style="display:none"><th class="red" colspan="4"><i>Load a file by copying everything and pasting in any input, press this button to use latest RX. </i><br>
 
-<button style="margin-top:5px; margin-right:15px; background-color:white; border-radius:10px; height:25px; width:180px" id="fillCurrentBtn">Use SP RX</button>
+<button style="margin-top:5px; margin-right:15px; background-color:white; border-radius:10px; height:25px; width:180px" id="fillCurrentBtn">Use Delta RX</button>
 
 </th></tr>
 
@@ -1143,7 +1147,7 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
 <table>
 <!-- SP Refraction -->
 <tr>
-  <th class="yellow" colspan="4">SP Refraction</th></tr>
+  <th class="yellow" colspan="4">Delta Refraction</th></tr>
 <tr style="border-bottom:none"><td style="border-bottom:none" colspan="4">1. Measure and input the amount of sph needed to shift DC to balance.<br>2. Apply fogging, measure and input the amount of cyl and axis needed to balance FC.<br><br>
 
 <button style="width:80%" id="toggleBtn">Show / Hide Helper</button>
@@ -1152,7 +1156,7 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
  </td></tr>
 </table>
 
-
+<div style="margin-top:-10px"></div>
 <div class="hide_show">
 <table style="max-width:100%">
 
@@ -1162,6 +1166,7 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
+
 <tr><th colspan="4">
 RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span class="customerWhatsapp_summary">...</span>
 
@@ -2032,11 +2037,16 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 
 <table>
 <tr class="red"><td colspan="1">Import Vectors</td>
-	
-	
-	<td colspan="3">
+<td colspan="3">
 
 <button class="yellow" onclick="runBE()" style="border-radius:10px; width:50px; height:25px">BE</button>
+<button class="yellow" style="border-radius:10px; margin-right:20px" onclick="resetLogBE()">X</button>
+<script>
+function resetLogBE() {
+  document.getElementById('logBE').innerHTML = '<i>-</i>';
+  document.getElementById('logBE_CL').innerHTML = '<i>-</i>';
+}
+</script>
 
 <button style="display:none" class="yellow" onclick="copyVD_OU_to_ODOS()" style="border-radius:10px; width:50px; height:25px">BE</button>
 &nbsp;&nbsp;
@@ -2050,6 +2060,14 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 style="border-radius:10px; width:80px; height:25px">
   RE + LE
 </button>
+<button class="purp" style="border-radius:10px; margin-right:20px" onclick="resetLogRELE()">X</button>
+<script>
+function resetLogRELE() {
+  document.getElementById('logRELE').innerHTML = '<i>-</i>';
+  document.getElementById('logRELE_CL').innerHTML = '<i>-</i>';
+}
+</script>
+
 
  
 <button style="display:none" onclick="captureRELE()" style="margin:5px;">
@@ -2135,7 +2153,7 @@ L: <span class="os_summary">+0.00 / +0.00 × 0</span>
 
 
 <tr style="display:none">
-  <td class="yellow">SP RX</td>
+  <td class="yellow">Delta RX</td>
   <td class="yellow" colspan="3">
 R: <span id="od_vcFinalS">0.00</span> / <span id="od_vcFinalC">0.00</span> x <span id="od_vcFinalA">-</span><span style="margin-left:80px"></span>
 L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <span id="os_vcFinalA">-</span>
@@ -2143,13 +2161,14 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 </tr>
 
 <tr class="yellow">
-  <td colspan="1">SP RX BE</td>
-  <td colspan="3" id="logBE"><i>Loading....</i></td>
+  <td colspan="1">Delta RX BE </td>
+  <td colspan="3">
+<span id="logBE"><i>Loading....</i></span></td>
 </tr>
 
 
 <tr class="purp">
-  <td colspan="1">SP RX RE / LE</td>
+  <td colspan="1">Delta RX RE / LE</td>
 
   <td id="logRELE" colspan="3"><i>Loading....</i></td>
 </tr>
@@ -2171,11 +2190,11 @@ L : <span id="CL_os_origCombined">OS -</span>
 </tr>
 
 	<tr class="yellow">
-  <td colspan="1">SP RX BE CL</td>
+  <td colspan="1">Delta RX BE CL</td>
   <td colspan="3" id="logBE_CL"><i>Loading....</i></td>
 </tr>
 <tr class="purp">
-  <td colspan="1">SP RX RE / LE CL</td>
+  <td colspan="1">Delta RX RE / LE CL</td>
 
   <td id="logRELE_CL" colspan="3"><i>Loading....</i></td>
 </tr>
@@ -2274,10 +2293,44 @@ const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s
 
 </tr>
 
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
+
+<tr class="red"><td colspan="4">
+<button style="height:25px; width:85px" class="exportBtn">
+    Save Data </button>
 
 
-<tr><td colspan="4">Visualizer
-<button class="vtbn" onclick="togglevisualizer()">Show / Hide</button>
+
+</td></tr>
+
+<tr class="red">
+<td colspan="1">Comments:</td>
+<td colspan="3">
+<input type="text" id="SP_comments1"
+  style="text-align:left; width:95%; height:20px"
+  placeholder="Purpose of prescription; Far? Near? Contact lens? etc"
+  oninput="updateSPSummary()">
+<div style="height:5px"></div>
+
+<input type="text" id="SP_comments2"
+  style="text-align:left; width:95%; height:20px"
+  placeholder="Any special plan for this prescription?"
+  oninput="updateSPSummary()">
+<div style="height:5px"></div>
+
+
+<div style="height:5px"></div>
+
+
+</td></tr>
+
+<tr><td colspan="4">
+<button class="vtbn" onclick="togglevisualizer()">Vector Graph Show / Hide</button>
 </td></tr>
 
 <tr class="vi-row" style="display:none;"><td colspan="4">
@@ -2435,37 +2488,6 @@ Status : <button id="statusSP"
 </th></tr>
 
 
-
-<tr>
-<td colspan="1">Comments:</td>
-<td colspan="3">
-<input type="text" id="SP_comments1"
-  style="text-align:left; width:95%; height:20px"
-  placeholder="Purpose of prescription; Far? Near? Contact lens? etc"
-  oninput="updateSPSummary()">
-<div style="height:5px"></div>
-
-<input type="text" id="SP_comments2"
-  style="text-align:left; width:95%; height:20px"
-  placeholder="Any special plan for this prescription?"
-  oninput="updateSPSummary()">
-<div style="height:5px"></div>
-
-<input type="text" id="SP_comments3"
-  style="text-align:left; width:95%; height:20px"
-  placeholder="Leave empty if not used"
-  oninput="updateSPSummary()">
-<div style="height:5px"></div>
-
-<input type="text" id="SP_comments4"
-  style="text-align:left; width:95%; height:20px"
-  placeholder="Leave empty if not used"
-  oninput="updateSPSummary()">
-<div style="height:5px"></div>
-
-
-</td></tr>
-
 </table>
 <div style="height:90px"></div>
 
@@ -2493,8 +2515,9 @@ Use this to know what RX to fit next based on patient's response.
 2. Key in their response of the FC and DC.<br>
 3. Press calculate prescription.<br>
 4. Refill the new prescription to the top by pressing the 'Copy to Top'.<br>
-<br><br> 
+</td></tr>
 
+<tr><td colspan="4">
 
   <!-- Inputs -->
   <div style="margin-bottom:15px" class="row">
@@ -2759,7 +2782,7 @@ Status : <button id="statusManual"
 </tr>
 
 <tr style="display:none" class="mask2">
-  <td class="yellow">SP Rx</td>
+  <td class="yellow">Delta Rx</td>
   <td class="yellow" colspan="3">
     R : <span id="od_vcCombined" style="margin-right: 100px;">-</span>
     L : <span id="os_vcCombined">-</span>
@@ -3142,7 +3165,7 @@ NOC :
 
 </div>  
 <div><br>
-<span><i>The Balance Point: Equality on both charts.</i></span><br>
+<span>The Balance Point: Equality on both charts.</span><br>
 </div>
 
 
@@ -3226,51 +3249,46 @@ NOC :
 
 
     <!-- CYL -->
-    <div style="margin-top:-10px; margin-left:40px; text-align:center;">
+    <div style="margin-top:-10px; margin-left:30px; text-align:center;">
 
       <div>
-        <button onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
-        <button style="margin-left:5px" onclick="adj('cyl_test', 0.25)" class="btn-plus">+</button>
+        <button style="width:50px" onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
+        <button style="margin-left:5px; width:50px" onclick="adj('cyl_test', 0.25)" class="btn-plus">+</button>
+
         <button style="display:none" onclick="adj('cyl_test',-1.00)" class="btn-minus">- -</button>
         <button style="display:none" onclick="adj('cyl_test', 1.00)" class="btn-plus">+ +</button>
 
+        	<button style="margin-left:15px; width:50px" onclick="adj('axis_test', -15)"  class="btn-minus"><</button>
+        	<button style="margin-left:5px; width:50px" onclick="adj('axis_test',  15)"  class="btn-plus">></button>       
 
-      </div>
-
-      Cyl : <input style="margin-top:15px; width:50px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
-    </div>
-
-    <!-- AXIS -->
-    <div style="margin-top:-10px; margin-left:20px; margin-right:45px; text-align:center;">
-
-      <div>
-        <button onclick="adj('axis_test', -15)"  class="btn-minus"><</button>
-        <button style="margin-left:5px" onclick="adj('axis_test',  15)"  class="btn-plus">></button>       
 	<button style="display:none" onclick="adj('axis_test', -30)"  class="btn-minus">>></button>
         <button style="display:none" onclick="adj('axis_test',  30)"  class="btn-plus"><<</button>
+
+
       </div>
 
-       Axis :<input style="margin-left:5px; margin-top:15px; width:50px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
-</div>
+      Fan chart : <input style="margin-top:15px; width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
+      X <input style="margin-left:5px; margin-top:15px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
+
+    </div>
 
 
-
-  <div style="margin-top:-10px; margin-left:50px; margin-right:90px" text-align:center;">
+  <div style="margin-top:-10px; margin-left:30px; margin-right:40px" text-align:center;">
 
       <div>
         <button style="display:none" onclick="adj('sph_test',-1.00)" class="btn-minus">- -</button>
-        <button onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
-        <button style="margin-left:10px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
+        <button style="width:100px" onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
+        <button style="margin-left:10px; width:100px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
    <button style="display:none" onclick="adj('sph_test', 1.00)" class="btn-plus">+ +</button>
 
 
 </div>
 
 <div style="margin-top:15px; text-align:center;">
-Sph : 
+Duochrome : 
 
 <input 
-  style="border:none; width:50px ; margin-left:5px; background-color:#f5f5f5"
+  style="border:none; width:30px ; margin-left:5px; background-color:#f5f5f5"
   type="text" 
   id="sph_test" 
   value="+0.00" 
@@ -3282,7 +3300,7 @@ Sph :
 
 </div>
 
-<div><span>Vision is measured by how much prescription off from the balance point.</span>   <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
+<div><span>Delta RX measures how much prescription off from The Balance Point.</span>   <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
 
 </div>
 
@@ -3975,7 +3993,7 @@ document.getElementById("fillCurrentBtn").addEventListener("click", () => {
   const btn = document.getElementById("fillCurrentBtn");
   btn.style.backgroundColor = "#d8c7c5";  // red
   btn.style.color = "black";               // text black
-  btn.textContent = "Latest SP Rx";             // change label
+  btn.textContent = "Latest Delta Rx";             // change label
 });
 
 </script>
@@ -5937,9 +5955,9 @@ if(FAN_IMAGES[img]){
 }
 
     const axisFC  = (axis + 90) % 180;
+
     const fcShift = (deltaSE > 0) ? 90 : 0;
-    outer.style.transform = `scaleX(-1) rotate(${-(axisFC + fcShift)}deg)`;
-  }
+outer.style.transform = `scaleX(-1)`;  }
 
   /* ========= EVENTS ========= */
   sphInput.addEventListener('input', recompute);
