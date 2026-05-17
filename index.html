@@ -5965,9 +5965,9 @@ if(FAN_IMAGES[img]){
 }
 
     const axisFC  = (axis + 90) % 180;
-
     const fcShift = (deltaSE > 0) ? 90 : 0;
-outer.style.transform = `scaleX(-1)`;  }
+    outer.style.transform = `scaleX(-1) rotate(${-(axisFC + fcShift)}deg)`;
+  }
 
   /* ========= EVENTS ========= */
   sphInput.addEventListener('input', recompute);
