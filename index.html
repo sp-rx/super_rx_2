@@ -530,7 +530,8 @@ button.active {
 
 <tr><td class="red" style="border-bottom:none" colspan="4">
 
-<span><b> Nearest Balance - Pull until nearest point of clear balance. </b></span>
+<span><b> Nearest Balance - Pull until nearest point of clear balance. </b></span><br><br>
+<span>1. Key in Age to calculate and use the 'Add' Power.<br>2. Pull as near as possible while still maintaining both side duochrome balance.<br>3. Find the nearest distance of balance. </span>
 
 </td></tr>
 
@@ -538,7 +539,14 @@ button.active {
 
 
 
-Add : <input style="margin-right:4%"  placeholder="1.50" type="number" step="0.25" id="add1b">
+Add : <input style="margin-right:1%"  placeholder="1.50" type="number" step="0.25" id="add1b">
+
+<span id="autoFillMsg" style="color:green; display:none; margin-right:8px;">
+  Pre-filled
+</span>
+
+
+
 
 Length (cm) : <input style="margin-right:4%" placeholder="33" type="number" step="1" id="np1b">
 
@@ -559,7 +567,7 @@ Length (cm) : <input style="margin-right:4%" placeholder="33" type="number" step
 
 <tr><td class="red" style="border-bottom:none" colspan="4">
 
-    <span><b>Calculate Near &amp; Mid Length Add Requirement</span></b>
+    <span><b>Calculate Near &amp; Mid Length Add Suitability</span></b>
 
 </td></tr>
 
@@ -595,7 +603,7 @@ Mid Length (cm) : <input  style="margin-right:4%" placeholder="50" type="number"
 
 <tr><td class="red" style="border-bottom:none" colspan="4">
 
-  <span><b>  Inset, corridor &amp; add calculator </b></span>
+  <span><b> Near PD, Progressive Corridor &amp; Fitting Height Calculator</b></span>
 
 
 </td></tr>
@@ -612,9 +620,9 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
 
     Eye-level vision : 
         <select style="width:120px; font-size:11px; padding:2px; margin-right:4%" id="fit">
-          <option value="4">Normal</option>
-          <option value="2">Near emphasis</option>
           <option value="6">Far emphasis</option>
+          <option value="4">Neutral</option>
+          <option value="2">Mid emphasis</option>
         </select>
 
 
@@ -628,7 +636,7 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
 
 <div style="height:15px"></div>
 
-    <span>Ideal multifocal reading distance 40 cm. 20% visual field loss for every 10 cm shorter or further.</span>
+    <span><i>Did you know! Standard multifocal distance designed for 40 cm; for every 10 cm difference, 20% visual field loss occur.</i></span>
   </div>
 
   <!-- WORKING DISTANCE GRAPH -->
@@ -640,13 +648,13 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
     <div id="graph-body" style="display:none">
       <div class="slider-row">
         <span style="min-width:80px">Near (cm)</span>
-        <input type="range" id="leftSlider" min="10" max="60" value="30" step="5">
-        <span id="leftValue" style="min-width:24px">30</span>
+        <input type="range" id="leftSlider" min="10" max="50" value="20" step="5">
+        <span id="leftValue" style="min-width:24px">20</span>
       </div>
       <div class="slider-row">
         <span style="min-width:80px">Mid (cm)</span>
-        <input type="range" id="rightSlider" min="20" max="170" value="80" step="5">
-        <span id="rightValue" style="min-width:24px">80</span>
+        <input type="range" id="rightSlider" min="20" max="160" value="60" step="5">
+        <span id="rightValue" style="min-width:24px">60</span>
       </div>
 
 
@@ -7747,7 +7755,7 @@ function calculateAdd(inputId, resultId, accommodation) {
   if (addNeeded < 0) addNeeded = 0;
   if (addNeeded > 4) addNeeded = 4;
 
-  let finalAdd = roundUp025(addNeeded);
+  let finalAdd = roundUp025(addNeeded) + 0.25;
 
 
 
@@ -7784,115 +7792,258 @@ function getResultAdd(id) {
   return parseFloat(val.replace('+', '')) || 0;
 }
 
+
+
+
 function corridorAddAdjustment(realCorridor, baseAdd) {
-  if (realCorridor >= 9) return 0;
+  if (realCorridor >= 9) return baseAdd;
 
   const deficit = 9 - realCorridor;
   const addPercent = deficit * 10;
 
   const extraAdd = baseAdd * (addPercent / 100);
 
-  return Math.round(extraAdd * 4) / 4;
+  const totalAdd = baseAdd + extraAdd;
+
+  return Math.round(totalAdd * 4) / 4;
+}
+
+function insetAdjustment(realCorridor, baseInset) {
+  if (realCorridor >= 9) return baseInset;
+
+  const deficit = 9 - realCorridor;
+  const insetPercent = deficit * 10;
+
+  const extraInset = baseInset * (insetPercent / 100);
+
+  const totalInset = baseInset + extraInset;
+
+  // round to nearest 0.25mm
+  return Math.round(totalInset * 4) / 4;
+}
+
+function corridorNote(val) {
+  if (!val) return '';
+  return `+${val.toFixed(2)}`;
+}
+
+function insetNote(val) {
+  if (!val) return '';
+  return `+${val.toFixed(2)}`;
+}
+
+
+function getDesignStars(fitValue) {
+const v = parseInt(fitValue);
+  const profiles = {
+    4: {
+      label: {
+        d35: "4. Neutral, bigger near.",
+        d45: "5. Neutral, equal near-mid.",
+        d55: "6. Neutral, bigger mid."
+      },
+      stars: {
+        d35: { far: "★★★★☆", mid: "★★☆☆☆", near: "★★★★☆" },
+        d45: { far: "★★★★☆", mid: "★★★☆☆", near: "★★★☆☆" },
+        d55: { far: "★★★★☆", mid: "★★★★☆", near: "★★☆☆☆" }
+      }
+    },
+
+    6: {
+      label: {
+        d35: "1. Far emphasis, bigger near.",
+        d45: "2. Far emphasis, equal near-mid.",
+        d55: "3. Far emphasis, bigger mid."
+      },
+      stars: {
+        d35: { far: "★★★★★", mid: "★☆☆☆☆", near: "★★★★☆" },
+        d45: { far: "★★★★★", mid: "★★☆☆☆", near: "★★★☆☆" },
+        d55: { far: "★★★★★", mid: "★★★☆☆", near: "★★☆☆☆" }
+      }
+    },
+
+    2: {
+      label: {
+        d35: "7. Mid emphasis, bigger near.",
+        d45: "8. Mid emphasis, equal near-mid.",
+        d55: "9. Mid emphasis, bigger mid."
+      },
+      stars: {
+        d35: { far: "★★☆☆☆", mid: "★★★☆☆", near: "★★★★★" },
+        d45: { far: "★★☆☆☆", mid: "★★★★☆", near: "★★★★☆" },
+        d55: { far: "★★☆☆☆", mid: "★★★★★", near: "★★★☆☆" }
+      }
+    }
+  };
+
+  // fallback = neutral
+  return profiles[v] || profiles[4];
 }
 
 function calculate() {
+const fitValue = document.getElementById('fit').value;
+const stars = getDesignStars(fitValue);
   const pd = parseFloat(document.getElementById('pd').value);
   const wd_cm = parseFloat(document.getElementById('wd1').value);
   const vd = parseFloat(document.getElementById('vd').value);
   const ph = parseFloat(document.getElementById('ph').value);
   const offset = parseFloat(document.getElementById('fit').value);
+const adjustedOffset = Math.round(
+  offset * ((vd + 12) / 24)
+);
+
   if (isNaN(pd) || isNaN(wd_cm) || isNaN(vd) || isNaN(ph)) {
-    document.getElementById('output').innerHTML = '<span style="color:#888;font-size:13px">Please fill all fields above.</span>';
+    document.getElementById('output').innerHTML =
+      '<span style="color:#888;font-size:13px">Please fill all fields above.</span>';
     return;
   }
+
   const wd = wd_cm * 10;
-const inset = (pd / 2) * ((vd + 12)  / (12 + wd));
-const nearPd = pd - (inset * 2);
-const fittingHeight = Math.round(ph - offset);
-const fhDiff = Math.round(fittingHeight - ph);
 
-function corridor(angle) { 
-return (vd + 12) * Math.tan(angle * Math.PI / 180); 
-}
+  const baseInset = (pd / 2) * ((vd + 12) / (12 + wd));
 
-const corr35Raw = corridor(35) - offset - 4;
-const corr45Raw = corridor(40) - offset - 4;
-const corr55Raw = corridor(45) - offset - 4;
+  const nearPd = pd - (baseInset * 2);
+ const monoPD = snapToQuarter(nearPd / 2);
+const fittingHeight = Math.round(ph - adjustedOffset);
+  const fhDiff = Math.round(fittingHeight - ph);
 
-const corr35 = roundCorridor(corr35Raw);
-const corr45 = roundCorridor(corr45Raw);
-const corr55 = roundCorridor(corr55Raw);
+  function corridor(angle) {
+    return (vd + 12) * Math.tan(angle * Math.PI / 180);
+  }
 
-const baseAdd = getResultAdd('result1b');
 
-const adj35 = corridorAddAdjustment(corr35Raw, baseAdd);
-const adj45 = corridorAddAdjustment(corr45Raw, baseAdd);
-const adj55 = corridorAddAdjustment(corr55Raw, baseAdd);
+  const corr35Raw = corridor(35) - offset - 4;
+  const corr45Raw = corridor(40) - offset - 4;
+  const corr55Raw = corridor(45) - offset - 4;
 
-function corridorNote(adj) {
-  if (!adj) return '';
-  return `+${adj.add.toFixed(2)}`;
-}
+  const corr35 = roundCorridor(corr35Raw);
+  const corr45 = roundCorridor(corr45Raw);
+  const corr55 = roundCorridor(corr55Raw);
+
+  const baseAdd = getResultAdd('result1b');
+
+  const adj35 = corridorAddAdjustment(corr35Raw, baseAdd);
+  const adj45 = corridorAddAdjustment(corr45Raw, baseAdd);
+  const adj55 = corridorAddAdjustment(corr55Raw, baseAdd);
+
+  const inset35 = insetAdjustment(corr35Raw, baseInset);
+  const inset45 = insetAdjustment(corr45Raw, baseInset);
+  const inset55 = insetAdjustment(corr55Raw, baseInset);
+
+const nearPd35 = ( pd - (baseInset + inset35) ) / 2 ;
+const nearPd45 = ( pd - (baseInset + inset45) ) / 2;
+const nearPd55 = ( pd - (baseInset + inset55) ) / 2;
+
+const nearPd35Final = snapToQuarter(nearPd35);
+const nearPd45Final = snapToQuarter(nearPd45);
+const nearPd55Final = snapToQuarter(nearPd55);
+
+
+
+
+const result1bValue = document.getElementById('result1b')?.textContent || '';
+
+
   document.getElementById('output').innerHTML = `
 
-    <div class="output-cell">
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr ;gap:20px">
+    <div class="output-cell" style="display:none">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px">
 
-<div><div class="lbl">Adjusted fitting height</div><div class="val"> ${Math.round(fittingHeight)} mm
-<span>( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} mm )</span></div></div>
+        <div>
+          <div class="lbl">Adjusted fitting height</div>
+          <div class="val">
+            ${Math.round(fittingHeight)} mm
+            <span>( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} mm )</span>
+          </div>
+        </div>
 
 <div>
-  <div class="lbl">Near PD</div>
-  <div class="val">${nearPd.toFixed(1)} mm</div>
-</div>
-
- <div><div class="lbl">Near Inset (per eye)</div><div class="val">${inset.toFixed(2)} mm</div></div>
-</div>
-</div>
-
-
-
-<div style="height:15px"></div>
-
-    <div class="output-cell">
-    <span>Select 1 Corridor Types</span>
-<div style="height:15px"></div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr ;gap:20px">
-<div>
-  <div class="lbl">1. Easier Near Zone</div>
+  <div class="lbl">Addition :</div>
   <div class="val">
-    ${corridorDisplayMap[corr35]} mm 
-${adj35 ? `+${adj35.toFixed(2)} more` : ''}
+    ${result1bValue}
   </div>
 </div>
 
-<div>
-  <div class="lbl">2. Balance Zone</div>
-  <div class="val">
-    ${corridorDisplayMap[corr45]} mm 
-${adj45 ? `+${adj45.toFixed(2)} more` : ''}
- </div>
-</div>
+        <div>
+          <div class="lbl">Near PD Per Eye</div>
+          <div class="val">${monoPD.toFixed(2)} </div>
+        </div>
 
-<div>
-  <div class="lbl">3. Easier Mid Zone</div>
-  <div class="val">
-    ${corridorDisplayMap[corr55]} mm 
-${adj55 ? `+${adj55.toFixed(2)} more` : ''}
-  </div>
-</div>
-</div>
-</div>
-
-
+        <div>
+          <div class="lbl">Near Inset (per eye)</div>
+          <div class="val">${baseInset.toFixed(2)} mm</div>
+        </div>
 
       </div>
     </div>
-  `;
-  document.getElementById('btnMain').classList.add('active');
 
+
+    <div class="output-cell">
+      <span><b><u>Select a Zone Design</b></u></span>
+      <div style="height:15px"></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+
+      <div>
+  <div class="lbl">
+<span>${stars.label.d35}</span><br><br>
+Far ${stars.stars.d35.far}<br>
+Mid ${stars.stars.d35.mid}<br>
+Near ${stars.stars.d35.near}
+  </div>
+  <div class="val"><br>
+    Corridor : ${corridorDisplayMap[corr35]} mm 
+    ${adj35 ? `<br>Addition +${adj35.toFixed(2)}` : ''}
+    ${nearPd35Final ? `<br>Near PD / eye ${nearPd35Final.toFixed(2)} mm` : ''}<br>
+    Cross Height : ${Math.round(fittingHeight)} mm
+  </div>
+</div>
+
+<div>
+  <div class="lbl">
+<span>${stars.label.d45}</span><br><br>
+
+Far ${stars.stars.d45.far}<br>
+Mid ${stars.stars.d45.mid}<br>
+Near ${stars.stars.d45.near}
+  </div>
+  <div class="val"><br>
+   Corridor:  ${corridorDisplayMap[corr45]} mm 
+    ${adj45 ? `<br>Addition +${adj45.toFixed(2)}` : ''}
+    ${nearPd45Final ? `<br>Near PD / eye ${nearPd45Final.toFixed(2)} mm` : ''} <br>
+    Cross Height : ${Math.round(fittingHeight)} mm
+  </div>
+</div>
+
+<div>
+  <div class="lbl">
+<span>${stars.label.d55}</span><br><br>
+
+Far ${stars.stars.d55.far}<br>
+Mid ${stars.stars.d55.mid}<br>
+Near ${stars.stars.d55.near}
+  </div>
+  <div class="val"><br>
+  Corridor :  ${corridorDisplayMap[corr55]} mm 
+  ${adj55 ? `<br>Addition +${adj55.toFixed(2)}` : ''}
+  ${nearPd55Final ? `<br>Near PD / eye ${nearPd55Final.toFixed(2)} mm` : ''}<br>
+  Cross Height : ${Math.round(fittingHeight)} mm
+  </div>
+</div>
+
+</div>
+<br><br>
+~ ~
+</div>
+
+  `;
+
+  document.getElementById('btnMain').classList.add('active');
 }
+
+
+
+
 
 function plotGraph() {
   const datasets = [];
@@ -8056,8 +8207,8 @@ x: {
             text: 'Add',
             font: { size: 11 }
           },
-          min: 0,
-          max: 4,
+          min: 0.5,
+          max: 3,
           grid: { color: 'rgba(0,0,0,0.05)' }
         }
       }
@@ -8143,7 +8294,31 @@ function formatPlus(el) {
   el.value = (v >= 0 ? '+' : '') + v.toFixed(2);
 }
 </script>
+<script>
+const ageInput = document.getElementById('age');
+const addInput = document.getElementById('add1b');
+const msg = document.getElementById('autoFillMsg');
 
+function autoFillAdd() {
+  const age = parseInt(ageInput.value);
+
+  let addValue = '';
+
+if (age < 40) addValue = 1.50;
+else if (age >= 41 && age <= 50) addValue = 2.00;
+else if (age >= 51 && age <= 60) addValue = 2.50;
+else if (age >= 61) addValue = 3.00;
+
+  if (addValue !== '') {
+    addInput.value = addValue.toFixed(2);
+    msg.style.display = 'inline';
+  } else {
+    msg.style.display = 'none';
+  }
+}
+
+ageInput.addEventListener('input', autoFillAdd);
+</script>
 
 
 </body>
