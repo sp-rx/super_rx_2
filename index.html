@@ -5972,8 +5972,8 @@ if(FAN_IMAGES[img]){
   fanImg.src = FAN_IMAGES[img].src;
 }
 
-    const axisFC  = (axis + 90) % 180;
-    const fcShift = (deltaSE > 0) ? 90 : 0;
+    const axisFC  = (axis) % 180; // original (axis + 90) % 180;
+    const fcShift = 0; // original (deltaSE > 0) ? 90 : 0;
     outer.style.transform = `scaleX(-1) rotate(${-(axisFC + fcShift)}deg)`;
   }
 
