@@ -3318,9 +3318,35 @@ Duochrome :
 
 </div>
 
-<div><span>Delta RX measures how much prescription off from The Balance Point.</span>   <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
+<div>
+<button onclick="loadRX('ou')">BE</button>
+<button onclick="loadRX('od')">RE</button>
+<button onclick="loadRX('os')">LE</button>
+<span>Delta RX measures how much prescription off from The Balance Point.</span>   <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
 
 </div>
+
+<script>
+function loadRX(type) {
+  const s = document.getElementById(`vd_out_${type}S`).textContent;
+  const c = document.getElementById(`vd_out_${type}C`).textContent;
+  const a = document.getElementById(`vd_out_${type}A`).textContent;
+
+  const sph = document.getElementById('sph_test');
+  const cyl = document.getElementById('cyl_test');
+  const axis = document.getElementById('axis_test');
+
+  if (s !== '-') sph.value = s;
+  if (c !== '-') cyl.value = c;
+  if (a !== '-') axis.value = a;
+
+  // 🔥 trigger system update
+  sph.dispatchEvent(new Event('input', { bubbles: true }));
+  cyl.dispatchEvent(new Event('input', { bubbles: true }));
+  axis.dispatchEvent(new Event('input', { bubbles: true }));
+}
+</script>
+
 
 </td></tr>
 
