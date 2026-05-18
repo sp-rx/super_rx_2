@@ -589,7 +589,7 @@ Near Add :  <span id="result1b">—</span>
 
 <div style="margin-top:10px">
 Mid Length (cm) : <input  style="margin-right:4%" placeholder="50" type="number" step="1" id="wd2">
-<button  style="margin-right:4%" class="normal-btn" id="btnWd2" onclick="calcBothWd2()">Calculate</button>
+<button  style="margin-right:4%" class="normal-btn" id="btnWd2" onclick="calcBothWd2()"><i>Calculate</i></button>
         Mid add :  <span id="result2b">—</span>
 
 
@@ -619,7 +619,7 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
 <div style="margin-top:10px">
 
     Eye-level vision : 
-        <select style="width:120px; font-size:11px; padding:2px; margin-right:4%" id="fit">
+        <select style="width:120px; height:23px; font-size:11px; padding:2px; margin-right:4%" id="fit">
           <option value="6">Far emphasis</option>
           <option value="4">Neutral</option>
           <option value="2">Mid emphasis</option>
@@ -636,7 +636,7 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
 
 <div style="height:15px"></div>
 
-    <span><i>Did you know! Standard multifocal distance designed for 40 cm; for every 10 cm difference, 20% visual field loss occur.</i></span>
+    <span><i>Did you know! Standard multifocal distance are designed for 40 cm; for every 10 cm difference, 20% visual field loss occur.</i></span>
   </div>
 
   <!-- WORKING DISTANCE GRAPH -->
@@ -7781,10 +7781,10 @@ function roundCorridor(val) {
 }
 
 const corridorDisplayMap = {
-9: '(4 + 5) 9',
-11: '(4 + 7) 11',
-13: '(4 + 9) 13',
-15: '(4 + 11) 15'
+9: '9 mm (5)',
+11: '11 mm (7)',
+13: '13 mm (9)',
+15: '15 mm (11)'
 }
 
 function getResultAdd(id) {
@@ -7838,9 +7838,9 @@ const v = parseInt(fitValue);
   const profiles = {
     4: {
       label: {
-        d35: "4. Neutral, bigger near.",
-        d45: "5. Neutral, equal near-mid.",
-        d55: "6. Neutral, bigger mid."
+        d35: "4. Neutral, bigger near.<br>",
+        d45: "5. Neutral, equal near-mid.<br>",
+        d55: "6. Neutral, bigger mid.<br>"
       },
       stars: {
         d35: { far: "★★★★☆", mid: "★★☆☆☆", near: "★★★★☆" },
@@ -7851,9 +7851,9 @@ const v = parseInt(fitValue);
 
     6: {
       label: {
-        d35: "1. Far emphasis, bigger near.",
-        d45: "2. Far emphasis, equal near-mid.",
-        d55: "3. Far emphasis, bigger mid."
+        d35: "1. Far emphasis, bigger near.<br>",
+        d45: "2. Far emphasis, equal near-mid.<br>",
+        d55: "3. Far emphasis, bigger mid.<br>"
       },
       stars: {
         d35: { far: "★★★★★", mid: "★☆☆☆☆", near: "★★★★☆" },
@@ -7864,9 +7864,9 @@ const v = parseInt(fitValue);
 
     2: {
       label: {
-        d35: "7. Mid emphasis, bigger near.",
-        d45: "8. Mid emphasis, equal near-mid.",
-        d55: "9. Mid emphasis, bigger mid."
+        d35: "7. Mid emphasis, bigger near.<br>",
+        d45: "8. Mid emphasis, equal near-mid.<br>",
+        d55: "9. Mid emphasis, bigger mid.<br>*Good for Computer"
       },
       stars: {
         d35: { far: "★★☆☆☆", mid: "★★★☆☆", near: "★★★★★" },
@@ -7888,9 +7888,7 @@ const stars = getDesignStars(fitValue);
   const vd = parseFloat(document.getElementById('vd').value);
   const ph = parseFloat(document.getElementById('ph').value);
   const offset = parseFloat(document.getElementById('fit').value);
-const adjustedOffset = Math.round(
-  offset * ((vd + 12) / 24)
-);
+const adjustedOffset = offset * ((vd + 12) / 24);
 
   if (isNaN(pd) || isNaN(wd_cm) || isNaN(vd) || isNaN(ph)) {
     document.getElementById('output').innerHTML =
@@ -7904,7 +7902,7 @@ const adjustedOffset = Math.round(
 
   const nearPd = pd - (baseInset * 2);
  const monoPD = snapToQuarter(nearPd / 2);
-const fittingHeight = Math.round(ph - adjustedOffset);
+const fittingHeight = Math.round((ph - adjustedOffset) * 2) / 2;
   const fhDiff = Math.round(fittingHeight - ph);
 
   function corridor(angle) {
@@ -7992,10 +7990,10 @@ Mid ${stars.stars.d35.mid}<br>
 Near ${stars.stars.d35.near}
   </div>
   <div class="val"><br>
-    Corridor : ${corridorDisplayMap[corr35]} mm 
+    Corridor : ${corridorDisplayMap[corr35]}
     ${adj35 ? `<br>Addition +${adj35.toFixed(2)}` : ''}
     ${nearPd35Final ? `<br>Near PD / eye ${nearPd35Final.toFixed(2)} mm` : ''}<br>
-    Cross Height : ${Math.round(fittingHeight)} mm
+    Cross Height : ${(fittingHeight)} mm
   </div>
 </div>
 
@@ -8008,10 +8006,10 @@ Mid ${stars.stars.d45.mid}<br>
 Near ${stars.stars.d45.near}
   </div>
   <div class="val"><br>
-   Corridor:  ${corridorDisplayMap[corr45]} mm 
+   Corridor:  ${corridorDisplayMap[corr45]}
     ${adj45 ? `<br>Addition +${adj45.toFixed(2)}` : ''}
     ${nearPd45Final ? `<br>Near PD / eye ${nearPd45Final.toFixed(2)} mm` : ''} <br>
-    Cross Height : ${Math.round(fittingHeight)} mm
+    Cross Height : ${(fittingHeight)} mm
   </div>
 </div>
 
@@ -8024,10 +8022,10 @@ Mid ${stars.stars.d55.mid}<br>
 Near ${stars.stars.d55.near}
   </div>
   <div class="val"><br>
-  Corridor :  ${corridorDisplayMap[corr55]} mm 
+  Corridor :  ${corridorDisplayMap[corr55]}
   ${adj55 ? `<br>Addition +${adj55.toFixed(2)}` : ''}
   ${nearPd55Final ? `<br>Near PD / eye ${nearPd55Final.toFixed(2)} mm` : ''}<br>
-  Cross Height : ${Math.round(fittingHeight)} mm
+  Cross Height : ${(fittingHeight)} mm
   </div>
 </div>
 
