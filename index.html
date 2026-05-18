@@ -618,7 +618,7 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
 
 <div style="margin-top:10px">
 
-    Eye-level vision : 
+    Select Eye-level vision : 
         <select style="width:120px; height:23px; font-size:11px; padding:2px; margin-right:4%" id="fit">
           <option value="6">Far emphasis</option>
           <option value="4">Neutral</option>
@@ -7928,9 +7928,9 @@ const adjustedOffset = offset * ((vd + 12) / 24);
 
   const nearPd = pd - (baseInset * 2);
  const monoPD = snapToQuarter(nearPd / 2);
-const fittingHeight = Math.round((ph - adjustedOffset) * 2) / 2;
-  const fhDiff = Math.round(fittingHeight - ph);
-
+ const fittingHeight = Math.round((ph - adjustedOffset) * 2) / 2;
+ const fhDiff = Math.round((fittingHeight - ph) * 2) / 2;
+ 
   function corridor(angle) {
     return (vd + 12) * Math.tan(angle * Math.PI / 180);
   }
@@ -8019,7 +8019,7 @@ Near ${stars.stars.d35.near}
     Corridor : ${corridorDisplayMap[corr35]}
     ${adj35 ? `<br>Addition +${adj35.toFixed(2)}` : ''}
     ${nearPd35Final ? `<br>Near PD / eye ${nearPd35Final.toFixed(2)} mm` : ''}<br>
-    Cross Height : ${(fittingHeight)} mm
+    Cross H : ${(fittingHeight)} mm ( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} )
   </div>
 </div>
 
@@ -8035,7 +8035,7 @@ Near ${stars.stars.d45.near}
    Corridor:  ${corridorDisplayMap[corr45]}
     ${adj45 ? `<br>Addition +${adj45.toFixed(2)}` : ''}
     ${nearPd45Final ? `<br>Near PD / eye ${nearPd45Final.toFixed(2)} mm` : ''} <br>
-    Cross Height : ${(fittingHeight)} mm
+    Cross H : ${(fittingHeight)} mm ( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} )
   </div>
 </div>
 
@@ -8051,13 +8051,12 @@ Near ${stars.stars.d55.near}
   Corridor :  ${corridorDisplayMap[corr55]}
   ${adj55 ? `<br>Addition +${adj55.toFixed(2)}` : ''}
   ${nearPd55Final ? `<br>Near PD / eye ${nearPd55Final.toFixed(2)} mm` : ''}<br>
-  Cross Height : ${(fittingHeight)} mm
+  Cross H : ${(fittingHeight)} mm ( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} )
   </div>
 </div>
 
 </div>
-<br><br>
-~ ~
+<br>
 </div>
 
   `;
