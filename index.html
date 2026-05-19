@@ -412,6 +412,10 @@ select:focus {
   border-color: #E0E0E0;
   background-color: #fff;
 }
+.rx-btn {
+border:1px grey dotted;
+  border-radius: 10px;
+}
 
 /* Option styling (limited support in browsers) */
 option {
@@ -503,7 +507,23 @@ button.active {
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
 
+<tr>
+  <td colspan="4">Current Add : <input style="width:60px" type="number" step="0.25" min="0" max="5" id="nearAdd">
+  <span style="margin-left:5%">Age :</span> <input style="width:60px" type="number" step="1" min="1" max="100" id="age">
 
+
+<span style="margin-left:5%" id="addComment"><i>Normal 40cm ..........</i></span></td>
+</tr>
+
+
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
+<tr style="display:none"><td colspan="4"><span>Overcorrection Predictor : </span><span id="overcorrectionComment"> - </td>
+</tr>
 
 
 
@@ -539,16 +559,15 @@ button.active {
 
 
 
-Add : <input style="margin-right:1%"  placeholder="1.50" type="number" step="0.25" id="add1b">
-
-<span id="autoFillMsg" style="color:green; display:none; margin-right:8px;">
-  Pre-filled
-</span>
+Testing Add : <span id="autoFillMsg" style="display:none; margin-right:8px;">
+</span><input style="margin-right:1%; width:60px"  placeholder="1.50" type="number" step="0.25" id="add1b">
 
 
 
 
-Length (cm) : <input style="margin-right:4%" placeholder="33" type="number" step="1" id="np1b">
+
+
+Length (cm) : <input style="margin-right:4%; width:60px" placeholder="33" type="number" step="1" id="np1b">
 
         <button class="normal-btn" id="btn1b" onclick="calcAccomB()">Calculate</button>
 
@@ -911,15 +930,7 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
   <td>Cyl : <input type="number" step="0.25" id="os_origC"></td>
   <td>Axis : <input type="number" step="5" min="0" max="180" id="os_origA"></td>
 </tr>
-<tr>
-  <td>Near Vision</td>
-  <td >Add : <input type="number" step="0.25" min="0" max="5" id="nearAdd"></td>
-  <td style="text-align:left" colspan="2"><span style="margin-left:5%">Age :</span> <input type="number" step="1" min="1" max="100" id="age">
-<span style="margin-left:2%" id="addComment"><i>Key in age to see normal add</i></span></td>
-</tr>
 
-<tr style="display:none"><td colspan="4"><span>Overcorrection Predictor : </span><span id="overcorrectionComment"> - </td>
-</tr>
 
 <tr style="display:none"><th class="red" colspan="4">Current Fitting Details - <i>Measure the PD and the NOC (middle of nosepad to optical center)</i></th></tr>
 <tr style="display:none">
@@ -1158,7 +1169,7 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
   <th class="yellow" colspan="4">Delta Refraction</th></tr>
 <tr style="border-bottom:none"><td style="border-bottom:none" colspan="4">1. Measure and input the amount of sph needed to shift DC to balance.<br>2. Apply fogging, measure and input the amount of cyl and axis needed to balance FC.<br><br>
 
-<button style="width:80%" id="toggleBtn">Show / Hide Helper</button>
+<button style="width:80%" id="toggleBtn">Show / Hide Inputs</button>
 
 
  </td></tr>
@@ -3173,22 +3184,32 @@ NOC :
 
 
 
-<tr><th class="red" colspan="4">Analysis</th></tr>
+<tr><th class="red" colspan="4">Results</th></tr>
 
 <tr>
 <td colspan="4">
-<div>
+<span>Delta RX measures how much prescription off from The Balance Point.</span> 
+  <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
 
-<img style="max-width:89%; margin-top:20px; margin-right:2%;" src="https://raw.githubusercontent.com/sp-rx/Trainer/refs/heads/main/clear_comfy.png" alt="">
 
-</div>  
-<div><br>
-<span>The Balance Point: Equality on both charts.</span><br>
+<div style="margin-top:10px; display:flex; align-items:center; gap:10px; justify-content:center">
+
+<button class="rx-btn" data-rx="ou" onclick="loadRX('ou', this)" style="width:165px">
+  RX Both Eye<br>
+  <span id="rx_ou"></span>
+</button>
+
+<button class="rx-btn" data-rx="od" onclick="loadRX('od', this)" style="width:165px">
+  RX Right Eye<br>
+  <span id="rx_od"></span>
+</button>
+
+<button class="rx-btn" data-rx="os" onclick="loadRX('os', this)" style="width:165px">
+  RX Left Eye<br>
+  <span id="rx_os"></span>
+</button>
+
 </div>
-
-
-</td></tr>
-<td colspan="4">
 
 <div style="display:none">
 <div style="
@@ -3209,7 +3230,9 @@ NOC :
 </div>
 
 <style>
-  .rx-active { background:#ccc; }
+.rx-active {
+  background: #ccc;
+}
 </style>
 
 </div>
@@ -3285,13 +3308,13 @@ NOC :
 
       </div>
 
-      Fan chart : <input style="margin-top:15px; width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
-      X <input style="margin-left:5px; margin-top:15px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
+      Fan chart : <input style="margin-top:5px; width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
+      X <input style="margin-left:5px; margin-top:5px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
 
     </div>
 
 
-  <div style="margin-top:-10px; margin-left:30px; margin-right:40px" text-align:center;">
+  <div style="margin-top:-10px; margin-left:30px; margin-right:40px; text-align:center;">
 
       <div>
         <button style="display:none" onclick="adj('sph_test',-1.00)" class="btn-minus">- -</button>
@@ -3302,7 +3325,7 @@ NOC :
 
 </div>
 
-<div style="margin-top:15px; text-align:center;">
+<div style="margin-top:5px; text-align:center;">
 Duochrome : 
 
 <input 
@@ -3318,34 +3341,96 @@ Duochrome :
 
 </div>
 
-<div>
-<button onclick="loadRX('ou')">BE</button>
-<button onclick="loadRX('od')">RE</button>
-<button onclick="loadRX('os')">LE</button>
-<span>Delta RX measures how much prescription off from The Balance Point.</span>   <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
 
-</div>
 
 <script>
-function loadRX(type) {
-  const s = document.getElementById(`vd_out_${type}S`).textContent;
-  const c = document.getElementById(`vd_out_${type}C`).textContent;
-  const a = document.getElementById(`vd_out_${type}A`).textContent;
+function getRX(type) {
+  const get = (key) =>
+    document.getElementById(`vd_out_${type}${key}`)?.textContent || '-';
+
+  return {
+    s: get('S'),
+    c: get('C'),
+    a: get('A')
+  };
+}
+
+function renderRX(type) {
+  const { s, c, a } = getRX(type);
+  document.getElementById(`rx_${type}`).textContent = `${s} / ${c} x ${a}`;
+}
+
+/* 🔥 highlight system */
+function setActiveRX(type) {
+  document.querySelectorAll('.rx-btn').forEach(btn => {
+    btn.classList.remove('rx-active');
+  });
+
+  const active = document.querySelector(`[data-rx="${type}"]`);
+  if (active) active.classList.add('rx-active');
+}
+
+function loadRX(type, btn) {
+  const { s, c, a } = getRX(type);
 
   const sph = document.getElementById('sph_test');
   const cyl = document.getElementById('cyl_test');
   const axis = document.getElementById('axis_test');
 
-  if (s !== '-') sph.value = s;
-  if (c !== '-') cyl.value = c;
-  if (a !== '-') axis.value = a;
+  sph.value = s;
+  cyl.value = c;
+ axis.value = a;
 
-  // 🔥 trigger system update
   sph.dispatchEvent(new Event('input', { bubbles: true }));
   cyl.dispatchEvent(new Event('input', { bubbles: true }));
   axis.dispatchEvent(new Event('input', { bubbles: true }));
+
+  renderRX(type);
+  setActiveRX(type);
 }
+
+
+/* optional: live sync if vd_out_* changes elsewhere */
+function watchRX(type) {
+  const ids = [
+    `vd_out_${type}S`,
+    `vd_out_${type}C`,
+    `vd_out_${type}A`
+  ].map(id => document.getElementById(id)).filter(Boolean);
+
+  const observer = new MutationObserver(() => renderRX(type));
+
+  ids.forEach(el => observer.observe(el, {
+    childList: true,
+    characterData: true,
+    subtree: true
+  }));
+
+  renderRX(type);
+}
+
+watchRX('ou');
+watchRX('od');
+watchRX('os');
 </script>
+
+
+</td></tr>
+
+
+
+
+
+<tr>
+<td colspan="4">
+<div>
+
+<img style="max-width:89%; margin-top:20px; margin-right:2%;" src="https://raw.githubusercontent.com/sp-rx/Trainer/refs/heads/main/clear_comfy.png" alt="">
+
+</div>  
+<div><br>
+<span>The Balance Point: Equality on both charts.</span><br>
+</div>
 
 
 </td></tr>
@@ -5888,8 +5973,8 @@ else {
   };
 
   /* ========= TUNABLES ========= */
-const PX_PER_D = 2; // spherical shift
-const K_BLUR_PER_D = 4; // astig-shift
+const PX_PER_D = 2; // astig shift
+const K_BLUR_PER_D = 4; // spherical-shift
   const EXTRA_ASTIG_BLUR_PER_D = 0;
   const OVERLAY_ALPHA = 0.5;
   const FC_BLUR_GAIN = 0.5;
@@ -5964,11 +6049,11 @@ function preloadFanImages(){
     /* ---- CYL → DUOCHROME SEPARATION ---- */
     const mag = Math.abs(cyl) * PX_PER_D;
     const rad = (((axis % 180) * 2) - 90) * Math.PI / 180;
-    const dx = Math.round(Math.cos(rad) * mag);
-    const dy = Math.round(Math.sin(rad) * mag);
+    const dx = Math.cos(rad) * mag;
+    const dy = Math.sin(rad) * mag;
 
-    redOv.style.transform  = `translate(${dx}px, ${dy}px)`;
-    blueOv.style.transform = `translate(${dx}px, ${dy}px)`;
+redOv.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+blueOv.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
 
     if(Math.abs(cyl) > 0.01){
       redImg.style.transform  = `translate(${-dx}px, ${-dy}px)`;
@@ -5998,8 +6083,8 @@ if(FAN_IMAGES[img]){
   fanImg.src = FAN_IMAGES[img].src;
 }
 
-    const axisFC  = (axis) % 180; // original (axis + 90) % 180;
-    const fcShift = 0; // original (deltaSE > 0) ? 90 : 0;
+    const axisFC  = (axis + 90) % 180; // original (axis + 90) % 180;
+    const fcShift = (deltaSE > -0.12) ? 90 : 0; // original (deltaSE > 0) ? 90 : 0;
     outer.style.transform = `scaleX(-1) rotate(${-(axisFC + fcShift)}deg)`;
   }
 
@@ -6840,29 +6925,29 @@ function analyzeAgeAdd() {
   let add = "";
 
   if (!age || age < 1) {
-    add = "Enter a valid age.";
+    add = "Enter a valid age.....";
   } else if (age < 37) {
-    add = "Normal add is +0.00";
+    add = "Normal 40cm +0.00";
   } else if (age < 43) {
-    add = "Normal add is +0.25 to +0.50";
+    add = "Normal 40cm +0.50";
   } else if (age < 45) {
-    add = "Normal add is +0.50 to +0.75";
+    add = "Normal 40cm +0.75";
   } else if (age < 47) {
-    add = "Normal add is +0.75 to +1.00";
+    add = "Normal 40cm +1.00";
   } else if (age < 49) {
-    add = "Normal add is +1.00 to +1.25";
+    add = "Normal 40cm +1.25";
   } else if (age < 51) {
-    add = "Normal add is +1.25 to +1.50";
+    add = "Normal 40cm +1.50";
   } else if (age < 53) {
-    add = "Normal add is +1.50 to +1.75";
+    add = "Normal 40cm +1.75";
   } else if (age < 55) {
-    add = "Normal add is +1.75 to +2.00";
+    add = "Normal 40cm +2.00";
   } else if (age < 57) {
-    add = "Normal add is +2.00 to +2.25";
+    add = "Normal 40cm +2.25";
   } else if (age < 59) {
-    add = "Normal add is +2.25 to +2.50";
+    add = "Normal 40cm +2.50";
   } else if (age < 61) {
-    add = "Normal add is +2.50";
+    add = "Normal 40cm +3.00";
   } else {
     add = "Normal add is +2.50";
   }
@@ -7685,13 +7770,9 @@ function highlightRx(btn, field, value){
   setRx(field, value);
 }
 
-// Reset everything
-function resetRx(){
-  Object.keys(activeBtn).forEach(field => {
-    if(activeBtn[field]){
-      activeBtn[field].classList.remove('rx-active');
-      activeBtn[field] = null;
-    }
+function resetRx() {
+  document.querySelectorAll('.rx-btn').forEach(btn => {
+    btn.classList.remove('rx-active');
   });
 
   setRx('sph_test', 0.00);
@@ -7864,9 +7945,9 @@ const v = parseInt(fitValue);
   const profiles = {
     4: {
       label: {
-        d35: "4. Neutral, bigger near.<br>",
-        d45: "5. Neutral, equal near-mid.<br>",
-        d55: "6. Neutral, bigger mid.<br>"
+        d35: "4. Neutral, bigger near.<br>Good for indoor, room length.",
+        d45: "5. Neutral, equal near-mid.<br>Most all-rounder.",
+        d55: "6. Neutral, bigger mid.<br>Good for less swim effect."
       },
       stars: {
         d35: { far: "★★★★☆", mid: "★★☆☆☆", near: "★★★★☆" },
@@ -7877,9 +7958,9 @@ const v = parseInt(fitValue);
 
     6: {
       label: {
-        d35: "1. Far emphasis, bigger near.<br>",
-        d45: "2. Far emphasis, equal near-mid.<br>",
-        d55: "3. Far emphasis, bigger mid.<br>"
+        d35: "1. Far emphasis, bigger near.<br>Only far & near.",
+        d45: "2. Far emphasis, equal near-mid.<br>Common everyday design.",
+        d55: "3. Far emphasis, bigger mid.<br>Good for driving."
       },
       stars: {
         d35: { far: "★★★★★", mid: "★☆☆☆☆", near: "★★★★☆" },
@@ -7890,9 +7971,9 @@ const v = parseInt(fitValue);
 
     2: {
       label: {
-        d35: "7. Mid emphasis, bigger near.<br>",
-        d45: "8. Mid emphasis, equal near-mid.<br>",
-        d55: "9. Mid emphasis, bigger mid.<br>*Good for Computer"
+        d35: "7. Mid emphasis, bigger near.<br>Mainly for near vision.",
+        d45: "8. Mid emphasis, equal near-mid.<br>Good for deskwork.",
+        d55: "9. Mid emphasis, bigger mid.<br>Good for computer length."
       },
       stars: {
         d35: { far: "★★☆☆☆", mid: "★★★☆☆", near: "★★★★★" },
@@ -8327,10 +8408,10 @@ function autoFillAdd() {
 
   let addValue = '';
 
-if (age < 40) addValue = 1.50;
-else if (age >= 41 && age <= 50) addValue = 2.00;
-else if (age >= 51 && age <= 60) addValue = 2.50;
-else if (age >= 61) addValue = 3.00;
+if (age <= 40) addValue = 1.50;
+else if (age >= 40 && age <= 50) addValue = 2.00;
+else if (age >= 51 && age <= 60) addValue = 3.00;
+else if (age >= 61) addValue = 3.50;
 
   if (addValue !== '') {
     addInput.value = addValue.toFixed(2);
