@@ -17,8 +17,20 @@ html, body, table, {
   padding: 0;
 
 }
+.rx-block.disabled-rx {
+  opacity: 0.25;
+  filter: blur(2px);
+  pointer-events: none;
+}
+.select-card {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 6px;
+}
 
-
+.select-card.active {
+  background: #CFEBFC;
+}
 
 
   #meyImage {
@@ -550,7 +562,7 @@ button.active {
 
 <tr><td class="red" style="border-bottom:none" colspan="4">
 
-<span><b> Nearest Balance - Pull until nearest point of clear balance. </b></span><br><br>
+<span><b> Nearest Balance - Pull until nearest point of balance. </b></span><br><br>
 <span>1. Key in Age to calculate and use the 'Add' Power.<br>2. Pull as near as possible while still maintaining both side duochrome balance.<br>3. Find the nearest distance of balance. </span>
 
 </td></tr>
@@ -563,13 +575,9 @@ Testing Add : <span id="autoFillMsg" style="display:none; margin-right:8px;">
 </span><input style="margin-right:1%; width:60px"  placeholder="1.50" type="number" step="0.25" id="add1b">
 
 
-
-
-
-
 Length (cm) : <input style="margin-right:4%; width:60px" placeholder="33" type="number" step="1" id="np1b">
 
-        <button class="normal-btn" id="btn1b" onclick="calcAccomB()">Calculate</button>
+        <button class="normal-btn" id="btn1b" onclick="calcAccomB()">Set</button>
 
       <div style="display:flex;gap:8px">
 
@@ -3190,6 +3198,7 @@ NOC :
 <td colspan="4">
 <span>Delta RX measures how much prescription off from The Balance Point.</span> 
   <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
+<button class="btn-0" style="width:70px" onclick="toggleresultsbutton()">Buttons</button>
 
 
 <div style="margin-top:10px; display:flex; align-items:center; gap:10px; justify-content:center">
@@ -3209,6 +3218,9 @@ NOC :
   <span id="rx_os"></span>
 </button>
 
+</div>
+<div style="margin-top:20px; margin-bottom:-10px">
+<span style="font-size:20px" id="fcdcbal_type"></span> 
 </div>
 
 <div style="display:none">
@@ -3236,6 +3248,7 @@ NOC :
 </style>
 
 </div>
+
 <div style="height:10px"></div>
 
 <!-- Stage -->
@@ -3244,9 +3257,8 @@ NOC :
 <div id="stage">
 
 
-
   <!-- Fan Chart -->
-  <div id="stack" style="position:relative; width:44%; height:auto ; margin:0 0 0px 0;">
+  <div class="rx-block" id="stack" style="position:relative; width:44%; height:auto ; margin:0 0 0px 0;">
 
     <img class="bg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/FC_DIRECTIONS.png" alt="" style="width:100%; display:block;" />
     
@@ -3263,12 +3275,11 @@ NOC :
       </div>
     </div>
   </div>
-    
 
 
 
  <!-- Duochrome (button above) -->
-<div class="duo-wrap"  >
+<div class="duo-wrap rx-block" >
   <div class="duochrome">
 
     <div class="duo-side" id="redSide">
@@ -3288,6 +3299,7 @@ NOC :
 
 
 
+<div id="resultsPanel" style="display:none; margin-top:20px">
 
     <!-- CYL -->
     <div style="margin-top:-10px; margin-left:30px; text-align:center;">
@@ -3306,30 +3318,21 @@ NOC :
         <button style="display:none" onclick="adj('axis_test',  30)"  class="btn-plus"><<</button>
 
 
-      </div>
-
-      Fan chart : <input style="margin-top:5px; width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
-      X <input style="margin-left:5px; margin-top:5px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
-
-    </div>
-
-
-  <div style="margin-top:-10px; margin-left:30px; margin-right:40px; text-align:center;">
-
-      <div>
         <button style="display:none" onclick="adj('sph_test',-1.00)" class="btn-minus">- -</button>
-        <button style="width:100px" onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
-        <button style="margin-left:10px; width:100px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
+        <button style="margin-left:37px; width:100px" onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
+        <button style="margin-left:10px; margin-right:40px; width:100px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
    <button style="display:none" onclick="adj('sph_test', 1.00)" class="btn-plus">+ +</button>
 
 
 </div>
+<div>
+      Fan chart : <input style="margin-top:5px; width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
+      X <input style="margin-right:120px; margin-left:5px; margin-top:5px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
 
-<div style="margin-top:5px; text-align:center;">
 Duochrome : 
 
 <input 
-  style="border:none; width:30px ; margin-left:5px; background-color:#f5f5f5"
+  style="border:none; width:30px ; margin-right:45px; background-color:#f5f5f5"
   type="text" 
   id="sph_test" 
   value="+0.00" 
@@ -3338,12 +3341,29 @@ Duochrome :
 >
 
 </div>
+</div>
 
+</div>
+<div>
+<span id="fcdcbal_s"></span>
+<span id="fcdcbal_c"></span>
+<span id="fcdcbal_a"></span>
 </div>
 
 
 
 <script>
+function toggleresultsbutton() {
+  const panel = document.getElementById('resultsPanel');
+
+  if (panel.style.display === 'none') {
+    panel.style.display = 'block';
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+
 function getRX(type) {
   const get = (key) =>
     document.getElementById(`vd_out_${type}${key}`)?.textContent || '-';
@@ -3370,7 +3390,56 @@ function setActiveRX(type) {
   if (active) active.classList.add('rx-active');
 }
 
+function toggleRXBlur(isEmpty) {
+
+  const blocks = document.querySelectorAll('.rx-block');
+
+  blocks.forEach(el => {
+    if (isEmpty) {
+      el.classList.add('disabled-rx');
+    } else {
+      el.classList.remove('disabled-rx');
+    }
+  });
+}
+
+function updateFCDCBal(type) {
+
+  const Sraw = document.getElementById(`vd_${type}S`)?.value;
+  const Craw = document.getElementById(`vd_${type}C`)?.value;
+  const Araw = document.getElementById(`vd_${type}A`)?.value;
+
+  const S = (Sraw === "" || Sraw == null || Sraw === "-")
+    ? "-"
+    : parseFloat(Sraw).toFixed(2);
+
+  const C = (Craw === "" || Craw == null || Craw === "-")
+    ? "-"
+    : parseFloat(Craw).toFixed(2);
+
+  const A = (Araw === "" || Araw == null || Araw === "-")
+    ? "-"
+    : parseFloat(Araw);
+
+  const typeSpan = document.getElementById('fcdcbal_type');
+  const sSpan = document.getElementById('fcdcbal_s');
+  const cSpan = document.getElementById('fcdcbal_c');
+  const aSpan = document.getElementById('fcdcbal_a');
+
+const eyeMap = {
+  ou: "Both Eye",
+  od: "Right Eye",
+  os: "Left Eye"
+};
+
+if (typeSpan) typeSpan.innerText = eyeMap[type] || type.toUpperCase();
+  if (sSpan) sSpan.innerText = `DC Bal ${S}`;
+  if (cSpan) cSpan.innerText = `| CYL Bal ${C}`;
+  if (aSpan) aSpan.innerText = `| Axis ${A}`;
+}
+
 function loadRX(type, btn) {
+
   const { s, c, a } = getRX(type);
 
   const sph = document.getElementById('sph_test');
@@ -3379,7 +3448,7 @@ function loadRX(type, btn) {
 
   sph.value = s;
   cyl.value = c;
- axis.value = a;
+  axis.value = a;
 
   sph.dispatchEvent(new Event('input', { bubbles: true }));
   cyl.dispatchEvent(new Event('input', { bubbles: true }));
@@ -3387,8 +3456,15 @@ function loadRX(type, btn) {
 
   renderRX(type);
   setActiveRX(type);
-}
 
+  updateFCDCBal(type);
+
+  // ✅ BLUR LOGIC (dash = no test)
+  const Sraw = document.getElementById(`vd_${type}S`)?.value;
+  const isEmpty = (!Sraw || Sraw === "" || Sraw === "-");
+
+  toggleRXBlur(isEmpty);
+}
 
 /* optional: live sync if vd_out_* changes elsewhere */
 function watchRX(type) {
@@ -7946,7 +8022,7 @@ const v = parseInt(fitValue);
     4: {
       label: {
         d35: "4. Neutral, bigger near.<br>Good for indoor, room length.",
-        d45: "5. Neutral, equal near-mid.<br>Most all-rounder.",
+        d45: "5. Neutral, balance.<br>Most all-rounder.",
         d55: "6. Neutral, bigger mid.<br>Good for less swim effect."
       },
       stars: {
@@ -7959,7 +8035,7 @@ const v = parseInt(fitValue);
     6: {
       label: {
         d35: "1. Far emphasis, bigger near.<br>Only far & near.",
-        d45: "2. Far emphasis, equal near-mid.<br>Common everyday design.",
+        d45: "2. Far emphasis, balance.<br>Common everyday design.",
         d55: "3. Far emphasis, bigger mid.<br>Good for driving."
       },
       stars: {
@@ -7971,14 +8047,14 @@ const v = parseInt(fitValue);
 
     2: {
       label: {
-        d35: "7. Mid emphasis, bigger near.<br>Mainly for near vision.",
-        d45: "8. Mid emphasis, equal near-mid.<br>Good for deskwork.",
-        d55: "9. Mid emphasis, bigger mid.<br>Good for computer length."
+        d35: "7. Near emphasis, bigger near.<br>Mainly for near vision.",
+        d45: "8. Near emphasis, balance.<br>Good for deskwork.",
+        d55: "9. Near emphasis, bigger mid.<br>Good for computer length."
       },
       stars: {
-        d35: { far: "★★☆☆☆", mid: "★★★☆☆", near: "★★★★★" },
-        d45: { far: "★★☆☆☆", mid: "★★★★☆", near: "★★★★☆" },
-        d55: { far: "★★☆☆☆", mid: "★★★★★", near: "★★★☆☆" }
+        d35: { far: "★★★☆☆", mid: "★★☆☆☆", near: "★★★★★" },
+        d45: { far: "★★★☆☆", mid: "★★★☆☆", near: "★★★★☆" },
+        d55: { far: "★★★☆☆", mid: "★★★★☆", near: "★★★☆☆" }
       }
     }
   };
@@ -8007,7 +8083,7 @@ const adjustedOffset = offset * ((vd + 12) / 24);
 
   const baseInset = (pd / 2) * ((vd + 12) / (12 + wd));
 
-  const nearPd = pd - (baseInset * 2);
+ const nearPd = pd - (baseInset * 2);
  const monoPD = snapToQuarter(nearPd / 2);
  const fittingHeight = Math.round((ph - adjustedOffset) * 2) / 2;
  const fhDiff = Math.round((fittingHeight - ph) * 2) / 2;
@@ -8039,11 +8115,13 @@ const nearPd35 = ( pd - (baseInset + inset35) ) / 2 ;
 const nearPd45 = ( pd - (baseInset + inset45) ) / 2;
 const nearPd55 = ( pd - (baseInset + inset55) ) / 2;
 
-const nearPd35Final = snapToQuarter(nearPd35);
-const nearPd45Final = snapToQuarter(nearPd45);
-const nearPd55Final = snapToQuarter(nearPd55);
+const nearPd35Final = Math.round(nearPd35 * 20) / 20;
+const nearPd45Final = Math.round(nearPd45 * 20) / 20;
+const nearPd55Final = Math.round(nearPd55 * 20) / 20;
 
-
+  const inset35final = (pd /2) - nearPd35Final;
+  const inset45final = (pd /2) - nearPd45Final;
+  const inset55final = (pd /2) - nearPd55Final;
 
 
 const result1bValue = document.getElementById('result1b')?.textContent || '';
@@ -8079,6 +8157,8 @@ const result1bValue = document.getElementById('result1b')?.textContent || '';
           <div class="val">${baseInset.toFixed(2)} mm</div>
         </div>
 
+
+
       </div>
     </div>
 
@@ -8089,7 +8169,9 @@ const result1bValue = document.getElementById('result1b')?.textContent || '';
 
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
 
-      <div>
+
+<div class="select-card">
+
   <div class="lbl">
 <span>${stars.label.d35}</span><br><br>
 Far ${stars.stars.d35.far}<br>
@@ -8099,12 +8181,17 @@ Near ${stars.stars.d35.near}
   <div class="val"><br>
     Corridor : ${corridorDisplayMap[corr35]}
     ${adj35 ? `<br>Addition +${adj35.toFixed(2)}` : ''}
-    ${nearPd35Final ? `<br>Near PD / eye ${nearPd35Final.toFixed(2)} mm` : ''}<br>
+    ${nearPd35Final ? `<br>Near PD ${nearPd35Final.toFixed(2)} / ${nearPd35Final.toFixed(2)}` : ''} 
+    ${inset35final ? `<br>Inset ${inset35final.toFixed(2)} / ${inset35final.toFixed(2)}` : ''}<br>
     Cross H : ${(fittingHeight)} mm ( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} )
   </div>
 </div>
 
-<div>
+
+
+
+<div class="select-card">
+
   <div class="lbl">
 <span>${stars.label.d45}</span><br><br>
 
@@ -8115,12 +8202,16 @@ Near ${stars.stars.d45.near}
   <div class="val"><br>
    Corridor:  ${corridorDisplayMap[corr45]}
     ${adj45 ? `<br>Addition +${adj45.toFixed(2)}` : ''}
-    ${nearPd45Final ? `<br>Near PD / eye ${nearPd45Final.toFixed(2)} mm` : ''} <br>
+    ${nearPd45Final ? `<br>Near PD ${nearPd45Final.toFixed(2)} / ${nearPd45Final.toFixed(2)}` : ''}
+    ${inset45final ? `<br>Inset ${inset45final.toFixed(2)} / ${inset45final.toFixed(2)}` : ''}<br>
     Cross H : ${(fittingHeight)} mm ( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} )
   </div>
 </div>
 
-<div>
+
+
+<div class="select-card">
+
   <div class="lbl">
 <span>${stars.label.d55}</span><br><br>
 
@@ -8131,10 +8222,12 @@ Near ${stars.stars.d55.near}
   <div class="val"><br>
   Corridor :  ${corridorDisplayMap[corr55]}
   ${adj55 ? `<br>Addition +${adj55.toFixed(2)}` : ''}
-  ${nearPd55Final ? `<br>Near PD / eye ${nearPd55Final.toFixed(2)} mm` : ''}<br>
+  ${nearPd55Final ? `<br>Near PD ${nearPd55Final.toFixed(2)} / ${nearPd55Final.toFixed(2)}` : ''}
+    ${inset55final ? `<br>Inset ${inset55final.toFixed(2)} / ${inset55final.toFixed(2)}` : ''}<br>
   Cross H : ${(fittingHeight)} mm ( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} )
   </div>
 </div>
+
 
 </div>
 <br>
@@ -8422,6 +8515,19 @@ else if (age >= 61) addValue = 3.50;
 }
 
 ageInput.addEventListener('input', autoFillAdd);
+</script>
+
+<script>
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.select-card');
+  if (!card) return;
+
+  document.querySelectorAll('.select-card').forEach(c => {
+    c.classList.remove('active');
+  });
+
+  card.classList.add('active');
+});
 </script>
 
 
