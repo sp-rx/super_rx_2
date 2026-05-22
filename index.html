@@ -3288,8 +3288,8 @@ NOC :
 
 <tr><th class="red" colspan="4">Results</th></tr>
 
-<tr>
-<td colspan="4">
+<tr style="border:none">
+<td colspan="4" style="border:none">
 <span>Delta RX measures how much prescription off from The Balance Point.</span> 
   <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
 <button class="btn-0" style="width:70px" onclick="toggleresultsbutton()">Buttons</button>
@@ -3314,7 +3314,7 @@ NOC :
 
 </div>
 <div style="margin-top:20px; margin-bottom:-10px">
-<span style="font-size:20px" id="fcdcbal_type">Your results for ......</span> 
+<span style="font-size:15px" id="fcdcbal_type">Your current vision for ......</span> 
 </div>
 
 <div style="display:none">
@@ -3393,10 +3393,27 @@ NOC :
 
 
 
-<div id="resultsPanel" style="display:none; margin-top:20px">
+<div id="resultsPanel" style="display:none; margin-top:-20px">
+
+<div>
+      <span style="margin-left:40px">Fan chart :</span> <input style=" width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
+      X <input style="margin-right:120px; margin-left:5px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
+
+Duochrome : 
+
+<input 
+  style="border:none; width:30px ; margin-right:45px; background-color:#f5f5f5"
+  type="text" 
+  id="sph_test" 
+  value="+0.00" 
+  class="rx-input"
+  oninput="formatPlus(this)"
+>
+
+</div>
 
     <!-- CYL -->
-    <div style="margin-top:-10px; margin-left:30px; text-align:center;">
+    <div style="margin-top:0px; margin-bottom:10px; margin-left:30px; text-align:center;">
 
       <div>
         <button style="width:50px" onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
@@ -3419,30 +3436,24 @@ NOC :
 
 
 </div>
-<div>
-      Fan chart : <input style="margin-top:5px; width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
-      X <input style="margin-right:120px; margin-left:5px; margin-top:5px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
-
-Duochrome : 
-
-<input 
-  style="border:none; width:30px ; margin-right:45px; background-color:#f5f5f5"
-  type="text" 
-  id="sph_test" 
-  value="+0.00" 
-  class="rx-input"
-  oninput="formatPlus(this)"
->
 
 </div>
-</div>
-
 </div>
 <div style="margin-top:-10px">
-<span style="margin-left:35px; margin-right:40px; font-size:12px" id="fcdcbal_c"></span>
-<span style="margin-left:70px; margin-right:45px; font-size:12px" id="fcdcbal_s"></span>
+<hr style="border: none; border-top: 1px solid grey; margin: 8px 0;">
+
+<span style="margin-left:35px; margin-right:40px;" id="fcdcbal_c"></span>
+<span style="margin-left:70px; margin-right:45px;" id="fcdcbal_s"></span>
 </div>
 
+
+
+
+<div>
+<span id="fcdcbal_astig"></span><br>
+<span id="fcdcbal_duo"></span>
+
+</div>
 
 
 <script>
@@ -3520,10 +3531,72 @@ function updateFCDCBal(type) {
   const aSpan = document.getElementById('fcdcbal_a');
 
 const eyeMap = {
-  ou: "Your results for Both Eye",
-  od: "Your results for Right Eye",
-  os: "Your results for Left Eye"
+  ou: "Your current vision for Both Eye",
+  od: "Your current vision for Right Eye",
+  os: "Your current vision for Left Eye"
 };
+
+const descSpan = document.getElementById('fcdcbal_desc');
+
+if (descSpan) {
+  descSpan.innerText = getFCDescription(S, C);
+}
+
+
+
+
+function getFCDescription(S, C) {
+  const s = parseFloat(S);
+  const c = Math.abs(parseFloat(C));
+
+  let astig = "";
+  let duo = "";
+
+  // =========================
+  // ASTIGMATISM BLOCK
+  // =========================
+  if (c === 0 || isNaN(c)) {
+    astig = "No astigmatism.  Vision clarity is uniform across all lines.";
+  } 
+  else if (c <= 0.25) {
+    astig = "Some axis blurrier. Mild Astigmatism. Usually not necessary to correct.";
+  } 
+  else if (c <= 1.00) {
+    astig = "Some axis blurrier. Normal Astigmatism. Causes blur or shadowing in low light.";
+  } 
+  else if (c <= 2.00) {
+    astig = "Some axis blurrier. Moderate Astigmatism. Noticeable shadows and blur in vision.";
+  } 
+  else {
+    astig = "Some axis blurrier. High Astigmatism. Strong shadowing and blurred vision.";
+  }
+
+  // =========================
+  // DUOCHROME / SPH BLOCK
+  // =========================
+  if (s < 0) {
+    duo = "Object in red clearer. Myopia / Under-powered / Short-sightedness.";
+  } 
+  else if (s > 0.25) {
+    duo = "Object in blue clearer. Hyperopia / Over-powered / Long-sightedness.";
+  } 
+  else if (Math.abs(s - 0.25) < 0.01) {
+    duo = "Object in blue slightly clearer. Good vision for far.";
+  } 
+  else {
+    duo = "Both side equal. Good vision for indoor.";
+  }
+
+  return { astig, duo };
+}
+
+const desc = getFCDescription(S, C);
+
+const astigSpan = document.getElementById('fcdcbal_astig');
+const duoSpan = document.getElementById('fcdcbal_duo');
+
+if (astigSpan) astigSpan.innerText = desc.astig;
+if (duoSpan) duoSpan.innerText = desc.duo;
 
 
 function formatPower(val) {
@@ -3542,6 +3615,8 @@ if (typeSpan) typeSpan.innerText = eyeMap[type] || type.toUpperCase();
 if (sSpan) sSpan.innerText = `To balance duochrome ${formatPower(S)}`;
 if (cSpan) cSpan.innerText = `To balance fan chart ${formatPower(C)} x ${A}`;
 }
+
+
 
 function loadRX(type, btn) {
 
@@ -3602,11 +3677,11 @@ watchRX('os');
 
 
 
-<tr>
-<td colspan="4">
+<tr style="border:none">
+<td colspan="4" style="border:none">
 <div>
 
-<img style="max-width:89%; margin-top:20px; margin-right:2%;" src="https://raw.githubusercontent.com/sp-rx/Trainer/refs/heads/main/clear_comfy.png" alt="">
+<img style=max-width:89%; margin-top:20px; margin-right:2%;" src="https://raw.githubusercontent.com/sp-rx/Trainer/refs/heads/main/clear_comfy.png" alt="">
 
 </div>  
 <div><br>
