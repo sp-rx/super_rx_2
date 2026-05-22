@@ -3313,9 +3313,6 @@ NOC :
 </button>
 
 </div>
-<div style="margin-top:20px; margin-bottom:-10px">
-<span style="font-size:15px" id="fcdcbal_type">Your current vision for ......</span> 
-</div>
 
 <div style="display:none">
 <div style="
@@ -3439,6 +3436,7 @@ Duochrome :
 
 </div>
 </div>
+
 <div style="margin-top:-10px">
 <hr style="border: none; border-top: 1px solid grey; margin: 8px 0;">
 
@@ -3447,9 +3445,8 @@ Duochrome :
 </div>
 
 
-
-
 <div>
+<span id="fcdcbal_type"></span><br>
 <span id="fcdcbal_astig"></span><br>
 <span id="fcdcbal_duo"></span>
 
@@ -8077,7 +8074,27 @@ function resetRx() {
   setRx('sph_test', 0.00);
   setRx('cyl_test', 0.00);
   setRx('axis_test', 180);
+
+  // remove blur state
+  document.querySelectorAll('.rx-block').forEach(el => {
+    el.classList.remove('disabled-rx');
+  });
+
+  // 🔥 RESET FC/DC DISPLAY
+  const ids = [
+    "fcdcbal_type",
+    "fcdcbal_astig",
+    "fcdcbal_duo",
+    "fcdcbal_s",
+    "fcdcbal_c"
+  ];
+
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = "";
+  });
 }
+
 </script>
 
 
