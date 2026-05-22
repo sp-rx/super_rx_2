@@ -3314,7 +3314,7 @@ NOC :
 
 </div>
 <div style="margin-top:20px; margin-bottom:-10px">
-<span style="font-size:20px" id="fcdcbal_type"></span> 
+<span style="font-size:20px" id="fcdcbal_type">Your results for ......</span> 
 </div>
 
 <div style="display:none">
@@ -3438,10 +3438,9 @@ Duochrome :
 </div>
 
 </div>
-<div>
-<span id="fcdcbal_s"></span>
-<span id="fcdcbal_c"></span>
-<span id="fcdcbal_a"></span>
+<div style="margin-top:-10px">
+<span style="margin-left:35px; margin-right:40px; font-size:12px" id="fcdcbal_c"></span>
+<span style="margin-left:70px; margin-right:45px; font-size:12px" id="fcdcbal_s"></span>
 </div>
 
 
@@ -3521,15 +3520,27 @@ function updateFCDCBal(type) {
   const aSpan = document.getElementById('fcdcbal_a');
 
 const eyeMap = {
-  ou: "Both Eye",
-  od: "Right Eye",
-  os: "Left Eye"
+  ou: "Your results for Both Eye",
+  od: "Your results for Right Eye",
+  os: "Your results for Left Eye"
 };
 
+
+function formatPower(val) {
+  const num = parseFloat(val);
+
+  if (isNaN(num)) return "—";
+
+  const fixed = num.toFixed(2);
+
+  // always force + for zero and positives
+  if (num >= 0) return `+${fixed}`;
+
+  return fixed; // negatives already have "-"
+}
 if (typeSpan) typeSpan.innerText = eyeMap[type] || type.toUpperCase();
-  if (sSpan) sSpan.innerText = `DC Bal ${S}`;
-  if (cSpan) cSpan.innerText = `| CYL Bal ${C}`;
-  if (aSpan) aSpan.innerText = `| Axis ${A}`;
+if (sSpan) sSpan.innerText = `To balance duochrome ${formatPower(S)}`;
+if (cSpan) cSpan.innerText = `To balance fan chart ${formatPower(C)} x ${A}`;
 }
 
 function loadRX(type, btn) {
@@ -6297,7 +6308,7 @@ if(FAN_IMAGES[img]){
 }
 
     const axisFC  = (axis + 90) % 180; // original (axis + 90) % 180;
-    const fcShift = (deltaSE > -0.12) ? 90 : 0; // original (deltaSE > 0) ? 90 : 0;
+    const fcShift = (cyl < 0) ? 0 : 90 ; // original (deltaSE > 0) ? 90 : 0;
     outer.style.transform = `scaleX(-1) rotate(${-(axisFC + fcShift)}deg)`;
   }
 
