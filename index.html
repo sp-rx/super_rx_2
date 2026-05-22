@@ -1199,8 +1199,7 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 
 </th></tr>
 
-<tr><th class="yellow" colspan="4">FC DC Status Both Eye <button class="vtbn" onclick="toggleBE()">Show / Hide</button>
-</th></tr>
+
 <tr class="yellow be-row" data-eye="both" style="display:none; border-bottom:none">
 <td style="border-bottom:none" colspan="4">
 
@@ -1419,36 +1418,31 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 
 </div>
 <br>
-<button style="margin:5px 0; border-radius:10px; width:100px; height:25px" id="fillBalance">FC DC Bal Be</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
+<button style="margin:5px 0; border-radius:10px; width:50%; height:25px" id="fillBalance">Calculate into Delta BE</button>
+<br><br>
+DC SPH: <span style="margin-right:30px" id="balanceBoth"></span>FC CYL: <span id="balance-ou"></span>
 </td></tr>
 
-<tr>
-<td class="be-row yellow" style="display:none; border-top:none; border-bottom:none" colspan="4">
-DC SPH: <span style="margin-right:30px" id="balanceBoth"></span>FC CYL: <span id="balance-ou"></span>
-
-</td>
-</tr>
 
 <tr class="befinal-row yellow" style="border-top:none; border-bottom:none">
 <td style="border-top:none; border-bottom:none" colspan="4">
+<br>
+Delta BE <button style="margin-right:4%;"class="vtbn" onclick="toggleBE()"> + </button>
 
      DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouS">
  
     CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouC">
 
     Darker Axis : <input style="width:60px" type="number" step="5" min="0" max="180" id="vd_ouA">
-
   </td>
 </tr>
 <tr>
-<td style="font-weight:600;" class="yellow" colspan="4">
+<td style="font-weight:600; border-top:none" class="yellow" colspan="4">
  Finalized Vector RX over Both Eyes  
     <span style="margin:0 15px" id="vd_out_ouS">-</span> / 
     <span style="margin:0 15px" id="vd_out_ouC">-</span> x 
     <span style="margin:0 15px" id="vd_out_ouA">-</span>
+<br><br>
 
 </td>
 </tr>
@@ -1488,9 +1482,6 @@ document.getElementById("fillBalance").addEventListener("click", () => {
 
 
 
-
-<tr><th class="purp" colspan="4">FC DC Status Right Eye <button class="vtbn" onclick="toggleRE()">Show / Hide</button>
-</th></tr>
 
 
 <tr class="re-row purp" data-eye="right" style="display:none; border-bottom:none">
@@ -1731,6 +1722,8 @@ DC SPH: <span style="margin-right:30px" id="balanceRight"></span>FC CYL: <span i
 
 <tr class="refinal-row purp" style="border-top:none; border-bottom:none">
 <td style="border-top:none; border-bottom:none" colspan="4">
+<br>
+Delta R <button style="margin-right:4%" class="vtbn" onclick="toggleRE()"> + </button>
 
      DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_odS">
  
@@ -1743,10 +1736,11 @@ DC SPH: <span style="margin-right:30px" id="balanceRight"></span>FC CYL: <span i
 
 
 <tr>
-<td style="font-weight:600;" class="purp" colspan="4">Finalized Vector RX over Right Eye Only 
+<td style="font-weight:600; border-top:none; "class="purp" colspan="4">Finalized Vector RX over Right Eye Only 
     <span style="margin:0 15px" id="vd_out_odS">-</span> / 
     <span style="margin:0 15px" id="vd_out_odC">-</span> x 
     <span style="margin:0 15px" id="vd_out_odA">-</span>
+<br><br>
 </td>
 </tr>
 
@@ -1779,8 +1773,7 @@ document.getElementById("fillBalanceRE").addEventListener("click", () => {
 </script>
 
 
-<tr><th class="turq" colspan="4">FC DC Status Left Eye <button class="vtbn" onclick="toggleLE()"> Show / Hide </button>
-</th></tr>
+
 <tr class="le-row turq" data-eye="left" style="display:none; border-bottom:none">
 <td style="border-bottom:none"colspan="4">
 <div class="SPhelper-row" style="display:grid;grid-template-columns:repeat(9,1fr);gap:5px;width:100%;">
@@ -2014,6 +2007,9 @@ DC SPH: <span style="margin-right:30px" id="balanceLeft"></span>FC CYL: <span id
 
 <tr class="lefinal-row turq" style="border-top:none; border-bottom:none"><td style="border-top:none; border-bottom:none" colspan="4">
 
+<br>
+Delta L <button style="margin-right:4%" class="vtbn" onclick="toggleLE()"> + </button>
+
      DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_osS">
  
     CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_osC">
@@ -2024,10 +2020,11 @@ DC SPH: <span style="margin-right:30px" id="balanceLeft"></span>FC CYL: <span id
 </tr>
 
 <tr>
-<td style="font-weight:600;" class="turq" colspan="4">Finalized Vector RX over Left Eye Only
+<td style="font-weight:600; border-top:none" class="turq" colspan="4">Finalized Vector RX over Left Eye Only
     <span style="margin:0 15px" id="vd_out_osS">-</span> / 
     <span style="margin:0 15px" id="vd_out_osC">-</span> x 
     <span style="margin:0 15px" id="vd_out_osA">-</span>
+<br><br>
 </td>
 </tr>
 
@@ -2087,6 +2084,7 @@ function resetLogBE() {
 style="border-radius:10px; width:80px; height:25px">
   RE + LE
 </button>
+
 <button class="purp" style="border-radius:10px; margin-right:20px" onclick="resetLogRELE()">X</button>
 <script>
 function resetLogRELE() {
@@ -2105,17 +2103,27 @@ function resetLogRELE() {
 
 <script>
 function runRELE() {
-  copyVD_OD();  // RE
-  copyVD_OS();  // LE
-  captureRELE();
-  captureRELE_CL(); // ← THIS IS MISSING
+  const odS = document.getElementById("vd_odS")?.value?.trim();
+  const osS = document.getElementById("vd_osS")?.value?.trim();
 
+  // If either is empty, do nothing
+  if (odS === "" || osS === "") return;
+
+  copyVD_OD();   // RE
+  copyVD_OS();   // LE
+  captureRELE();
+  captureRELE_CL();
 }
+
 function runBE() {
+  const ouS = document.getElementById("vd_ouS")?.value?.trim();
+
+  // If empty, do nothing
+  if (ouS === "") return;
+
   copyVD_OU_to_ODOS();
   captureBE();
-  captureBE_CL();   // ← THIS IS MISSING
-
+  captureBE_CL();
 }
 </script>
 
@@ -2168,9 +2176,10 @@ function runBE() {
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
+<tr><td colspan="4">Spectacle Lens Results</td></tr>
 
 <tr>
-<td class="red">Current RX</td>
+<td class="red">Current SL</td>
 <td class="red" colspan="3">
 R: <span class="od_summary" style="margin-right: 80px;">+0.00 / +0.00 × 0</span>
 L: <span class="os_summary">+0.00 / +0.00 × 0</span>
@@ -2188,14 +2197,14 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 </tr>
 
 <tr class="yellow">
-  <td colspan="1">Delta RX BE </td>
+  <td colspan="1">Delta BE SL</td>
   <td colspan="3">
 <span id="logBE"><i>Loading....</i></span></td>
 </tr>
 
 
 <tr class="purp">
-  <td colspan="1">Delta RX RE / LE</td>
+  <td colspan="1">Delta R/L SL</td>
 
   <td id="logRELE" colspan="3"><i>Loading....</i></td>
 </tr>
@@ -2207,24 +2216,58 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
 	
+<tr><td colspan="4">Contact Lens With Astigmatism Results</td></tr>
 <tr>
-  <td class="red">Current RX CL</td>
+  <td class="red">Current CLA</td>
   <td colspan="3" class="red">
 
-R : <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
-L : <span id="CL_os_origCombined">OS -</span>
+R: <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
+L: <span id="CL_os_origCombined">OS -</span>
   </td>
 </tr>
 
-	<tr class="yellow">
-  <td colspan="1">Delta RX BE CL</td>
+<tr class="yellow">
+  <td colspan="1">Delta BE CLA</td>
   <td colspan="3" id="logBE_CL"><i>Loading....</i></td>
 </tr>
+
 <tr class="purp">
-  <td colspan="1">Delta RX RE / LE CL</td>
+  <td colspan="1">Delta R/L CLA</td>
 
   <td id="logRELE_CL" colspan="3"><i>Loading....</i></td>
 </tr>
+
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
+
+
+<tr><td colspan="4">Contact Lens SE Only Results</td></tr>
+<tr>
+  <td class="red">Current CLSE</td>
+  <td colspan="3" class="red">
+
+R: <span id="SE_od_origCombined" style="margin-right: 80px;">OD -</span>
+L: <span id="SE_os_origCombined">OS -</span>
+  </td>
+</tr>
+
+<tr class="yellow">
+  <td colspan="1">Delta BE CLSE</td>
+  <td colspan="3" id="logBE_CL_SE"><i>Loading....</i></td>
+</tr>
+
+<tr class="purp">
+  <td colspan="1"">Delta R/L CLSE</td>
+  <td colspan="3" id="logRELE_CL_SE"><i>Loading....</i></td>
+</tr>
+
+
+
+
 
 <tr style="display:none">
 <td class="yellow">Add : <input style="width:60px" type="number" step="0.25" min="0" max="5" id="nearAddSP">
@@ -2240,16 +2283,61 @@ function formatRx(val) {
 
   if (num > 0) return `+${fixed}`;
   if (num === 0) return `+${fixed}`;
-  return fixed; // negative already has "-"
+  return fixed;
+}
+
+function getSE(rxText) {
+  if (!rxText) return "—";
+
+  // remove HTML junk just in case
+  const clean = rxText.replace(/<[^>]*>/g, "").trim();
+
+  // Case 1: SPH / CYL
+  let match = clean.match(/([+-]?\d+(\.\d+)?)\s*\/\s*([+-]?\d+(\.\d+)?)/);
+
+  if (match) {
+    const sphere = parseFloat(match[1]);
+    const cyl = parseFloat(match[3]) || 0;
+
+    let se = sphere + (cyl / 2);
+
+    // round to nearest 0.25, ties toward negative
+    const scaled = se * 4;
+    const floorVal = Math.floor(scaled);
+    const frac = scaled - floorVal;
+
+    let roundedScaled;
+    if (frac < 0.5) {
+      roundedScaled = floorVal;
+    } else if (frac > 0.5) {
+      roundedScaled = floorVal + 1;
+    } else {
+      roundedScaled = floorVal;
+    }
+
+    se = roundedScaled / 4;
+
+    return formatRx(se);
+  }
+
+  // Case 2: SPH only (e.g. "-2.50")
+  match = clean.match(/([+-]?\d+(\.\d+)?)/);
+
+  if (match) {
+    const sph = parseFloat(match[1]);
+    return formatRx(sph);
+  }
+
+  return "—";
 }
 
 function captureBE() {
-const odS = formatRx(document.getElementById("od_vcFinalS")?.textContent);
-const odC = formatRx(document.getElementById("od_vcFinalC")?.textContent);
+  const odS = formatRx(document.getElementById("od_vcFinalS")?.textContent);
+  const odC = formatRx(document.getElementById("od_vcFinalC")?.textContent);
   const odA = document.getElementById("od_vcFinalA")?.textContent || "—";
 
-const osS = formatRx(document.getElementById("os_vcFinalS")?.textContent);
-const osC = formatRx(document.getElementById("os_vcFinalC")?.textContent);
+  const osS = formatRx(document.getElementById("os_vcFinalS")?.textContent);
+  const osC = formatRx(document.getElementById("os_vcFinalC")?.textContent);
   const osA = document.getElementById("os_vcFinalA")?.textContent || "—";
 
   const formatted = `
@@ -2263,7 +2351,7 @@ const osC = formatRx(document.getElementById("os_vcFinalC")?.textContent);
 function captureBE_CL() {
   const text = document.getElementById("logBE")?.textContent || "";
 
-const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s*(\d+|-))/g) || [];
+  const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s*(\d+|-))/g) || [];
 
   const odCL = matches[0] ? convertOne(...parseText(matches[0])) : "";
   const osCL = matches[1] ? convertOne(...parseText(matches[1])) : "";
@@ -2272,15 +2360,20 @@ const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s
     R: <span style="margin-right:80px">${odCL}</span>
     L: <span>${osCL}</span>
   `;
+
+  document.getElementById("logBE_CL_SE").innerHTML = `
+    R: <span style="margin-right:80px">${getSE(odCL)}</span>
+    L: <span>${getSE(osCL)}</span>
+  `;
 }
 
 function captureRELE() {
-const odS = formatRx(document.getElementById("od_vcFinalS")?.textContent);
-const odC = formatRx(document.getElementById("od_vcFinalC")?.textContent);
+  const odS = formatRx(document.getElementById("od_vcFinalS")?.textContent);
+  const odC = formatRx(document.getElementById("od_vcFinalC")?.textContent);
   const odA = document.getElementById("od_vcFinalA")?.textContent || "—";
 
-const osS = formatRx(document.getElementById("os_vcFinalS")?.textContent);
-const osC = formatRx(document.getElementById("os_vcFinalC")?.textContent);
+  const osS = formatRx(document.getElementById("os_vcFinalS")?.textContent);
+  const osC = formatRx(document.getElementById("os_vcFinalC")?.textContent);
   const osA = document.getElementById("os_vcFinalA")?.textContent || "—";
 
   const formatted = `
@@ -2294,7 +2387,7 @@ const osC = formatRx(document.getElementById("os_vcFinalC")?.textContent);
 function captureRELE_CL() {
   const text = document.getElementById("logRELE")?.textContent || "";
 
-const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s*(\d+|-))/g) || [];
+  const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s*(\d+|-))/g) || [];
 
   const odCL = matches[0] ? convertOne(...parseText(matches[0])) : "";
   const osCL = matches[1] ? convertOne(...parseText(matches[1])) : "";
@@ -2303,12 +2396,13 @@ const matches = text.match(/([+-]?\d+(\.\d+)?\s*\/\s*[+-]?\d+(\.\d+)?\s*[xX×]\s
     R: <span style="margin-right:80px">${odCL}</span>
     L: <span>${osCL}</span>
   `;
+
+  document.getElementById("logRELE_CL_SE").innerHTML = `
+    R: <span style="margin-right:80px">${getSE(odCL)}</span>
+    L: <span>${getSE(osCL)}</span>
+  `;
 }
-
-
-
 </script>
-
 
 
 
@@ -5963,30 +6057,73 @@ function parseText(txt){
   ];
 }
 
+function getSEfromCL(clText) {
+  if (!clText) return "";
 
+  // Case 1: SPH / CYL
+  const fullMatch = clText.match(/([+-]?\d+\.?\d*)\s*\/\s*([+-]?\d+\.?\d*)/);
 
-  function updateCL(odSpan, osSpan, odCL, osCL){
-    const [sOD,cOD,aOD] = parseText(odSpan.textContent);
-    const [sOS,cOS,aOS] = parseText(osSpan.textContent);
-    odCL.textContent = convertOne(sOD,cOD,aOD);
-    osCL.textContent = convertOne(sOS,cOS,aOS);
+  if (fullMatch) {
+    const sphere = parseFloat(fullMatch[1]);
+    const cyl = parseFloat(fullMatch[2]) || 0;
+
+    let se = sphere + (cyl / 2);
+
+    const scaled = se * 4;
+    const rounded = Math.round(scaled) / 4; // safer rounding to 0.25
+
+    return (rounded >= 0 ? "+" : "") + rounded.toFixed(2);
   }
 
-  sets.forEach(([odId, osId])=>{
-    const odSpan = document.getElementById(odId);
-    const osSpan = document.getElementById(osId);
-    const odCL = document.getElementById("CL_" + odId);
-    const osCL = document.getElementById("CL_" + osId);
-    if(!odSpan || !osSpan || !odCL || !osCL) return;
+  // Case 2: SPH only (no cyl present)
+  const sphOnly = clText.match(/([+-]?\d+\.?\d*)/);
+  if (sphOnly) {
+    const sph = parseFloat(sphOnly[1]);
+    return (sph >= 0 ? "+" : "") + sph.toFixed(2);
+  }
 
-    // Initial calculation
-    updateCL(odSpan, osSpan, odCL, osCL);
+  return "";
+}
 
-    // Live update using MutationObserver
-    const observer = new MutationObserver(()=>updateCL(odSpan, osSpan, odCL, osCL));
-    observer.observe(odSpan, { childList: true, characterData: true, subtree: true });
-    observer.observe(osSpan, { childList: true, characterData: true, subtree: true });
+function updateCL(odSpan, osSpan, odCL, osCL, odSE, osSE){
+  const [sOD,cOD,aOD] = parseText(odSpan.textContent);
+  const [sOS,cOS,aOS] = parseText(osSpan.textContent);
+
+  const odVal = convertOne(sOD,cOD,aOD);
+  const osVal = convertOne(sOS,cOS,aOS);
+
+  // existing CL output
+  odCL.textContent = odVal;
+  osCL.textContent = osVal;
+
+  // NEW SE output
+  if (odSE) odSE.textContent = getSEfromCL(odVal);
+  if (osSE) osSE.textContent = getSEfromCL(osVal);
+}
+
+
+
+sets.forEach(([odId, osId])=>{
+  const odSpan = document.getElementById(odId);
+  const osSpan = document.getElementById(osId);
+
+  const odCL = document.getElementById("CL_" + odId);
+  const osCL = document.getElementById("CL_" + osId);
+
+  const odSE = document.getElementById("SE_" + odId);
+  const osSE = document.getElementById("SE_" + osId);
+
+  if(!odSpan || !osSpan || !odCL || !osCL) return;
+
+  updateCL(odSpan, osSpan, odCL, osCL, odSE, osSE);
+
+  const observer = new MutationObserver(()=>{
+    updateCL(odSpan, osSpan, odCL, osCL, odSE, osSE);
   });
+
+  observer.observe(odSpan, { childList:true, characterData:true, subtree:true });
+  observer.observe(osSpan, { childList:true, characterData:true, subtree:true });
+});
 
   window.convertOne = convertOne;
   window.parseText = parseText;
