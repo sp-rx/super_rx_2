@@ -3549,6 +3549,13 @@ function getFCDescription(S, C) {
   let astig = "";
   let duo = "";
 
+if (S === "-" || C === "-" || isNaN(parseFloat(S)) || isNaN(parseFloat(C))) {
+  return {
+    astig: "Not done",
+    duo: " "
+  };
+}
+
   // =========================
   // ASTIGMATISM BLOCK
   // =========================
