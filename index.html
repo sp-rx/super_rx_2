@@ -614,10 +614,10 @@ Near Add :  <span id="result1b">—</span>
 
 
 
-<div style="margin-top:10px">
+<div style="margin-top:10px"><i>(Optional)
 Mid Length (cm) : <input  style="margin-right:4%" placeholder="50" type="number" step="1" id="wd2">
-<button  style="margin-right:4%" class="normal-btn" id="btnWd2" onclick="calcBothWd2()"><i>Calculate</i></button>
-        Mid add :  <span id="result2b">—</span>
+<button style="margin-right:4%" class="normal-btn" id="btnWd2" onclick="calcBothWd2()"><i>Calculate</i></button>
+     Mid add :  <span id="result2b">—</span></i>
 
 
         </div>
@@ -2052,7 +2052,7 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 
 <tr class="red"><td colspan="1">Import Vectors</td>
 <td colspan="3">
-<button id="toggleBtn3">Show Results</button>
+<button style="border-radius:10px; width:100px; height:25px" id="toggleBtn3">Show Results</button>
 
 <button class="yellow" onclick="runBE()" style="border-radius:10px; width:50px; height:25px">BE</button>
 <button class="yellow" style="border-radius:10px; margin-right:20px" onclick="resetLogBE()">X</button>
@@ -7256,33 +7256,29 @@ function analyzeAgeAdd() {
   const age = parseInt(document.getElementById("age").value);
   let add = "";
 
-  if (!age || age < 1) {
-    add = "Enter a valid age.....";
-  } else if (age < 37) {
-    add = "Normal 40cm +0.00";
-  } else if (age < 43) {
-    add = "Normal 40cm +0.50";
-  } else if (age < 45) {
-    add = "Normal 40cm +0.75";
-  } else if (age < 47) {
-    add = "Normal 40cm +1.00";
-  } else if (age < 49) {
-    add = "Normal 40cm +1.25";
-  } else if (age < 51) {
-    add = "Normal 40cm +1.50";
-  } else if (age < 53) {
-    add = "Normal 40cm +1.75";
-  } else if (age < 55) {
-    add = "Normal 40cm +2.00";
-  } else if (age < 57) {
-    add = "Normal 40cm +2.25";
-  } else if (age < 59) {
-    add = "Normal 40cm +2.50";
-  } else if (age < 61) {
-    add = "Normal 40cm +3.00";
-  } else {
-    add = "Normal add is +2.50";
-  }
+ if (!age || age < 1) {
+  add = "Enter a valid age.....";
+} else if (age < 37) {
+  add = "Normal 40cm +0.00";
+} else if (age < 43) {
+  add = "Normal 40cm +0.50";
+} else if (age < 45) {
+  add = "Normal 40cm +0.75";
+} else if (age < 47) {
+  add = "Normal 40cm +1.00";
+} else if (age < 49) {
+  add = "Normal 40cm +1.25";
+} else if (age < 51) {
+  add = "Normal 40cm +1.50";
+} else if (age < 53) {
+  add = "Normal 40cm +1.75";
+} else if (age < 55) {
+  add = "Normal 40cm +2.00";
+} else if (age < 57) {
+  add = "Normal 40cm +2.25";
+} else {
+  add = "Normal 40cm +2.50";
+}
 
   document.getElementById("addComment").innerText = add;
 
