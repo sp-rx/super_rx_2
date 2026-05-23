@@ -2052,9 +2052,8 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 
 <tr class="red"><td colspan="1">Import Vectors</td>
 <td colspan="3">
-<button style="border-radius:10px; width:100px; height:25px" id="toggleBtn3">Show Results</button>
 
-<button class="yellow" onclick="runBE()" style="border-radius:10px; width:50px; height:25px">BE</button>
+<button class="yellow" onclick="runBE()" style="margin-left:50px; border-radius:10px; width:50px; height:25px">BE</button>
 <button class="yellow" style="border-radius:10px; margin-right:20px" onclick="resetLogBE()">X</button>
 <script>
 function resetLogBE() {
@@ -2090,6 +2089,7 @@ function resetLogRELE() {
   Capture RE / LE
 </button>
 
+<button style="border-radius:10px; width:100px; height:25px" id="toggleBtn3">Show Charts</button>
 
 
 <script>
@@ -2176,18 +2176,18 @@ function runBE() {
 <div style="margin-top:10px; display:flex; align-items:center; gap:10px; justify-content:center">
 
 <button class="rx-btn" data-rx="ou" onclick="loadRX('ou', this)" style="width:165px">
-  RX Both Eye<br>
-  <span id="rx_ou"></span>
+  RX BE<br>
+  <span style="display:none" id="rx_ou"></span>
 </button>
 
 <button class="rx-btn" data-rx="od" onclick="loadRX('od', this)" style="width:165px">
   RX Right Eye<br>
-  <span id="rx_od"></span>
+  <span style="display:none" id="rx_od"></span>
 </button>
 
 <button class="rx-btn" data-rx="os" onclick="loadRX('os', this)" style="width:165px">
   RX Left Eye<br>
-  <span id="rx_os"></span>
+  <span style="display:none" id="rx_os"></span>
 </button>
 
 </div>
@@ -2320,14 +2320,13 @@ Duochrome :
 <span style="margin-left:35px; margin-right:40px;" id="fcdcbal_c"></span>
 <span style="margin-left:70px; margin-right:45px;" id="fcdcbal_s"></span>
 </div>
+</div>
 
-
-<div>
-<span id="fcdcbal_type"></span><br>
+<div style="margin-top:15px">
+<span id="fcdcbal_type"></span><br><br>
 <span id="fcdcbal_astig"></span><br>
 <span id="fcdcbal_duo"></span>
 
-</div>
 
 
 <script>
@@ -2559,7 +2558,7 @@ watchRX('os');
 
 <tr style="border:none">
 <td colspan="4" style="border:none" style="padding:0 0 0 0">
-<button style="border:none" id="hide_show4" onclick="toggleHideShow4()"><u>Show the balance chart</u></button>
+<button style="width:40%; border-radius:10px" id="hide_show4" onclick="toggleHideShow4()">Show the balance chart</button>
 <div style="margin-top:-10px"></div>
 <div style="display:none" id="toggleDiv4">
 
@@ -2645,25 +2644,25 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
 	
-<tr><td colspan="4">Contact Lens With Astigmatism Results</td></tr>
+<tr><td style="color: darkblue" colspan="4">Contact Lens With Astigmatism Results</td></tr>
 <tr>
-  <td class="red">Current CLA</td>
-  <td colspan="3" class="red">
+  <td style="color: darkblue" class="red">Current CLA</td>
+  <td style="color: darkblue" colspan="3" class="red">
 
 R: <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
 L: <span id="CL_os_origCombined">OS -</span>
   </td>
 </tr>
 
-<tr class="yellow">
-  <td colspan="1">Delta BE CLA</td>
-  <td colspan="3" id="logBE_CL"><i>Loading....</i></td>
+<tr style="color: darkblue" class="yellow">
+  <td style="color: darkblue" colspan="1">Delta BE CLA</td>
+  <td style="color: darkblue" colspan="3" id="logBE_CL"><i>Loading....</i></td>
 </tr>
 
-<tr class="purp">
-  <td colspan="1">Delta R/L CLA</td>
+<tr style="color: darkblue" class="purp">
+  <td style="color: darkblue" colspan="1">Delta R/L CLA</td>
 
-  <td id="logRELE_CL" colspan="3"><i>Loading....</i></td>
+  <td style="color: darkblue" id="logRELE_CL" colspan="3"><i>Loading....</i></td>
 </tr>
 
 <tr style="border:none; height:10px;">
@@ -2674,24 +2673,24 @@ L: <span id="CL_os_origCombined">OS -</span>
 </tr>
 
 
-<tr><td colspan="4">Contact Lens SE Only Results</td></tr>
+<tr><td style="color: darkblue" colspan="4">Contact Lens SE Only Results</td></tr>
 <tr>
-  <td class="red">Current CLSE</td>
-  <td colspan="3" class="red">
+  <td style="color: darkblue" class="red">Current CLSE</td>
+  <td style="color: darkblue" colspan="3" class="red">
 
 R: <span id="SE_od_origCombined" style="margin-right: 80px;">OD -</span>
 L: <span id="SE_os_origCombined">OS -</span>
   </td>
 </tr>
 
-<tr class="yellow">
-  <td colspan="1">Delta BE CLSE</td>
-  <td colspan="3" id="logBE_CL_SE"><i>Loading....</i></td>
+<tr style="color: darkblue" class="yellow">
+  <td style="color: darkblue" colspan="1">Delta BE CLSE</td>
+  <td style="color: darkblue" colspan="3" id="logBE_CL_SE"><i>Loading....</i></td>
 </tr>
 
-<tr class="purp">
-  <td colspan="1"">Delta R/L CLSE</td>
-  <td colspan="3" id="logRELE_CL_SE"><i>Loading....</i></td>
+<tr style="color: darkblue" class="purp">
+  <td style="color: darkblue" colspan="1"">Delta R/L CLSE</td>
+  <td style="color: darkblue" colspan="3" id="logRELE_CL_SE"><i>Loading....</i></td>
 </tr>
 
 
@@ -2900,8 +2899,18 @@ function captureRELE_CL() {
 </div>
 
   <div>
-    <b>Current RX</b><br>(Reset) <button class="vbtn" type="button" onclick="resetValue('visual_s1')">S</button> <button class="vbtn" type="button" onclick="resetValue('visual_c1')">C</button> <button class="vbtn" type="button" onclick="resetValue('visual_a1')">A</button><br><br>
+    <b>Current RX</b><br>
+<button class="vbtn" type="button" onclick="resetAllVisual1()">0</button>
+<button class="vbtn" type="button" onclick="resetValue('visual_s1')">S</button> <button class="vbtn" type="button" onclick="resetValue('visual_c1')">C</button> <button class="vbtn" type="button" onclick="resetValue('visual_a1')">A</button>
+<br><br>
 
+<script>
+function resetAllVisual1() {
+  resetValue('visual_s1');
+  resetValue('visual_c1');
+  resetValue('visual_a1');
+}
+</script>
 
 <button class="vbtn" type="button" onclick="adjust('visual_s1', -1)">--</button>
     <button class="vbtn" type="button" onclick="adjust('visual_s1', 1)">++</button>&nbsp;&nbsp;
@@ -2933,8 +2942,16 @@ function captureRELE_CL() {
   </div>
 
   <div>
-    <b>SP Changes</b><br>(Reset) <button class="vbtn" type="button" onclick="resetValue('visual_s2')">S</button> <button class="vbtn" type="button" onclick="resetValue('visual_c2')">C</button> <button class="vbtn" type="button" onclick="resetValue('visual_a2')">A</button><br><br>
-
+    <b>Delta</b><br>
+<button class="vbtn" type="button" onclick="resetAllVisual2()">0</button>
+<button class="vbtn" type="button" onclick="resetValue('visual_s2')">S</button> <button class="vbtn" type="button" onclick="resetValue('visual_c2')">C</button> <button class="vbtn" type="button" onclick="resetValue('visual_a2')">A</button><br><br>
+<script>
+function resetAllVisual2() {
+  resetValue('visual_s2');
+  resetValue('visual_c2');
+  resetValue('visual_a2');
+}
+</script>
 
      S: 
     <input style="width:60px" type="number" id="visual_s2" step="0.25" value="0">&nbsp;&nbsp;
@@ -2955,14 +2972,41 @@ function captureRELE_CL() {
     <button class="vbtn"  type="button" onclick="adjust('visual_a2', -15)">-</button>
     <button class="vbtn"  type="button" onclick="adjust('visual_a2', 15)">+</button>
 
-
   </div>
 </div>
 
 <div style="margin-top:10px; margin-bottom:5px; display:flex; gap:7%; align-items:flex-start; justify-content:center">
 
-<div><br>
-  <span style="font-size:20px; font-weight:400">Final RX <span id="lastLoaded"> </span>&nbsp<span id="visual_combinedSpan">0.00 0.00 x 0</span>
+<div>
+<br><br>
+<span style="font-size:12px; font-weight:400">Delta RX &nbsp;&nbsp;<span id="rx_display2">0.00 0.00 x 0</span>
+
+<script>
+function updateRXDisplay2() {
+  const s = parseFloat(document.getElementById("visual_s2").value) || 0;
+  const c = parseFloat(document.getElementById("visual_c2").value) || 0;
+  const a = parseInt(document.getElementById("visual_a2").value) || 0;
+
+  const sText = (s >= 0 ? "+" : "") + s.toFixed(2);
+  const cText = (c >= 0 ? "+" : "") + c.toFixed(2);
+  const aText = a.toString().padStart(3, "0");
+
+  document.getElementById("rx_display2").innerText =
+    `${sText} / ${cText} x ${aText}`;
+}
+
+// live update
+["visual_s2", "visual_c2", "visual_a2"].forEach(id => {
+  document.getElementById(id).addEventListener("input", updateRXDisplay2);
+});
+
+// first load
+updateRXDisplay2();
+</script>
+<br>
+
+
+  <span style="font-size:15px; font-weight:400">Final RX <span id="lastLoaded"> </span>&nbsp<span id="visual_combinedSpan">0.00 0.00 x 0</span>
   </span>
 
 
