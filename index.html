@@ -478,7 +478,7 @@ button.active {
 	<a data-target="s2">Delta RX</a>
 	<a data-target="s3">Manual RX</a>
 	<a data-target="snear">Near RX</a>
-	<a data-target="s1">Results</a>
+	<a style="display:none" data-target="s1">Results</a>
 
 
 
@@ -1179,7 +1179,6 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
 
 <button style="width:80%" id="toggleBtn">Show / Hide Inputs</button>
 
-
  </td></tr>
 </table>
 
@@ -1424,9 +1423,8 @@ DC SPH: <span style="margin-right:30px" id="balanceBoth"></span>FC CYL: <span id
 </td></tr>
 
 
-<tr class="befinal-row yellow" style="border-top:none; border-bottom:none">
+<tr class="befinal-row yellow" style="border-top:none; border-bottom:none; padding:10px 0 0 0">
 <td style="border-top:none; border-bottom:none" colspan="4">
-<br>
 Delta BE <button style="margin-right:4%;"class="vtbn" onclick="toggleBE()"> + </button>
 
      DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouS">
@@ -1436,13 +1434,11 @@ Delta BE <button style="margin-right:4%;"class="vtbn" onclick="toggleBE()"> + </
     Darker Axis : <input style="width:60px" type="number" step="5" min="0" max="180" id="vd_ouA">
   </td>
 </tr>
-<tr>
-<td style="font-weight:600; border-top:none" class="yellow" colspan="4">
+<tr><td style="font-weight:600; border-top:none; padding:0 0 10px 0" class="yellow" colspan="4">
  Finalized Vector RX over Both Eyes  
     <span style="margin:0 15px" id="vd_out_ouS">-</span> / 
     <span style="margin:0 15px" id="vd_out_ouC">-</span> x 
     <span style="margin:0 15px" id="vd_out_ouA">-</span>
-<br><br>
 
 </td>
 </tr>
@@ -1708,8 +1704,7 @@ document.getElementById("fillBalance").addEventListener("click", () => {
 </div>
 
 <br>
-<button style="margin:5px 0; border-radius:10px; width:100px; height:25px" id="fillBalanceRE">FC DC Bal RE</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button style="margin:5px 0; border-radius:10px; width:50%; height:25px" id="fillBalanceRE">Calculate into Delta R</button>
 
 
 </td></tr>
@@ -1720,9 +1715,10 @@ DC SPH: <span style="margin-right:30px" id="balanceRight"></span>FC CYL: <span i
 </td>
 </tr>
 
-<tr class="refinal-row purp" style="border-top:none; border-bottom:none">
-<td style="border-top:none; border-bottom:none" colspan="4">
-<br>
+
+
+<tr class="refinal-row purp" style="border-top:none; border-bottom:none; padding: 10px 0 0 0">
+<td style="border-top:none; border-bottom:none;" colspan="4">
 Delta R <button style="margin-right:4%" class="vtbn" onclick="toggleRE()"> + </button>
 
      DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_odS">
@@ -1736,11 +1732,10 @@ Delta R <button style="margin-right:4%" class="vtbn" onclick="toggleRE()"> + </b
 
 
 <tr>
-<td style="font-weight:600; border-top:none; "class="purp" colspan="4">Finalized Vector RX over Right Eye Only 
+<td style="font-weight:600; border-top:none; padding:0 0 10px 0 "class="purp" colspan="4">Finalized Vector RX over Right Eye Only 
     <span style="margin:0 15px" id="vd_out_odS">-</span> / 
     <span style="margin:0 15px" id="vd_out_odC">-</span> x 
     <span style="margin:0 15px" id="vd_out_odA">-</span>
-<br><br>
 </td>
 </tr>
 
@@ -1991,8 +1986,7 @@ document.getElementById("fillBalanceRE").addEventListener("click", () => {
 
 </div>
 <br>
-<button style="margin:5px 0; border-radius:10px; width:100px; height:25px" id="fillBalanceLE">FC DC RX</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button style="margin:5px 0; border-radius:10px; width:50%; height:25px" id="fillBalanceLE">Calculate into Delta L</button>
 
 
 </td></tr>
@@ -2005,9 +1999,8 @@ DC SPH: <span style="margin-right:30px" id="balanceLeft"></span>FC CYL: <span id
 </tr>
 
 
-<tr class="lefinal-row turq" style="border-top:none; border-bottom:none"><td style="border-top:none; border-bottom:none" colspan="4">
+<tr class="lefinal-row turq" style="border-top:none; border-bottom:none; padding:10px 0 0 0"><td style="border-top:none; border-bottom:none" colspan="4">
 
-<br>
 Delta L <button style="margin-right:4%" class="vtbn" onclick="toggleLE()"> + </button>
 
      DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_osS">
@@ -2020,11 +2013,10 @@ Delta L <button style="margin-right:4%" class="vtbn" onclick="toggleLE()"> + </b
 </tr>
 
 <tr>
-<td style="font-weight:600; border-top:none" class="turq" colspan="4">Finalized Vector RX over Left Eye Only
+<td style="font-weight:600; border-top:none; padding:0 0 10px 0" class="turq" colspan="4">Finalized Vector RX over Left Eye Only
     <span style="margin:0 15px" id="vd_out_osS">-</span> / 
     <span style="margin:0 15px" id="vd_out_osC">-</span> x 
     <span style="margin:0 15px" id="vd_out_osA">-</span>
-<br><br>
 </td>
 </tr>
 
@@ -2056,12 +2048,11 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 });
 </script>
 
-</table>
-</div>
 
-<table>
+
 <tr class="red"><td colspan="1">Import Vectors</td>
 <td colspan="3">
+<button id="toggleBtn3">Show Results</button>
 
 <button class="yellow" onclick="runBE()" style="border-radius:10px; width:50px; height:25px">BE</button>
 <button class="yellow" style="border-radius:10px; margin-right:20px" onclick="resetLogBE()">X</button>
@@ -2167,10 +2158,448 @@ function runBE() {
 <tr style="display:none" ><th class="red" colspan="4">Please Press Update All! 
 <button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
 </th></tr>
+</table>
+</div>
+
+
+<div class="hide_show3" style="display:none; margin-top:-10px">
+
+<table>
+
+<tr style="border:none">
+<td colspan="4" style="border:none">
+<span>Delta RX measures how much prescription off from The Balance Point.</span> 
+  <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
+<button class="btn-0" style="width:70px" onclick="toggleresultsbutton()">Buttons</button>
+
+
+<div style="margin-top:10px; display:flex; align-items:center; gap:10px; justify-content:center">
+
+<button class="rx-btn" data-rx="ou" onclick="loadRX('ou', this)" style="width:165px">
+  RX Both Eye<br>
+  <span id="rx_ou"></span>
+</button>
+
+<button class="rx-btn" data-rx="od" onclick="loadRX('od', this)" style="width:165px">
+  RX Right Eye<br>
+  <span id="rx_od"></span>
+</button>
+
+<button class="rx-btn" data-rx="os" onclick="loadRX('os', this)" style="width:165px">
+  RX Left Eye<br>
+  <span id="rx_os"></span>
+</button>
+
+</div>
+
+<div style="display:none">
+<div style="
+  display:grid;
+  grid-template-columns: repeat(3, 25%);
+  gap:10px;
+  justify-content:center;
+  margin-top:12px;
+ 
+">
+  <button style="width:100%" onclick="highlightRx(this,'sph_test',-1.00)">Near-Sighted</button>
+  <button style="width:100%" onclick="highlightRx(this,'sph_test',1.00)">Far-Sighted</button>
+  <button style="width:100%" onclick="highlightRx(this,'cyl_test',-0.75)">Astig</button>
+  <button style="width:100%" onclick="highlightRx(this,'sph_test',-2.00)">High Near-Sighted</button>
+  <button style="width:100%" onclick="highlightRx(this,'sph_test',2.00)">High Far-Sighted</button>
+  <button style="width:100%" onclick="highlightRx(this,'cyl_test',-2.00)">High Astig</button>
+</div>
+</div>
+
+<style>
+.rx-active {
+  background: #ccc;
+}
+</style>
+
+</div>
+
+<div style="height:10px"></div>
+
+<!-- Stage -->
+
+
+<div id="stage">
+
+
+  <!-- Fan Chart -->
+  <div class="rx-block" id="stack" style="position:relative; width:44%; height:auto ; margin:0 0 0px 0;">
+
+    <img class="bg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/FC_DIRECTIONS.png" alt="" style="width:100%; display:block;" />
+    
+<div class="overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;">
+      
+<div class="overlay-stage">
+        
+<div class="outer-circle" id="outerCircle" style="width:100%; aspect-ratio:1/1; border-radius:9999px; overflow:hidden;">
+          
+<div class="circular-img" style="width:100%; height:100%;">
+            <img id="fanChart" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/C000.png" alt="" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
-<tr style="border:none; height:10px;">
+ <!-- Duochrome (button above) -->
+<div class="duo-wrap rx-block" >
+  <div class="duochrome">
+
+    <div class="duo-side" id="redSide">
+      <img class="base" id="redImg"  src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png"  alt="">
+<img class="overlay" id="redOv" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png" alt="">
+    </div>
+
+    <div class="duo-side" id="blueSide">
+      <img class="base" id="blueImg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/BLUE_1.png" alt="">
+<img class="overlay" id="blueOv" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/BLUE_1.png" alt="">
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+<div id="resultsPanel" style="display:none; margin-top:-20px">
+
+<div>
+      <span style="margin-left:40px">Fan chart :</span> <input style=" width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
+      X <input style="margin-right:120px; margin-left:5px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
+
+Duochrome : 
+
+<input 
+  style="border:none; width:30px ; margin-right:45px; background-color:#f5f5f5"
+  type="text" 
+  id="sph_test" 
+  value="+0.00" 
+  class="rx-input"
+  oninput="formatPlus(this)"
+>
+
+</div>
+
+    <!-- CYL -->
+    <div style="margin-top:0px; margin-bottom:10px; margin-left:30px; text-align:center;">
+
+      <div>
+        <button style="width:50px" onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
+        <button style="margin-left:5px; width:50px" onclick="adj('cyl_test', 0.25)" class="btn-plus">+</button>
+
+        <button style="display:none" onclick="adj('cyl_test',-1.00)" class="btn-minus">- -</button>
+        <button style="display:none" onclick="adj('cyl_test', 1.00)" class="btn-plus">+ +</button>
+
+        	<button style="margin-left:15px; width:50px" onclick="adj('axis_test', -15)"  class="btn-minus"><</button>
+        	<button style="margin-left:5px; width:50px" onclick="adj('axis_test',  15)"  class="btn-plus">></button>       
+
+	<button style="display:none" onclick="adj('axis_test', -30)"  class="btn-minus">>></button>
+        <button style="display:none" onclick="adj('axis_test',  30)"  class="btn-plus"><<</button>
+
+
+        <button style="display:none" onclick="adj('sph_test',-1.00)" class="btn-minus">- -</button>
+        <button style="margin-left:37px; width:100px" onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
+        <button style="margin-left:10px; margin-right:40px; width:100px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
+   <button style="display:none" onclick="adj('sph_test', 1.00)" class="btn-plus">+ +</button>
+
+
+</div>
+
+</div>
+</div>
+
+<div style="margin-top:-10px">
+
+<span style="margin-left:35px; margin-right:40px;" id="fcdcbal_c"></span>
+<span style="margin-left:70px; margin-right:45px;" id="fcdcbal_s"></span>
+</div>
+
+
+<div>
+<span id="fcdcbal_type"></span><br>
+<span id="fcdcbal_astig"></span><br>
+<span id="fcdcbal_duo"></span>
+
+</div>
+
+
+<script>
+function toggleresultsbutton() {
+  const panel = document.getElementById('resultsPanel');
+
+  if (panel.style.display === 'none') {
+    panel.style.display = 'block';
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+
+function getRX(type) {
+  const get = (key) =>
+    document.getElementById(`vd_out_${type}${key}`)?.textContent || '-';
+
+  return {
+    s: get('S'),
+    c: get('C'),
+    a: get('A')
+  };
+}
+
+function renderRX(type) {
+  const { s, c, a } = getRX(type);
+  document.getElementById(`rx_${type}`).textContent = `${s} / ${c} x ${a}`;
+}
+
+/* 🔥 highlight system */
+function setActiveRX(type) {
+  document.querySelectorAll('.rx-btn').forEach(btn => {
+    btn.classList.remove('rx-active');
+  });
+
+  const active = document.querySelector(`[data-rx="${type}"]`);
+  if (active) active.classList.add('rx-active');
+}
+
+function toggleRXBlur(isEmpty) {
+
+  const blocks = document.querySelectorAll('.rx-block');
+
+  blocks.forEach(el => {
+    if (isEmpty) {
+      el.classList.add('disabled-rx');
+    } else {
+      el.classList.remove('disabled-rx');
+    }
+  });
+}
+
+function updateFCDCBal(type) {
+
+  const Sraw = document.getElementById(`vd_${type}S`)?.value;
+  const Craw = document.getElementById(`vd_${type}C`)?.value;
+  const Araw = document.getElementById(`vd_${type}A`)?.value;
+
+  const S = (Sraw === "" || Sraw == null || Sraw === "-")
+    ? "-"
+    : parseFloat(Sraw).toFixed(2);
+
+  const C = (Craw === "" || Craw == null || Craw === "-")
+    ? "-"
+    : parseFloat(Craw).toFixed(2);
+
+  const A = (Araw === "" || Araw == null || Araw === "-")
+    ? "-"
+    : parseFloat(Araw);
+
+  const typeSpan = document.getElementById('fcdcbal_type');
+  const sSpan = document.getElementById('fcdcbal_s');
+  const cSpan = document.getElementById('fcdcbal_c');
+  const aSpan = document.getElementById('fcdcbal_a');
+
+const eyeMap = {
+  ou: "Vision for Both Eye",
+  od: "Vision for Right Eye",
+  os: "Vision for Left Eye"
+};
+
+const descSpan = document.getElementById('fcdcbal_desc');
+
+if (descSpan) {
+  descSpan.innerText = getFCDescription(S, C);
+}
+
+
+
+
+function getFCDescription(S, C) {
+  const s = parseFloat(S);
+  const c = Math.abs(parseFloat(C));
+
+  let astig = "";
+  let duo = "";
+
+if (S === "-" || C === "-" || isNaN(parseFloat(S)) || isNaN(parseFloat(C))) {
+  return {
+    astig: "Not done",
+    duo: " "
+  };
+}
+
+  // =========================
+  // ASTIGMATISM BLOCK
+  // =========================
+  if (c === 0 || isNaN(c)) {
+    astig = "No astigmatism.  Vision clarity is uniform across all lines.";
+  } 
+  else if (c <= 0.25) {
+    astig = "Some axis blurrier. Mild Astigmatism. Usually not necessary to correct.";
+  } 
+  else if (c <= 1.00) {
+    astig = "Some axis blurrier. Normal Astigmatism. Causes blur or shadowing in low light.";
+  } 
+  else if (c <= 2.00) {
+    astig = "Some axis blurrier. Moderate Astigmatism. Noticeable shadows and blur in vision.";
+  } 
+  else {
+    astig = "Some axis blurrier. High Astigmatism. Strong shadowing and blurred vision.";
+  }
+
+  // =========================
+  // DUOCHROME / SPH BLOCK
+  // =========================
+  if (s < 0) {
+    duo = "Object in red clearer. Myopia / Under-powered / Short-sightedness.";
+  } 
+  else if (s > 0.25) {
+    duo = "Object in blue clearer. Hyperopia / Over-powered / Long-sightedness.";
+  } 
+  else if (Math.abs(s - 0.25) < 0.01) {
+    duo = "Object in blue slightly clearer. Good vision for far.";
+  } 
+  else {
+    duo = "Both side equal. Good vision for indoor.";
+  }
+
+  return { astig, duo };
+}
+
+const desc = getFCDescription(S, C);
+
+const astigSpan = document.getElementById('fcdcbal_astig');
+const duoSpan = document.getElementById('fcdcbal_duo');
+
+if (astigSpan) astigSpan.innerText = desc.astig;
+if (duoSpan) duoSpan.innerText = desc.duo;
+
+
+function formatPower(val) {
+  const num = parseFloat(val);
+
+  if (isNaN(num)) return "—";
+
+  const fixed = num.toFixed(2);
+
+  // always force + for zero and positives
+  if (num >= 0) return `+${fixed}`;
+
+  return fixed; // negatives already have "-"
+}
+if (typeSpan) typeSpan.innerText = eyeMap[type] || type.toUpperCase();
+if (sSpan) sSpan.innerText = `To balance duochrome ${formatPower(S)}`;
+if (cSpan) cSpan.innerText = `To balance fan chart ${formatPower(C)} x ${A}`;
+}
+
+
+
+function loadRX(type, btn) {
+
+  const { s, c, a } = getRX(type);
+
+  const sph = document.getElementById('sph_test');
+  const cyl = document.getElementById('cyl_test');
+  const axis = document.getElementById('axis_test');
+
+  sph.value = s;
+  cyl.value = c;
+  axis.value = a;
+
+  sph.dispatchEvent(new Event('input', { bubbles: true }));
+  cyl.dispatchEvent(new Event('input', { bubbles: true }));
+  axis.dispatchEvent(new Event('input', { bubbles: true }));
+
+  renderRX(type);
+  setActiveRX(type);
+
+  updateFCDCBal(type);
+
+  // ✅ BLUR LOGIC (dash = no test)
+  const Sraw = document.getElementById(`vd_${type}S`)?.value;
+  const isEmpty = (!Sraw || Sraw === "" || Sraw === "-");
+
+  toggleRXBlur(isEmpty);
+}
+
+/* optional: live sync if vd_out_* changes elsewhere */
+function watchRX(type) {
+  const ids = [
+    `vd_out_${type}S`,
+    `vd_out_${type}C`,
+    `vd_out_${type}A`
+  ].map(id => document.getElementById(id)).filter(Boolean);
+
+  const observer = new MutationObserver(() => renderRX(type));
+
+  ids.forEach(el => observer.observe(el, {
+    childList: true,
+    characterData: true,
+    subtree: true
+  }));
+
+  renderRX(type);
+}
+
+watchRX('ou');
+watchRX('od');
+watchRX('os');
+</script>
+
+</td></tr>
+
+
+
+
+
+<tr style="border:none">
+<td colspan="4" style="border:none" style="padding:0 0 0 0">
+<button style="border:none" id="hide_show4" onclick="toggleHideShow4()"><u>Show the balance chart</u></button>
+<div style="margin-top:-10px"></div>
+<div style="display:none" id="toggleDiv4">
+
+  <div>
+    <img style="max-width:89%; margin-top:20px; margin-right:2%;"
+         src="https://raw.githubusercontent.com/sp-rx/Trainer/refs/heads/main/clear_comfy.png"
+         alt="">
+  </div>
+
+  <div><br>
+    <span>The Balance Point: Equality of lines is all directions. Equality of clarity in both red and blue background..</span><br>
+  </div>
+
+</div>
+</td></tr>
+
+
+<script>
+function toggleHideShow4() {
+  const div = document.getElementById("toggleDiv4");
+
+  if (div.style.display === "none") {
+    div.style.display = "";
+  } else {
+    div.style.display = "none";
+  }
+}
+</script>
+
+</table>
+
+
+
+
+</div>
+
+
+
+<table>
+<tr style="border:none; height:-10px;">
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
@@ -3285,418 +3714,6 @@ NOC :
 
 
 
-
-<tr><th class="red" colspan="4">Results</th></tr>
-
-<tr style="border:none">
-<td colspan="4" style="border:none">
-<span>Delta RX measures how much prescription off from The Balance Point.</span> 
-  <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
-<button class="btn-0" style="width:70px" onclick="toggleresultsbutton()">Buttons</button>
-
-
-<div style="margin-top:10px; display:flex; align-items:center; gap:10px; justify-content:center">
-
-<button class="rx-btn" data-rx="ou" onclick="loadRX('ou', this)" style="width:165px">
-  RX Both Eye<br>
-  <span id="rx_ou"></span>
-</button>
-
-<button class="rx-btn" data-rx="od" onclick="loadRX('od', this)" style="width:165px">
-  RX Right Eye<br>
-  <span id="rx_od"></span>
-</button>
-
-<button class="rx-btn" data-rx="os" onclick="loadRX('os', this)" style="width:165px">
-  RX Left Eye<br>
-  <span id="rx_os"></span>
-</button>
-
-</div>
-
-<div style="display:none">
-<div style="
-  display:grid;
-  grid-template-columns: repeat(3, 25%);
-  gap:10px;
-  justify-content:center;
-  margin-top:12px;
- 
-">
-  <button style="width:100%" onclick="highlightRx(this,'sph_test',-1.00)">Near-Sighted</button>
-  <button style="width:100%" onclick="highlightRx(this,'sph_test',1.00)">Far-Sighted</button>
-  <button style="width:100%" onclick="highlightRx(this,'cyl_test',-0.75)">Astig</button>
-  <button style="width:100%" onclick="highlightRx(this,'sph_test',-2.00)">High Near-Sighted</button>
-  <button style="width:100%" onclick="highlightRx(this,'sph_test',2.00)">High Far-Sighted</button>
-  <button style="width:100%" onclick="highlightRx(this,'cyl_test',-2.00)">High Astig</button>
-</div>
-</div>
-
-<style>
-.rx-active {
-  background: #ccc;
-}
-</style>
-
-</div>
-
-<div style="height:10px"></div>
-
-<!-- Stage -->
-
-
-<div id="stage">
-
-
-  <!-- Fan Chart -->
-  <div class="rx-block" id="stack" style="position:relative; width:44%; height:auto ; margin:0 0 0px 0;">
-
-    <img class="bg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/FC_DIRECTIONS.png" alt="" style="width:100%; display:block;" />
-    
-<div class="overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;">
-      
-<div class="overlay-stage">
-        
-<div class="outer-circle" id="outerCircle" style="width:100%; aspect-ratio:1/1; border-radius:9999px; overflow:hidden;">
-          
-<div class="circular-img" style="width:100%; height:100%;">
-            <img id="fanChart" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/C000.png" alt="" style="width:100%; height:100%; object-fit:cover;" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
- <!-- Duochrome (button above) -->
-<div class="duo-wrap rx-block" >
-  <div class="duochrome">
-
-    <div class="duo-side" id="redSide">
-      <img class="base" id="redImg"  src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png"  alt="">
-<img class="overlay" id="redOv" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png" alt="">
-    </div>
-
-    <div class="duo-side" id="blueSide">
-      <img class="base" id="blueImg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/BLUE_1.png" alt="">
-<img class="overlay" id="blueOv" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/BLUE_1.png" alt="">
-    </div>
-
-
-  </div>
-</div>
-
-
-
-
-<div id="resultsPanel" style="display:none; margin-top:-20px">
-
-<div>
-      <span style="margin-left:40px">Fan chart :</span> <input style=" width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
-      X <input style="margin-right:120px; margin-left:5px; width:30px; background-color:#f5f5f5; border:none" type="text" id="axis_test" min="0" step="15" value="0" class="rx-input">
-
-Duochrome : 
-
-<input 
-  style="border:none; width:30px ; margin-right:45px; background-color:#f5f5f5"
-  type="text" 
-  id="sph_test" 
-  value="+0.00" 
-  class="rx-input"
-  oninput="formatPlus(this)"
->
-
-</div>
-
-    <!-- CYL -->
-    <div style="margin-top:0px; margin-bottom:10px; margin-left:30px; text-align:center;">
-
-      <div>
-        <button style="width:50px" onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
-        <button style="margin-left:5px; width:50px" onclick="adj('cyl_test', 0.25)" class="btn-plus">+</button>
-
-        <button style="display:none" onclick="adj('cyl_test',-1.00)" class="btn-minus">- -</button>
-        <button style="display:none" onclick="adj('cyl_test', 1.00)" class="btn-plus">+ +</button>
-
-        	<button style="margin-left:15px; width:50px" onclick="adj('axis_test', -15)"  class="btn-minus"><</button>
-        	<button style="margin-left:5px; width:50px" onclick="adj('axis_test',  15)"  class="btn-plus">></button>       
-
-	<button style="display:none" onclick="adj('axis_test', -30)"  class="btn-minus">>></button>
-        <button style="display:none" onclick="adj('axis_test',  30)"  class="btn-plus"><<</button>
-
-
-        <button style="display:none" onclick="adj('sph_test',-1.00)" class="btn-minus">- -</button>
-        <button style="margin-left:37px; width:100px" onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
-        <button style="margin-left:10px; margin-right:40px; width:100px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
-   <button style="display:none" onclick="adj('sph_test', 1.00)" class="btn-plus">+ +</button>
-
-
-</div>
-
-</div>
-</div>
-
-<div style="margin-top:-10px">
-<hr style="border: none; border-top: 1px solid grey; margin: 8px 0;">
-
-<span style="margin-left:35px; margin-right:40px;" id="fcdcbal_c"></span>
-<span style="margin-left:70px; margin-right:45px;" id="fcdcbal_s"></span>
-</div>
-
-
-<div>
-<span id="fcdcbal_type"></span><br>
-<span id="fcdcbal_astig"></span><br>
-<span id="fcdcbal_duo"></span>
-
-</div>
-
-
-<script>
-function toggleresultsbutton() {
-  const panel = document.getElementById('resultsPanel');
-
-  if (panel.style.display === 'none') {
-    panel.style.display = 'block';
-  } else {
-    panel.style.display = 'none';
-  }
-}
-
-
-function getRX(type) {
-  const get = (key) =>
-    document.getElementById(`vd_out_${type}${key}`)?.textContent || '-';
-
-  return {
-    s: get('S'),
-    c: get('C'),
-    a: get('A')
-  };
-}
-
-function renderRX(type) {
-  const { s, c, a } = getRX(type);
-  document.getElementById(`rx_${type}`).textContent = `${s} / ${c} x ${a}`;
-}
-
-/* 🔥 highlight system */
-function setActiveRX(type) {
-  document.querySelectorAll('.rx-btn').forEach(btn => {
-    btn.classList.remove('rx-active');
-  });
-
-  const active = document.querySelector(`[data-rx="${type}"]`);
-  if (active) active.classList.add('rx-active');
-}
-
-function toggleRXBlur(isEmpty) {
-
-  const blocks = document.querySelectorAll('.rx-block');
-
-  blocks.forEach(el => {
-    if (isEmpty) {
-      el.classList.add('disabled-rx');
-    } else {
-      el.classList.remove('disabled-rx');
-    }
-  });
-}
-
-function updateFCDCBal(type) {
-
-  const Sraw = document.getElementById(`vd_${type}S`)?.value;
-  const Craw = document.getElementById(`vd_${type}C`)?.value;
-  const Araw = document.getElementById(`vd_${type}A`)?.value;
-
-  const S = (Sraw === "" || Sraw == null || Sraw === "-")
-    ? "-"
-    : parseFloat(Sraw).toFixed(2);
-
-  const C = (Craw === "" || Craw == null || Craw === "-")
-    ? "-"
-    : parseFloat(Craw).toFixed(2);
-
-  const A = (Araw === "" || Araw == null || Araw === "-")
-    ? "-"
-    : parseFloat(Araw);
-
-  const typeSpan = document.getElementById('fcdcbal_type');
-  const sSpan = document.getElementById('fcdcbal_s');
-  const cSpan = document.getElementById('fcdcbal_c');
-  const aSpan = document.getElementById('fcdcbal_a');
-
-const eyeMap = {
-  ou: "Your current vision for Both Eye",
-  od: "Your current vision for Right Eye",
-  os: "Your current vision for Left Eye"
-};
-
-const descSpan = document.getElementById('fcdcbal_desc');
-
-if (descSpan) {
-  descSpan.innerText = getFCDescription(S, C);
-}
-
-
-
-
-function getFCDescription(S, C) {
-  const s = parseFloat(S);
-  const c = Math.abs(parseFloat(C));
-
-  let astig = "";
-  let duo = "";
-
-if (S === "-" || C === "-" || isNaN(parseFloat(S)) || isNaN(parseFloat(C))) {
-  return {
-    astig: "Not done",
-    duo: " "
-  };
-}
-
-  // =========================
-  // ASTIGMATISM BLOCK
-  // =========================
-  if (c === 0 || isNaN(c)) {
-    astig = "No astigmatism.  Vision clarity is uniform across all lines.";
-  } 
-  else if (c <= 0.25) {
-    astig = "Some axis blurrier. Mild Astigmatism. Usually not necessary to correct.";
-  } 
-  else if (c <= 1.00) {
-    astig = "Some axis blurrier. Normal Astigmatism. Causes blur or shadowing in low light.";
-  } 
-  else if (c <= 2.00) {
-    astig = "Some axis blurrier. Moderate Astigmatism. Noticeable shadows and blur in vision.";
-  } 
-  else {
-    astig = "Some axis blurrier. High Astigmatism. Strong shadowing and blurred vision.";
-  }
-
-  // =========================
-  // DUOCHROME / SPH BLOCK
-  // =========================
-  if (s < 0) {
-    duo = "Object in red clearer. Myopia / Under-powered / Short-sightedness.";
-  } 
-  else if (s > 0.25) {
-    duo = "Object in blue clearer. Hyperopia / Over-powered / Long-sightedness.";
-  } 
-  else if (Math.abs(s - 0.25) < 0.01) {
-    duo = "Object in blue slightly clearer. Good vision for far.";
-  } 
-  else {
-    duo = "Both side equal. Good vision for indoor.";
-  }
-
-  return { astig, duo };
-}
-
-const desc = getFCDescription(S, C);
-
-const astigSpan = document.getElementById('fcdcbal_astig');
-const duoSpan = document.getElementById('fcdcbal_duo');
-
-if (astigSpan) astigSpan.innerText = desc.astig;
-if (duoSpan) duoSpan.innerText = desc.duo;
-
-
-function formatPower(val) {
-  const num = parseFloat(val);
-
-  if (isNaN(num)) return "—";
-
-  const fixed = num.toFixed(2);
-
-  // always force + for zero and positives
-  if (num >= 0) return `+${fixed}`;
-
-  return fixed; // negatives already have "-"
-}
-if (typeSpan) typeSpan.innerText = eyeMap[type] || type.toUpperCase();
-if (sSpan) sSpan.innerText = `To balance duochrome ${formatPower(S)}`;
-if (cSpan) cSpan.innerText = `To balance fan chart ${formatPower(C)} x ${A}`;
-}
-
-
-
-function loadRX(type, btn) {
-
-  const { s, c, a } = getRX(type);
-
-  const sph = document.getElementById('sph_test');
-  const cyl = document.getElementById('cyl_test');
-  const axis = document.getElementById('axis_test');
-
-  sph.value = s;
-  cyl.value = c;
-  axis.value = a;
-
-  sph.dispatchEvent(new Event('input', { bubbles: true }));
-  cyl.dispatchEvent(new Event('input', { bubbles: true }));
-  axis.dispatchEvent(new Event('input', { bubbles: true }));
-
-  renderRX(type);
-  setActiveRX(type);
-
-  updateFCDCBal(type);
-
-  // ✅ BLUR LOGIC (dash = no test)
-  const Sraw = document.getElementById(`vd_${type}S`)?.value;
-  const isEmpty = (!Sraw || Sraw === "" || Sraw === "-");
-
-  toggleRXBlur(isEmpty);
-}
-
-/* optional: live sync if vd_out_* changes elsewhere */
-function watchRX(type) {
-  const ids = [
-    `vd_out_${type}S`,
-    `vd_out_${type}C`,
-    `vd_out_${type}A`
-  ].map(id => document.getElementById(id)).filter(Boolean);
-
-  const observer = new MutationObserver(() => renderRX(type));
-
-  ids.forEach(el => observer.observe(el, {
-    childList: true,
-    characterData: true,
-    subtree: true
-  }));
-
-  renderRX(type);
-}
-
-watchRX('ou');
-watchRX('od');
-watchRX('os');
-</script>
-
-
-</td></tr>
-
-
-
-
-
-<tr style="border:none">
-<td colspan="4" style="border:none">
-<div>
-
-<img style=max-width:89%; margin-top:20px; margin-right:2%;" src="https://raw.githubusercontent.com/sp-rx/Trainer/refs/heads/main/clear_comfy.png" alt="">
-
-</div>  
-<div><br>
-<span>The Balance Point: Equality on both charts.</span><br>
-</div>
-
-
-</td></tr>
-
-</table>
-<div style="height:90px"></div>
 
 
 
@@ -6889,6 +6906,18 @@ document.getElementById('toggleBtn').addEventListener('click', ()=>{
 <script>
 document.getElementById('toggleBtn2').addEventListener('click', ()=>{
   document.querySelectorAll('.hide_show2').forEach(el=>{
+    if(el.style.display === 'none'){
+      el.style.display = 'block';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+});
+</script>
+
+<script>
+document.getElementById('toggleBtn3').addEventListener('click', ()=>{
+  document.querySelectorAll('.hide_show3').forEach(el=>{
     if(el.style.display === 'none'){
       el.style.display = 'block';
     } else {
