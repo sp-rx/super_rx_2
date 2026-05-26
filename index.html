@@ -2054,7 +2054,11 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 <td colspan="3">
 
 <button class="yellow" onclick="runBE()" style="margin-left:50px; border-radius:10px; width:50px; height:25px">BE</button>
+
+
 <button class="yellow" style="border-radius:10px; margin-right:20px" onclick="resetLogBE()">X</button>
+
+
 <script>
 function resetLogBE() {
   document.getElementById('logBE').innerHTML = '<i>-</i>';
@@ -2075,7 +2079,13 @@ style="border-radius:10px; width:80px; height:25px">
   RE + LE
 </button>
 
+
+
+
+
 <button class="purp" style="border-radius:10px; margin-right:20px" onclick="resetLogRELE()">X</button>
+
+
 <script>
 function resetLogRELE() {
   document.getElementById('logRELE').innerHTML = '<i>-</i>';
@@ -2168,32 +2178,35 @@ function runBE() {
 
 <tr style="border:none">
 <td colspan="4" style="border:none">
-<span>Delta RX measures how much prescription off from The Balance Point.</span> 
-  <button class="btn-0" style="width:70px" onclick="resetRx()">Reset</button>
-<button class="btn-0" style="width:70px" onclick="toggleresultsbutton()">Buttons</button>
 
 
-<div style="margin-top:10px; display:flex; align-items:center; gap:10px; justify-content:center">
 
-<button class="rx-btn" data-rx="ou" onclick="loadRX('ou', this)" style="width:110px">
+<div style="margin-top:-10px; display:flex; align-items:center; gap:10px; justify-content:center">
+
+<button class="rx-btn" data-rx="ou" onclick="loadRX('ou', this)" style="width:100px">
   RX BE<br>
   <span style="display:none" id="rx_ou"></span>
 </button>
 
-<button class="rx-btn" data-rx="od" onclick="loadRX('od', this)" style="width:110px">
+<button class="rx-btn" data-rx="od" onclick="loadRX('od', this)" style="width:100px">
   RX Right Eye<br>
   <span style="display:none" id="rx_od"></span>
 </button>
 
-<button class="rx-btn" data-rx="os" onclick="loadRX('os', this)" style="width:110px">
+<button class="rx-btn" data-rx="os" onclick="loadRX('os', this)" style="width:100px">
   RX Left Eye<br>
   <span style="display:none" id="rx_os"></span>
 </button>
 
-<button class="rx-btn" style="width:110px" id="hide_show4" onclick="toggleHideShow4()">Balance</button>
+<button class="rx-btn" style="width:100px" id="hide_show4" onclick="toggleHideShow4()">Balance</button>
+
+  <button class="rx-btn" style="width:100px" onclick="resetRx()">Reset</button>
+
 
 
 </div>
+
+
 
 <div style="display:none">
 <div style="
@@ -2228,13 +2241,13 @@ function runBE() {
 
 <div style="display:none" id="toggleDiv4">
 
-  <div style="margin-top:20px">
-    <span>The Balance Point: Equality of lines is all directions. Equality of clarity in both red and blue background..</span>
+  <div style="margin-top:0px">
+    <span>The Balance Point: Equality of lines is all directions and clarity in both red and blue background.</span>
 </div>
 <div style="margin-top:-10px">
 <img
   style="
-    max-width:91%;
+    max-width:92%;
     clip-path: inset(10px 0 10px 0);
     margin:0 auto;
     display:block;
@@ -2245,6 +2258,7 @@ function runBE() {
 
 
   </div>
+<button class="btn-0" style="width:70px" onclick="toggleresultsbutton()">Buttons</button>
 
 </div>
 
@@ -2254,6 +2268,11 @@ function runBE() {
 
 
   <!-- Fan Chart -->
+<div style="margin-bottom:-10px">
+<span style="margin-bottom:-100px">Delta RX measures how much and what prescription is needed to bring your vision to The Balance Point.</span> 
+
+</div>
+
   <div class="rx-block" id="stack" style="position:relative; width:44%; height:auto ; margin:0 0 0px 0;">
 
     <img class="bg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/FC_DIRECTIONS.png" alt="" style="border-radius:20px; width:100%; display:block;" />
