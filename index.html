@@ -342,8 +342,8 @@ body, table, th, td, input, button {
 @supports not (overflow: clip) { 
   .duo-side { overflow: hidden; } 
 }
-#redSide  { clip-path: inset(0 0 0 9px); }   /* 85% of 10px */
-#blueSide { clip-path: inset(0 9px 0 0); }   /* 85% of 10px */
+#redSide  { clip-path: inset(0 0 0 0); }   /* 85% of 10px */
+#blueSide { clip-path: inset(0 0 0 0); }   /* 85% of 10px */
 .duo-side img.base {
   width: 128px;      /* 85% of 150px */
   height: 255px;     /* 85% of 300px */
@@ -2229,7 +2229,7 @@ function runBE() {
   <!-- Fan Chart -->
   <div class="rx-block" id="stack" style="position:relative; width:44%; height:auto ; margin:0 0 0px 0;">
 
-    <img class="bg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/FC_DIRECTIONS.png" alt="" style="width:100%; display:block;" />
+    <img class="bg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/FC_DIRECTIONS.png" alt="" style="border-radius:20px; width:100%; display:block;" />
     
 <div class="overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;">
       
@@ -2249,7 +2249,7 @@ function runBE() {
 
  <!-- Duochrome (button above) -->
 <div class="duo-wrap rx-block" >
-  <div class="duochrome">
+  <div class="duochrome" style="border-radius:20px">
 
     <div class="duo-side" id="redSide">
       <img class="base" id="redImg"  src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png"  alt="">
@@ -2267,8 +2267,7 @@ function runBE() {
 
 
 
-
-<div id="resultsPanel" style="display:none; margin-top:-20px">
+<div id="resultsPanel" style="display:none; margin-top:-15px">
 
 <div>
       <span style="margin-left:40px">Fan chart :</span> <input style=" width:30px; background-color: #f5f5f5; border:none" type="text" id="cyl_test" step="0.25" value="+0.00"   oninput="formatPlus(this)" class="rx-input">
@@ -2312,20 +2311,25 @@ Duochrome :
 
 </div>
 
+<div style="margin-top:10px">
+
+
+</div>
 </div>
 </div>
 
-<div style="margin-top:-10px">
+</div>
+
+<div style="width:90%; margin:0px auto; border: 1px grey dotted; border-radius:10px"><br>
+<span id="fcdcbal_type"><i>Loading results...</i></span><br><br>
+
 
 <span style="margin-left:35px; margin-right:40px;" id="fcdcbal_c"></span>
 <span style="margin-left:70px; margin-right:45px;" id="fcdcbal_s"></span>
-</div>
-</div>
 
-<div style="margin-top:15px">
-<span id="fcdcbal_type"></span><br><br>
+<br><br>
 <span id="fcdcbal_astig"></span><br>
-<span id="fcdcbal_duo"></span>
+<span id="fcdcbal_duo"></span><br><br>
 
 
 
@@ -2644,25 +2648,25 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
 	
-<tr><td style="color: darkblue" colspan="4">Contact Lens With Astigmatism Results</td></tr>
+<tr><td style="color: #042747" colspan="4">Contact Lens With Astigmatism Results</td></tr>
 <tr>
-  <td style="color: darkblue" class="red">Current CLA</td>
-  <td style="color: darkblue" colspan="3" class="red">
+  <td style="color: #042747" class="red">Current CLA</td>
+  <td style="color: #042747" colspan="3" class="red">
 
 R: <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
 L: <span id="CL_os_origCombined">OS -</span>
   </td>
 </tr>
 
-<tr style="color: darkblue" class="yellow">
-  <td style="color: darkblue" colspan="1">Delta BE CLA</td>
-  <td style="color: darkblue" colspan="3" id="logBE_CL"><i>Loading....</i></td>
+<tr style="color: #042747" class="yellow">
+  <td style="color: #042747" colspan="1">Delta BE CLA</td>
+  <td style="color: #042747" colspan="3" id="logBE_CL"><i>Loading....</i></td>
 </tr>
 
-<tr style="color: darkblue" class="purp">
-  <td style="color: darkblue" colspan="1">Delta R/L CLA</td>
+<tr style="color: #042747" class="purp">
+  <td style="color: #042747" colspan="1">Delta R/L CLA</td>
 
-  <td style="color: darkblue" id="logRELE_CL" colspan="3"><i>Loading....</i></td>
+  <td style="color: #042747" id="logRELE_CL" colspan="3"><i>Loading....</i></td>
 </tr>
 
 <tr style="border:none; height:10px;">
@@ -2673,24 +2677,24 @@ L: <span id="CL_os_origCombined">OS -</span>
 </tr>
 
 
-<tr><td style="color: darkblue" colspan="4">Contact Lens SE Only Results</td></tr>
+<tr><td style="color: #042747" colspan="4">Contact Lens SE Only Results</td></tr>
 <tr>
-  <td style="color: darkblue" class="red">Current CLSE</td>
-  <td style="color: darkblue" colspan="3" class="red">
+  <td style="color: #042747" class="red">Current CLSE</td>
+  <td style="color: #042747" colspan="3" class="red">
 
 R: <span id="SE_od_origCombined" style="margin-right: 80px;">OD -</span>
 L: <span id="SE_os_origCombined">OS -</span>
   </td>
 </tr>
 
-<tr style="color: darkblue" class="yellow">
-  <td style="color: darkblue" colspan="1">Delta BE CLSE</td>
-  <td style="color: darkblue" colspan="3" id="logBE_CL_SE"><i>Loading....</i></td>
+<tr style="color: #042747" class="yellow">
+  <td style="color: #042747" colspan="1">Delta BE CLSE</td>
+  <td style="color: #042747" colspan="3" id="logBE_CL_SE"><i>Loading....</i></td>
 </tr>
 
-<tr style="color: darkblue" class="purp">
-  <td style="color: darkblue" colspan="1"">Delta R/L CLSE</td>
-  <td style="color: darkblue" colspan="3" id="logRELE_CL_SE"><i>Loading....</i></td>
+<tr style="color: #042747" class="purp">
+  <td style="color: #042747" colspan="1"">Delta R/L CLSE</td>
+  <td style="color: #042747" colspan="3" id="logRELE_CL_SE"><i>Loading....</i></td>
 </tr>
 
 
