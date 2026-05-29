@@ -1431,7 +1431,7 @@ Delta BE <button style="margin-right:4%;"class="vtbn" onclick="toggleBE()"> + </
  
     CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouC">
 
-    Darker Axis : <input style="width:60px" type="number" step="5" min="0" max="180" id="vd_ouA">
+    Darker Axis : <input style="width:60px" type="number" step="15" min="0" max="180" id="vd_ouA">
   </td>
 </tr>
 <tr><td style="font-weight:600; border-top:none; padding:0 0 10px 0" class="yellow" colspan="4">
@@ -1725,7 +1725,7 @@ Delta R <button style="margin-right:4%" class="vtbn" onclick="toggleRE()"> + </b
  
     CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_odC">
 
-    Darker Axis : <input style="width:60px" type="number" step="5" min="0" max="180" id="vd_odA">
+    Darker Axis : <input style="width:60px" type="number" step="15" min="0" max="180" id="vd_odA">
 
   </td>
 </tr>
@@ -2007,7 +2007,7 @@ Delta L <button style="margin-right:4%" class="vtbn" onclick="toggleLE()"> + </b
  
     CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_osC">
 
-    Darker Axis : <input style="width:60px" type="number" step="5" min="0" max="180" id="vd_osA">
+    Darker Axis : <input style="width:60px" type="number" step="15" min="0" max="180" id="vd_osA">
 
   </td>
 </tr>
@@ -2200,7 +2200,6 @@ function runBE() {
 
 <button class="rx-btn" style="width:100px" id="hide_show4" onclick="toggleHideShow4()">Balance</button>
 
-  <button class="rx-btn" style="width:100px" onclick="resetRx()">Reset</button>
 
 
 
@@ -2247,7 +2246,7 @@ function runBE() {
 <div style="margin-top:-10px">
 <img
   style="
-    max-width:92%;
+    max-width:91.5%;
     clip-path: inset(10px 0 10px 0);
     margin:0 auto;
     display:block;
@@ -2258,7 +2257,6 @@ function runBE() {
 
 
   </div>
-<button class="btn-0" style="width:70px" onclick="toggleresultsbutton()">Buttons</button>
 
 </div>
 
@@ -2311,7 +2309,9 @@ function runBE() {
   </div>
 </div>
 
-
+<div style="margin-top:-15px; margin-bottom:10px">
+<button class="btn-0" style="width:70px;" onclick="toggleresultsbutton()">+</button>
+</div>
 
 <div id="resultsPanel" style="display:none; margin-top:-15px">
 
@@ -2336,7 +2336,7 @@ Duochrome :
     <div style="margin-top:0px; margin-bottom:10px; margin-left:30px; text-align:center;">
 
       <div>
-        <button style="width:50px" onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
+        <button style="width:50px; margin-left:3px" onclick="adj('cyl_test',-0.25)" class="btn-minus">-</button>
         <button style="margin-left:5px; width:50px" onclick="adj('cyl_test', 0.25)" class="btn-plus">+</button>
 
         <button style="display:none" onclick="adj('cyl_test',-1.00)" class="btn-minus">- -</button>
@@ -2350,8 +2350,12 @@ Duochrome :
 
 
         <button style="display:none" onclick="adj('sph_test',-1.00)" class="btn-minus">- -</button>
-        <button style="margin-left:37px; width:100px" onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
-        <button style="margin-left:10px; margin-right:40px; width:100px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
+        <button style="margin-left:67px; width:70px" onclick="adj('sph_test',-0.25)" class="btn-minus">-</button>
+
+        <button style="margin-left:5px; margin-right:15px; width:70px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
+
+<button class="btn-0" style="width:40px; margin-right:20px" onclick="resetRx()">R</button>
+
    <button style="display:none" onclick="adj('sph_test', 1.00)" class="btn-plus">+ +</button>
 
 
