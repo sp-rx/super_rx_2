@@ -643,7 +643,28 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
       Pupil H (mm) : <input style="width:50px; margin-right:4%" placeholder="25" type="number" id="ph"></div>
 
 <div style="margin-top:10px">
+Select Eye-Level Vision Style
+<div>
+<button class="normal-btn" onclick="setFitAndCalculate('6')">
+  Far Emphasis
+</button>
 
+<button class="normal-btn" onclick="setFitAndCalculate('4')">
+  Neutral
+</button>
+
+<button class="normal-btn" onclick="setFitAndCalculate('2')">
+  Mid Emphasis
+</button>
+</div>
+<script>
+function setFitAndCalculate(value) {
+  document.getElementById('fit').value = value;
+  calculate();
+}
+</script>
+
+<div style="display:none">
     Select Eye-level vision : 
         <select style="width:120px; height:23px; font-size:11px; padding:2px; margin-right:4%" id="fit">
           <option value="6">Far emphasis</option>
@@ -654,7 +675,7 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
 
 
     <button class="normal-btn" id="btnMain" onclick="calculate()">Calculate</button>
-
+</div>
 </div>
 
     <div id="output" style="margin-top:0.75rem"></div>
@@ -8369,7 +8390,8 @@ function insetNote(val) {
 
 
 function getDesignStars(fitValue) {
-const v = parseInt(fitValue);
+  const v = parseInt(fitValue);
+
   const profiles = {
     4: {
       label: {
@@ -8377,10 +8399,34 @@ const v = parseInt(fitValue);
         d45: "5. Neutral, balance.<br>Most all-rounder.",
         d55: "6. Neutral, bigger mid.<br>Good for less swim effect."
       },
+
       stars: {
-        d35: { far: "★★★★☆", mid: "★★☆☆☆", near: "★★★★☆" },
-        d45: { far: "★★★★☆", mid: "★★★☆☆", near: "★★★☆☆" },
-        d55: { far: "★★★★☆", mid: "★★★★☆", near: "★★☆☆☆" }
+        d35: {
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■<span style='color:red'>■■</span>■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br>□□□□■■■■■■■■■■■■□□□□</span>"
+
+        },
+
+
+        d45: {
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■<span style='color:red'>■■</span>■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br></span>"
+        },
+
+        d55: {
+
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■<span style='color:red'>■■</span>■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□■■■■■■■■■■□□□□□<br>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br></span>"
+        }
       }
     },
 
@@ -8390,10 +8436,29 @@ const v = parseInt(fitValue);
         d45: "2. Far emphasis, balance.<br>Common everyday design.",
         d55: "3. Far emphasis, bigger mid.<br>Good for driving."
       },
+
       stars: {
-        d35: { far: "★★★★★", mid: "★☆☆☆☆", near: "★★★★☆" },
-        d45: { far: "★★★★★", mid: "★★☆☆☆", near: "★★★☆☆" },
-        d55: { far: "★★★★★", mid: "★★★☆☆", near: "★★☆☆☆" }
+        d35: {
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■<span style='color:red'>■■</span>■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br>□□□□■■■■■■■■■■■■□□□□<br></span>"
+        },
+        d45: {
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■<span style='color:red'>■■</span>■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br></span>"
+        },
+        d55: {
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■<span style='color:red'>■■</span>■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□■■■■■■■■■■□□□□□<br>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□</span>"
+        }
       }
     },
 
@@ -8403,15 +8468,33 @@ const v = parseInt(fitValue);
         d45: "8. Near emphasis, balance.<br>Good for deskwork.",
         d55: "9. Near emphasis, bigger mid.<br>Good for computer length."
       },
+
       stars: {
-        d35: { far: "★★★☆☆", mid: "★★☆☆☆", near: "★★★★★" },
-        d45: { far: "★★★☆☆", mid: "★★★☆☆", near: "★★★★☆" },
-        d55: { far: "★★★☆☆", mid: "★★★★☆", near: "★★★☆☆" }
+        d35: {
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■<span style='color:red'>■■</span>■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br>□□□□■■■■■■■■■■■■□□□□<br></span>"
+        },
+        d45: {
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■<span style='color:red'>■■</span>■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□■■■■■■■■■■□□□□□<br>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br></span>"
+        },
+        d55: {
+far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■<span style='color:red'>■■</span>■■■■■□□□□</span>",
+
+mid:  "<span style='color:#4E7294'>□□□□□■■■■■■■■■■□□□□□<br>□□□□□□■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+
+near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br></span>"
+        }
       }
     }
   };
 
-  // fallback = neutral
   return profiles[v] || profiles[4];
 }
 
@@ -8526,10 +8609,12 @@ const result1bValue = document.getElementById('result1b')?.textContent || '';
 
   <div class="lbl">
 <span>${stars.label.d35}</span><br><br>
-Far ${stars.stars.d35.far}<br>
-Mid ${stars.stars.d35.mid}<br>
-Near ${stars.stars.d35.near}
+${stars.stars.d35.far}<br>
+${stars.stars.d35.mid}<br>
+${stars.stars.d35.near}
   </div>
+
+
   <div class="val"><br>
     Corridor : ${corridorDisplayMap[corr35]}
     ${adj35 ? `<br>Addition +${adj35.toFixed(2)}` : ''}
@@ -8547,9 +8632,9 @@ Near ${stars.stars.d35.near}
   <div class="lbl">
 <span>${stars.label.d45}</span><br><br>
 
-Far ${stars.stars.d45.far}<br>
-Mid ${stars.stars.d45.mid}<br>
-Near ${stars.stars.d45.near}
+${stars.stars.d45.far}<br>
+${stars.stars.d45.mid}<br>
+${stars.stars.d45.near}
   </div>
   <div class="val"><br>
    Corridor:  ${corridorDisplayMap[corr45]}
@@ -8567,9 +8652,9 @@ Near ${stars.stars.d45.near}
   <div class="lbl">
 <span>${stars.label.d55}</span><br><br>
 
-Far ${stars.stars.d55.far}<br>
-Mid ${stars.stars.d55.mid}<br>
-Near ${stars.stars.d55.near}
+${stars.stars.d55.far}<br>
+${stars.stars.d55.mid}<br>
+${stars.stars.d55.near}
   </div>
   <div class="val"><br>
   Corridor :  ${corridorDisplayMap[corr55]}
