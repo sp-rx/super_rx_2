@@ -23,12 +23,13 @@ html, body, table, {
 }
 .select-card {
   cursor: pointer;
-  padding: 10px;
+  padding: 10px 5px;
   border-radius: 6px;
+  
 }
 
 .select-card.active {
-  background: #CFEBFC;
+ /* background: #CFEBFC; */
 }
 
 
@@ -643,25 +644,40 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
       Pupil H (mm) : <input style="width:50px; margin-right:4%" placeholder="25" type="number" id="ph"></div>
 
 <div style="margin-top:10px">
-Select Eye-Level Vision Style
-<div>
-<button class="normal-btn" onclick="setFitAndCalculate('6')">
-  Far Emphasis
-</button>
 
-<button class="normal-btn" onclick="setFitAndCalculate('4')">
-  Neutral
-</button>
 
-<button class="normal-btn" onclick="setFitAndCalculate('2')">
-  Mid Emphasis
-</button>
+<div style="margin-bottom:5px">
+<span style="display:inline-block; margin-right:10px; width:150px; user-select:none;">
+ Select Near Vision Style :</span>
+<button style="width:100px" class="normal-btn-2" onclick="setDesignView('35', this)">More Near</button>
+<button style="width:100px" class="normal-btn-2" onclick="setDesignView('45', this)">Normal</button>
+<button style="width:100px" class="normal-btn-2" onclick="setDesignView('55', this)">More Mid</button>
 </div>
+
+<div>
+<span style="display:inline-block; margin-right:10px; width:150px; user-select:none;">
+ Select Far Vision Style : </span>
+<button style="width:100px" class="normal-btn" onclick="setFitAndCalculate(this, '6')"> More Far </button>
+<button style="width:100px" class="normal-btn" onclick="setFitAndCalculate(this, '4')">  Neutral </button>
+<button style="width:100px" class="normal-btn" onclick="setFitAndCalculate(this, '2')"> More Mid </button>
+</div>
+
+
+
+
 <script>
-function setFitAndCalculate(value) {
+function setFitAndCalculate(btn, value) {
   document.getElementById('fit').value = value;
+
+  document.querySelectorAll('.normal-btn').forEach(b =>
+    b.classList.remove('rx-active')
+  );
+
+  btn.classList.add('rx-active');
+
   calculate();
 }
+
 </script>
 
 <div style="display:none">
@@ -671,8 +687,6 @@ function setFitAndCalculate(value) {
           <option value="4">Neutral</option>
           <option value="2">Mid emphasis</option>
         </select>
-
-
 
     <button class="normal-btn" id="btnMain" onclick="calculate()">Calculate</button>
 </div>
@@ -8337,10 +8351,10 @@ function roundCorridor(val) {
 }
 
 const corridorDisplayMap = {
-9: '9 mm (5)',
-11: '11 mm (7)',
-13: '13 mm (9)',
-15: '15 mm (11)'
+9: '8 mm (5)',
+11: '10 mm (7)',
+13: '12 mm (9)',
+15: '14 mm (11)'
 }
 
 function getResultAdd(id) {
@@ -8389,10 +8403,117 @@ function insetNote(val) {
 }
 
 
+
+
+function row(emptyLeft, filled, emptyRight = emptyLeft) {
+  return "□".repeat(emptyLeft) +
+         "■".repeat(filled) +
+         "□".repeat(emptyRight);
+}
+
+function redRow(leftBlue, red, rightBlue, emptyLeft = 0, emptyRight = emptyLeft) {
+  return "□".repeat(emptyLeft) +
+         "■".repeat(leftBlue) +
+         `<span style="color:red">${"■".repeat(red)}</span>` +
+         "■".repeat(rightBlue) +
+         "□".repeat(emptyRight);
+}
+
+function section(color, rows) {
+  return `<span style="color:${color}">${rows.join("<br>")}</span>`;
+}
+
+
 function getDesignStars(fitValue) {
   const v = parseInt(fitValue);
 
   const profiles = {
+
+6: {
+      label: {
+        d35: "1. Far emphasis, bigger near.<br>Only far & near.",
+        d45: "2. Far emphasis, balance.<br>Common everyday design.",
+        d55: "3. Far emphasis, bigger mid.<br>Good for driving."
+      },
+
+      stars: {
+        d35: {
+far: section("#368BE0", [
+  row(0,48),
+  row(0,48),
+  redRow(22,4,22),
+  row(0,48),
+  row(2,44),
+  row(8,32)
+]),
+
+mid: section("#727375", [
+  row(14,20),
+  row(18,12),
+  row(14,20)
+]),
+
+near: section("#2A2D30", [
+  row(12,24),
+  row(8,32),
+  row(6,36),
+  row(6,36)
+])
+        },
+
+        d45: {
+far: section("#368BE0", [
+  row(0,48),
+  row(0,48),
+  redRow(22,4,22),
+  row(0,48),
+  row(2,44),
+  row(8,32)
+]),
+
+mid: section("#727375", [
+  row(14,20),
+  row(18,12),
+  row(16,16),
+  row(14,20)
+]),
+
+near: section("#2A2D30", [
+  row(12,24),
+  row(8,32),
+  row(6,36)
+])
+        },
+
+        d55: {
+far: section("#368BE0", [
+  row(0,48),
+  row(0,48),
+  redRow(22,4,22),
+  row(0,48),
+  row(2,44),
+  row(8,32)
+]),
+
+mid: section("#727375", [
+  row(12,24),
+  row(14,20),
+  row(16,16),
+  row(16,16),
+  row(14,20)
+]),
+
+near: section("#2A2D30", [
+  row(12,24),
+  row(8,32)
+])
+        }
+      }
+    },
+
+
+
+
     4: {
       label: {
         d35: "4. Neutral, bigger near.<br>Good for indoor, room length.",
@@ -8402,67 +8523,80 @@ function getDesignStars(fitValue) {
 
       stars: {
         d35: {
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■<span style='color:red'>■■</span>■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+far: section("#368BE0", [
+  row(0,48),
+  row(0,48),
+  redRow(22,4,22),
+  row(2,44),
+  row(8,32)
+]),
 
-mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+mid: section("#727375", [
+  row(14,20),
+  row(18,12),
+  row(16,16),
+  row(14,20)
+]),
 
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br>□□□□■■■■■■■■■■■■□□□□</span>"
-
+near: section("#2A2D30", [
+  row(12,24),
+  row(8,32),
+  row(6,36),
+  row(6,36)
+])
         },
 
-
         d45: {
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■<span style='color:red'>■■</span>■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+far: section("#368BE0", [
+  row(0,48),
+  row(0,48),
+  redRow(22,4,22),
+  row(2,44),
+  row(8,32)
+]),
 
-mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+mid: section("#727375", [
+  row(12,24),
+  row(14,20),
+  row(16,16),
+  row(16,16),
+  row(14,20)
+]),
 
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br></span>"
+near: section("#2A2D30", [
+  row(12,24),
+  row(8,32),
+  row(6,36)
+])
         },
 
         d55: {
+far: section("#368BE0", [
+  row(0,48),
+  row(0,48),
+  redRow(22,4,22),
+  row(2,44),
+  row(8,32)
+]),
 
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■<span style='color:red'>■■</span>■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
+mid: section("#727375", [
+  row(12,24),
+  row(14,20),
+  row(14,20),
+  row(14,20),
+  row(14,20),
+  row(12,24)
+]),
 
-mid:  "<span style='color:#4E7294'>□□□□□■■■■■■■■■■□□□□□<br>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
-
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br></span>"
+near: section("#2A2D30", [
+  row(10,28),
+  row(8,32)
+])
         }
       }
     },
 
-    6: {
-      label: {
-        d35: "1. Far emphasis, bigger near.<br>Only far & near.",
-        d45: "2. Far emphasis, balance.<br>Common everyday design.",
-        d55: "3. Far emphasis, bigger mid.<br>Good for driving."
-      },
-
-      stars: {
-        d35: {
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■<span style='color:red'>■■</span>■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
-
-mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
-
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br>□□□□■■■■■■■■■■■■□□□□<br></span>"
-        },
-        d45: {
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■<span style='color:red'>■■</span>■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
-
-mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
-
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br></span>"
-        },
-        d55: {
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■■■■■■■■■■■■<br>■■■■■■■■■<span style='color:red'>■■</span>■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■■■■■■■■□□□□</span>",
-
-mid:  "<span style='color:#4E7294'>□□□□□■■■■■■■■■■□□□□□<br>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
-
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□</span>"
-        }
-      }
-    },
-
-    2: {
+        2: {
       label: {
         d35: "7. Near emphasis, bigger near.<br>Mainly for near vision.",
         d45: "8. Near emphasis, balance.<br>Good for deskwork.",
@@ -8470,26 +8604,80 @@ near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□
       },
 
       stars: {
-        d35: {
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■<span style='color:red'>■■</span>■■■■■□□□□</span>",
+                  d35: {
+  far: section("#368BE0", [
+    row(0,48),
+    row(0,48),
+  redRow(22,4,22),
+    row(8,32)
+  ]),
 
-mid:  "<span style='color:#4E7294'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+  mid: section("#727375", [
+    row(12,24),
+    row(14,20),
+    row(16,16),
+    row(16,16),
+    row(14,20)
+  ]),
 
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br>□□□□■■■■■■■■■■■■□□□□<br></span>"
+  near: section("#2A2D30", [
+    row(12,24),
+    row(8,32),
+    row(6,36),
+    row(6,36)
+
+          ])
         },
+
         d45: {
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■<span style='color:red'>■■</span>■■■■■□□□□</span>",
+far: section("#368BE0", [
+  row(0,48),
+  row(0,48),
+  redRow(22,4,22),
+  row(8,32)
+]),
 
-mid:  "<span style='color:#4E7294'>□□□□□■■■■■■■■■■□□□□□<br>□□□□□□■■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+mid: section("#727375", [
+  row(12,24),
+  row(14,20),
+  row(16,16),
+  row(16,16),
+  row(16,16),
+  row(14,20)
+]),
 
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br>□□□□□■■■■■■■■■■□□□□□<br></span>"
+near: section("#2A2D30", [
+  row(12,24),
+  row(8,32),
+  row(6,36)
+
+
+          ])
         },
+
         d55: {
-far:  "<span style='color:#368BE0'>■■■■■■■■■■■■■■■■■■■■<br>□□■■■■■■■■■■■■■■■■□□<br>□□□□■■■■■<span style='color:red'>■■</span>■■■■■□□□□</span>",
+far: section("#368BE0", [
+  row(0,48),
+  row(0,48),
+  redRow(22,4,22),
+  row(8,32)
+]),
 
-mid:  "<span style='color:#4E7294'>□□□□□■■■■■■■■■■□□□□□<br>□□□□□□■■■■■■■□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□<br>□□□□□□□■■■■■■□□□□□□□</span>",
+mid: section("#727375", [
+  row(10,28),
+  row(12,24),
+  row(14,20),
+  row(14,20),
+  row(14,20),
+  row(14,20),
+  row(12,24)
+]),
 
-near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□□□□□□<br></span>"
+near: section("#2A2D30", [
+  row(10,28),
+  row(8,32)
+
+          ])
         }
       }
     }
@@ -8497,6 +8685,11 @@ near: "<span style='color:#2A2D30'>□□□□□□■■■■■■■■□
 
   return profiles[v] || profiles[4];
 }
+
+
+
+
+
 
 function calculate() {
 const fitValue = document.getElementById('fit').value;
@@ -8602,8 +8795,9 @@ const result1bValue = document.getElementById('result1b')?.textContent || '';
       <span><b><u>Select a Zone Design</b></u></span>
       <div style="height:15px"></div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
+      <div>
 
+${designView === 'all' || designView === '35' ? `
 
 <div class="select-card">
 
@@ -8611,7 +8805,7 @@ const result1bValue = document.getElementById('result1b')?.textContent || '';
 <span>${stars.label.d35}</span><br><br>
 ${stars.stars.d35.far}<br>
 ${stars.stars.d35.mid}<br>
-${stars.stars.d35.near}
+${stars.stars.d35.near}<br>
   </div>
 
 
@@ -8624,8 +8818,9 @@ ${stars.stars.d35.near}
   </div>
 </div>
 
+` : ''}
 
-
+${designView === 'all' || designView === '45' ? `
 
 <div class="select-card">
 
@@ -8634,7 +8829,7 @@ ${stars.stars.d35.near}
 
 ${stars.stars.d45.far}<br>
 ${stars.stars.d45.mid}<br>
-${stars.stars.d45.near}
+${stars.stars.d45.near}<br>
   </div>
   <div class="val"><br>
    Corridor:  ${corridorDisplayMap[corr45]}
@@ -8645,16 +8840,21 @@ ${stars.stars.d45.near}
   </div>
 </div>
 
+` : ''}
 
+
+${designView === 'all' || designView === '55' ? `
 
 <div class="select-card">
+
+
 
   <div class="lbl">
 <span>${stars.label.d55}</span><br><br>
 
 ${stars.stars.d55.far}<br>
 ${stars.stars.d55.mid}<br>
-${stars.stars.d55.near}
+${stars.stars.d55.near}<br>
   </div>
   <div class="val"><br>
   Corridor :  ${corridorDisplayMap[corr55]}
@@ -8664,6 +8864,8 @@ ${stars.stars.d55.near}
   Cross H : ${(fittingHeight)} mm ( ${fhDiff >= 0 ? '+' : '-'} ${Math.abs(fhDiff)} )
   </div>
 </div>
+
+` : ''}
 
 
 </div>
@@ -8676,7 +8878,19 @@ ${stars.stars.d55.near}
 }
 
 
+let designView = 'all';
 
+function setDesignView(v, btn) {
+  designView = v;
+
+  document.querySelectorAll('.normal-btn-2').forEach(b =>
+    b.classList.remove('rx-active')
+  );
+
+  btn.classList.add('rx-active');
+
+  calculate();
+}
 
 
 function plotGraph() {
