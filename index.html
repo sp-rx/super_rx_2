@@ -29,7 +29,7 @@ html, body, table, {
 }
 
 .select-card.active {
- /* background: #CFEBFC; */
+  background: #CFEBFC;
 }
 
 
@@ -646,20 +646,12 @@ Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type
 <div style="margin-top:10px">
 
 
-<div style="margin-bottom:5px">
-<span style="display:inline-block; margin-right:10px; width:150px; user-select:none;">
- Select Near Vision Style :</span>
-<button style="width:100px" class="normal-btn-2" onclick="setDesignView('35', this)">More Near</button>
-<button style="width:100px" class="normal-btn-2" onclick="setDesignView('45', this)">Normal</button>
-<button style="width:100px" class="normal-btn-2" onclick="setDesignView('55', this)">More Mid</button>
-</div>
+<div style="margin-top:5px">
+<button class="normal-btn" onclick="setFitAndCalculate(this, '6')"> Larger Far Design </button>
 
-<div>
-<span style="display:inline-block; margin-right:10px; width:150px; user-select:none;">
- Select Far Vision Style : </span>
-<button style="width:100px" class="normal-btn" onclick="setFitAndCalculate(this, '6')"> More Far </button>
-<button style="width:100px" class="normal-btn" onclick="setFitAndCalculate(this, '4')">  Neutral </button>
-<button style="width:100px" class="normal-btn" onclick="setFitAndCalculate(this, '2')"> More Mid </button>
+<button class="normal-btn" onclick="setFitAndCalculate(this, '4')"> Neutral </button>
+
+<button class="normal-btn" onclick="setFitAndCalculate(this, '2')"> Larger Mid Design </button>
 </div>
 
 
@@ -8438,75 +8430,77 @@ function getDesignStars(fitValue) {
 
       stars: {
         d35: {
-far: section("#368BE0", [
-  row(0,48),
-  row(0,48),
-  redRow(22,4,22),
-  row(0,48),
-  row(2,44),
-  row(8,32)
-]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(11,2,11),
+            row(0,24),
+            row(1,22),
+            row(4,16)
+          ]),
 
-mid: section("#727375", [
-  row(14,20),
-  row(18,12),
-  row(14,20)
-]),
+          mid: section("#727375", [
+            row(7,10),
+            row(9,6),
+            row(7,10)
+          ]),
 
-near: section("#2A2D30", [
-  row(12,24),
-  row(8,32),
-  row(6,36),
-  row(6,36)
-])
+          near: section("#2A2D30", [
+            row(6,12),
+            row(4,16),
+            row(3,18),
+            row(3,18)
+
+          ])
         },
 
         d45: {
-far: section("#368BE0", [
-  row(0,48),
-  row(0,48),
-  redRow(22,4,22),
-  row(0,48),
-  row(2,44),
-  row(8,32)
-]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(11,2,11),
+            row(0,24),
+            row(1,22),
+            row(4,16)
+          ]),
 
-mid: section("#727375", [
-  row(14,20),
-  row(18,12),
-  row(16,16),
-  row(14,20)
-]),
+          mid: section("#727375", [
+            row(7,10),
+            row(9,6),
+            row(8,8),
+            row(7,10)
+          ]),
 
-near: section("#2A2D30", [
-  row(12,24),
-  row(8,32),
-  row(6,36)
-])
+          near: section("#2A2D30", [
+            row(6,12),
+            row(4,16),
+            row(3,18)
+
+          ])
         },
 
         d55: {
-far: section("#368BE0", [
-  row(0,48),
-  row(0,48),
-  redRow(22,4,22),
-  row(0,48),
-  row(2,44),
-  row(8,32)
-]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(11,2,11),
+            row(0,24),
+            row(1,22),
+            row(4,16)
+          ]),
 
-mid: section("#727375", [
-  row(12,24),
-  row(14,20),
-  row(16,16),
-  row(16,16),
-  row(14,20)
-]),
+          mid: section("#727375", [
+            row(6,12),
+            row(7,10),
+            row(8,8),
+            row(8,8),
+            row(7,10)
+          ]),
 
-near: section("#2A2D30", [
-  row(12,24),
-  row(8,32)
-])
+          near: section("#2A2D30", [
+            row(6,12),
+            row(4,16),
+          ])
         }
       }
     },
@@ -8523,75 +8517,77 @@ near: section("#2A2D30", [
 
       stars: {
         d35: {
-far: section("#368BE0", [
-  row(0,48),
-  row(0,48),
-  redRow(22,4,22),
-  row(2,44),
-  row(8,32)
-]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(11,2,11),
+            row(1,22),
+            row(4,16)
+          ]),
 
-mid: section("#727375", [
-  row(14,20),
-  row(18,12),
-  row(16,16),
-  row(14,20)
-]),
+          mid: section("#727375", [
+            row(7,10),
+            row(9,6),
+            row(8,8),
+            row(7,10)
+          ]),
 
-near: section("#2A2D30", [
-  row(12,24),
-  row(8,32),
-  row(6,36),
-  row(6,36)
-])
+          near: section("#2A2D30", [
+            row(6,12),
+            row(4,16),
+            row(3,18),
+            row(3,18)
+
+          ])
         },
 
         d45: {
-far: section("#368BE0", [
-  row(0,48),
-  row(0,48),
-  redRow(22,4,22),
-  row(2,44),
-  row(8,32)
-]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(11,2,11),
+            row(1,22),
+            row(4,16)
+          ]),
 
-mid: section("#727375", [
-  row(12,24),
-  row(14,20),
-  row(16,16),
-  row(16,16),
-  row(14,20)
-]),
+          mid: section("#727375", [
+            row(6,12),
+            row(7,10),
+            row(8,8),
+            row(8,8),
+            row(7,10)
+          ]),
 
-near: section("#2A2D30", [
-  row(12,24),
-  row(8,32),
-  row(6,36)
-])
+          near: section("#2A2D30", [
+            row(6,12),
+            row(4,16),
+            row(3,18)
+
+          ])
         },
 
         d55: {
-far: section("#368BE0", [
-  row(0,48),
-  row(0,48),
-  redRow(22,4,22),
-  row(2,44),
-  row(8,32)
-]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(11,2,11),
+            row(1,22),
+            row(4,16)
+          ]),
 
-mid: section("#727375", [
-  row(12,24),
-  row(14,20),
-  row(14,20),
-  row(14,20),
-  row(14,20),
-  row(12,24)
-]),
+          mid: section("#727375", [
+            row(6,12),
+            row(7,10),
+            row(7,10),
+            row(7,10),
+            row(7,10),
+            row(6,12)
+          ]),
 
-near: section("#2A2D30", [
-  row(10,28),
-  row(8,32)
-])
+          near: section("#2A2D30", [
+            row(5,14),
+            row(4,16),
+          ])
         }
       }
     },
@@ -8605,78 +8601,76 @@ near: section("#2A2D30", [
 
       stars: {
                   d35: {
-  far: section("#368BE0", [
-    row(0,48),
-    row(0,48),
-  redRow(22,4,22),
-    row(8,32)
-  ]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(10,2,10,1),
+            row(4,16)
+          ]),
 
-  mid: section("#727375", [
-    row(12,24),
-    row(14,20),
-    row(16,16),
-    row(16,16),
-    row(14,20)
-  ]),
+          mid: section("#727375", [
+            row(6,12),
+            row(7,10),
+            row(8,8),
+            row(8,8),
+            row(7,10)
+          ]),
 
-  near: section("#2A2D30", [
-    row(12,24),
-    row(8,32),
-    row(6,36),
-    row(6,36)
+          near: section("#2A2D30", [
+            row(6,12),
+            row(4,16),
+            row(3,18),
+            row(3,18)
 
           ])
         },
 
         d45: {
-far: section("#368BE0", [
-  row(0,48),
-  row(0,48),
-  redRow(22,4,22),
-  row(8,32)
-]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(10,2,10,1),
+            row(4,16)
+          ]),
 
-mid: section("#727375", [
-  row(12,24),
-  row(14,20),
-  row(16,16),
-  row(16,16),
-  row(16,16),
-  row(14,20)
-]),
+          mid: section("#727375", [
+            row(6,12),
+            row(7,10),
+            row(8,8),
+            row(8,8),
+            row(8,8),
+            row(7,10)
+          ]),
 
-near: section("#2A2D30", [
-  row(12,24),
-  row(8,32),
-  row(6,36)
-
+          near: section("#2A2D30", [
+            row(6,12),
+            row(4,16),
+            row(3,18)
 
           ])
         },
 
         d55: {
-far: section("#368BE0", [
-  row(0,48),
-  row(0,48),
-  redRow(22,4,22),
-  row(8,32)
-]),
+          far: section("#368BE0", [
+            row(0,24),
+            row(0,24),
+            redRow(10,2,10,1),
+            row(4,16)
+          ]),
 
-mid: section("#727375", [
-  row(10,28),
-  row(12,24),
-  row(14,20),
-  row(14,20),
-  row(14,20),
-  row(14,20),
-  row(12,24)
-]),
+          mid: section("#727375", [
+            row(5,14),
+            row(6,12),
+            row(7,10),
+            row(7,10),
+            row(7,10),
+            row(7,10),
+            row(6,12)
+          ]),
 
-near: section("#2A2D30", [
-  row(10,28),
-  row(8,32)
-
+          near: section("#2A2D30", [
+            row(5,14),
+            row(4,16),
           ])
         }
       }
@@ -8792,11 +8786,10 @@ const result1bValue = document.getElementById('result1b')?.textContent || '';
 
 
     <div class="output-cell">
-      <span><b><u>Select a Zone Design</b></u></span>
-      <div style="height:15px"></div>
+      <span><b><u>3 Types of Near Design</b></u></span>
+      <div style="height:10px"></div>
 
-      <div>
-
+<div style="display:grid; grid-template-columns: 1fr 1fr 1fr;">
 ${designView === 'all' || designView === '35' ? `
 
 <div class="select-card">
