@@ -339,6 +339,14 @@ body, table, th, td, input, button {
   contain: paint;
   isolation: isolate;
 }
+
+.darkness{
+  position:absolute;
+  inset:0;
+  background:black;
+  opacity:0;
+  pointer-events:none;
+}
 @supports not (overflow: clip) { 
   .duo-side { overflow: hidden; } 
 }
@@ -2318,22 +2326,27 @@ function runBE() {
 
 
  <!-- Duochrome (button above) -->
+
 <div class="duo-wrap rx-block" >
   <div class="duochrome" style="border-radius:20px">
 
     <div class="duo-side" id="redSide">
       <img class="base" id="redImg"  src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png"  alt="">
 <img class="overlay" id="redOv" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/RED_1.png" alt="">
+      <div class="darkness"></div>
+
     </div>
 
     <div class="duo-side" id="blueSide">
       <img class="base" id="blueImg" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/BLUE_1.png" alt="">
 <img class="overlay" id="blueOv" src="https://raw.githubusercontent.com/sp-rx/Trainer/main/BLUE_1.png" alt="">
+      <div class="darkness"></div>
+
     </div>
-
-
   </div>
 </div>
+
+
 
 <div style="margin-top:-15px; margin-bottom:10px">
 <button class="btn-0" style="width:70px;" onclick="toggleresultsbutton()">+</button>
@@ -2381,6 +2394,22 @@ Duochrome :
         <button style="margin-left:5px; margin-right:15px; width:70px" onclick="adj('sph_test', 0.25)" class="btn-plus">+</button>
 
 <button class="btn-0" style="width:40px; margin-right:20px" onclick="resetRx()">R</button>
+<div>
+<input type="range" id="darkSlider" min="0" max="100" value="0" style="width:300px;">
+</div>
+
+<script>
+const slider = document.getElementById("darkSlider");
+
+slider.oninput = function () {
+  const val = (this.value / 100) * 0.5; // max = 0.5
+
+  document.querySelectorAll(".darkness").forEach(el => {
+    el.style.opacity = val;
+  });
+};
+</script>
+
 
    <button style="display:none" onclick="adj('sph_test', 1.00)" class="btn-plus">+ +</button>
 
@@ -8436,10 +8465,10 @@ function getDesignStars(fitValue) {
             redRow(11,2,11),
             row(0,24),
             row(1,22),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(7,10),
             row(9,6),
             row(7,10)
@@ -8461,10 +8490,10 @@ function getDesignStars(fitValue) {
             redRow(11,2,11),
             row(0,24),
             row(1,22),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(7,10),
             row(9,6),
             row(8,8),
@@ -8486,10 +8515,10 @@ function getDesignStars(fitValue) {
             redRow(11,2,11),
             row(0,24),
             row(1,22),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(6,12),
             row(7,10),
             row(8,8),
@@ -8522,10 +8551,10 @@ function getDesignStars(fitValue) {
             row(0,24),
             redRow(11,2,11),
             row(1,22),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(7,10),
             row(9,6),
             row(8,8),
@@ -8547,10 +8576,10 @@ function getDesignStars(fitValue) {
             row(0,24),
             redRow(11,2,11),
             row(1,22),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(6,12),
             row(7,10),
             row(8,8),
@@ -8572,10 +8601,10 @@ function getDesignStars(fitValue) {
             row(0,24),
             redRow(11,2,11),
             row(1,22),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(6,12),
             row(7,10),
             row(7,10),
@@ -8605,10 +8634,10 @@ function getDesignStars(fitValue) {
             row(0,24),
             row(0,24),
             redRow(10,2,10,1),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(6,12),
             row(7,10),
             row(8,8),
@@ -8630,10 +8659,10 @@ function getDesignStars(fitValue) {
             row(0,24),
             row(0,24),
             redRow(10,2,10,1),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(6,12),
             row(7,10),
             row(8,8),
@@ -8655,10 +8684,10 @@ function getDesignStars(fitValue) {
             row(0,24),
             row(0,24),
             redRow(10,2,10,1),
-            row(4,16)
           ]),
 
           mid: section("#727375", [
+            row(4,16),
             row(5,14),
             row(6,12),
             row(7,10),
@@ -8707,7 +8736,7 @@ const adjustedOffset = offset * ((vd + 12) / 24);
 
  const nearPd = pd - (baseInset * 2);
  const monoPD = snapToQuarter(nearPd / 2);
- const fittingHeight = Math.round((ph - adjustedOffset) * 2) / 2;
+ const fittingHeight = Math.round((ph - adjustedOffset + 2) * 2) / 2;
  const fhDiff = Math.round((fittingHeight - ph) * 2) / 2;
  
   function corridor(angle) {
@@ -9173,6 +9202,10 @@ document.addEventListener('click', function(e) {
   card.classList.add('active');
 });
 </script>
+
+
+
+
 
 
 </body>
