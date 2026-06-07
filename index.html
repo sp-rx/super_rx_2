@@ -646,10 +646,15 @@ Mid Length (cm) : <input  style="margin-right:4%" placeholder="50" type="number"
 <tr><td style="border:none" colspan="4">
 
 <div>
-Bino PD (mm) : <input style="width:50px; margin-right:4%"  placeholder="65" type="number" id="pd">
-      Vertex (mm) : <input style="width:50px; margin-right:4%" placeholder="12" type="number" step="2" id="vd">
+Bino PD : <input style="width:40px; margin-right:2%"  placeholder="65" type="number" id="pd">
+      Vertex : <input style="width:40px; margin-right:2%" placeholder="12" type="number" step="2" id="vd">
 
-      Pupil H (mm) : <input style="width:50px; margin-right:4%" placeholder="25" type="number" id="ph"></div>
+      Pupil H : <input style="width:40px; margin-right:2%" placeholder="25" type="number" id="ph">
+
+Drop : <input style="width:40px; margin-right:2%" placeholder="4" type="number" step="1" id="drop"> 
+
+
+</div>
 
 <div style="margin-top:10px">
 
@@ -8722,7 +8727,8 @@ const stars = getDesignStars(fitValue);
   const vd = parseFloat(document.getElementById('vd').value);
   const ph = parseFloat(document.getElementById('ph').value);
   const offset = parseFloat(document.getElementById('fit').value);
-const adjustedOffset = offset * ((vd + 12) / 24);
+  const drop = parseFloat(document.getElementById('drop').value);
+  const adjustedOffset = ( offset * ((vd + 12) / 24) ) - drop;
 
   if (isNaN(pd) || isNaN(wd_cm) || isNaN(vd) || isNaN(ph)) {
     document.getElementById('output').innerHTML =
