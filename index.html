@@ -7228,19 +7228,22 @@ function updateFC(blockId, spanId){
   });
 
   // calculate result
-  let result = null;
-  if(balPower !== null && perpPower !== null) result = Math.min(balPower, perpPower);
-  else if(balPower !== null) result = balPower;
-  else if(perpPower !== null) result = perpPower;
+let result = null;
+
+if (balPower !== null) {
+  result = balPower;
+} else if (perpPower !== null) {
+  result = perpPower - 0.25;
+}
 
   // update result span
-  if(result !== null){
-    result = result - 0.25;
-    const power = (result > 0 ? "+" : "") + result.toFixed(2);
-    document.getElementById(spanId).innerHTML = power + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AXIS: " + nowAxis;
-  } else {
-    document.getElementById(spanId).textContent = "";
-  }
+if(result !== null){
+  const power = (result > 0 ? "+" : "") + result.toFixed(2);
+  document.getElementById(spanId).innerHTML =
+    power + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AXIS: " + nowAxis;
+} else {
+  document.getElementById(spanId).textContent = "";
+}
 }
 
 // attach change events
