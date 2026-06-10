@@ -2402,6 +2402,10 @@ Duochrome :
 <input type="range" id="darkSlider" min="0" max="100" value="0" style="width:300px;">
 </div>
 
+<button class="normal" onclick="window.open('https://sp-rx.github.io/mobile_FCDC/', '_blank')" style="cursor:pointer; width:90%; margin-right:5%">
+  Click to open FCDC Simulator in a new window
+</button>
+
 <script>
 const slider = document.getElementById("darkSlider");
 
@@ -8461,7 +8465,7 @@ function getDesignStars(fitValue) {
       label: {
         d35: "1. Far emphasis, bigger near.<br>Only far & near.",
         d45: "2. Far emphasis, balance.<br>Common everyday design.",
-        d55: "3. Far emphasis, bigger mid.<br>Good for driving."
+        d55: ". Far emphasis, bigger mid.<br>Good for driving."
       },
 
       stars: {
@@ -8546,9 +8550,9 @@ function getDesignStars(fitValue) {
 
     4: {
       label: {
-        d35: "4. Neutral, bigger near.<br>Good for indoor, room length.",
-        d45: "5. Neutral, balance.<br>Most all-rounder.",
-        d55: "6. Neutral, bigger mid.<br>Good for less swim effect."
+        d35: "3. Neutral, bigger near.<br>Good for indoor, room length.",
+        d45: "4. Neutral, balance.<br>Most all-rounder.",
+        d55: ". Neutral, bigger mid.<br>Good for less swim effect."
       },
 
       stars: {
@@ -8630,8 +8634,8 @@ function getDesignStars(fitValue) {
 
         2: {
       label: {
-        d35: "7. Near emphasis, bigger near.<br>Mainly for near vision.",
-        d45: "8. Near emphasis, balance.<br>Good for deskwork.",
+        d35: "5. Near emphasis, bigger near.<br>Mainly for near vision.",
+        d45: "6. Near emphasis, balance.<br>Good for deskwork.",
         d55: "9. Near emphasis, bigger mid.<br>Good for computer length."
       },
 
@@ -8823,10 +8827,10 @@ const result1bValue = document.getElementById('result1b')?.textContent || '';
 
 
     <div class="output-cell">
-      <span><b><u>3 Types of Mid / Near Design</b></u></span>
+      <span><b>Two Types of Mid / Near Design</b></span>
       <div style="height:10px"></div>
 
-<div style="display:grid; grid-template-columns: 1fr 1fr 1fr;">
+<div style="display:grid; grid-template-columns: 1fr 1fr;">
 ${designView === 'all' || designView === '35' ? `
 
 <div class="select-card">
@@ -8875,7 +8879,7 @@ ${stars.stars.d45.near}<br>
 
 ${designView === 'all' || designView === '55' ? `
 
-<div class="select-card">
+<div style="display:none" class="select-card">
 
 
 
