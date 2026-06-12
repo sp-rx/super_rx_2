@@ -70,11 +70,11 @@ max-width:570px;
     .info-note { font-size: 12px; color: #888; line-height: 1.5; margin-top: 0.5rem; }
 .duochrome-img {
   width: 100%;
-  aspect-ratio: 24 / 9;
+  aspect-ratio: 24 / 18;
   object-fit: cover;
-  object-position: center 15%;
+  object-position: center 0%;
   border-radius: 8px;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 
@@ -741,7 +741,7 @@ function setFitAndCalculate(btn, value) {
 
 
 <tr><td style="border:none" colspan="4">
-      <button class="normal-btn" onclick="toggle('duo-body')">Duochrome  Show / Hide</button>
+      <button class="normal-btn" onclick="toggle('duo-body')">Duochrome Show / Hide</button>
     </div>
     <div id="duo-body" style="display:none">
       <img src="https://raw.githubusercontent.com/kiaraoptometrypx/mobile_test/main/Near.png" class="duochrome-img">
@@ -8471,75 +8471,85 @@ function getDesignStars(fitValue) {
       stars: {
         d35: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(11,2,11),
-            row(0,24),
-            row(1,22),
+            row(0,30),
+
+            row(0,30),
+            row(0,30),
+            redRow(14,2,14),
+            row(1,28),
+            row(4,22),
           ]),
 
           mid: section("#727375", [
-            row(4,16),
-            row(7,10),
-            row(9,6),
-            row(7,10)
+
+            row(7,16),
+            row(10,10),
+            row(12,6),
+            row(11,8)
           ]),
 
           near: section("#2A2D30", [
-            row(6,12),
-            row(4,16),
-            row(3,18),
-            row(3,18)
+            row(9,12),
+            row(7,16),
+            row(6,18),
+            row(5,20),
+            row(5,20)
 
           ])
         },
 
         d45: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(11,2,11),
-            row(0,24),
-            row(1,22),
+            row(0,30),
+
+            row(0,30),
+            row(0,30),
+            redRow(14,2,14),
+            row(1,28),
+            row(4,22),
           ]),
 
           mid: section("#727375", [
-            row(4,16),
-            row(7,10),
-            row(9,6),
-            row(8,8),
-            row(7,10)
+            row(7,16),
+            row(10,10),
+            row(11,8),
+            row(11,8),
+            row(11,8),
+            row(10,10)
           ]),
 
           near: section("#2A2D30", [
-            row(6,12),
-            row(4,16),
-            row(3,18)
+            row(6+3,12),
+            row(4+3,16),
+            row(3+3,18)
 
           ])
         },
 
         d55: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(11,2,11),
-            row(0,24),
-            row(1,22),
+            row(0,30),
+
+            row(0,30),
+            row(0,30),
+            redRow(14,2,14),
+            row(1,28),
+            row(1+3,22),
           ]),
 
           mid: section("#727375", [
-            row(4,16),
-            row(6,12),
-            row(7,10),
-            row(8,8),
-            row(8,8),
-            row(7,10)
+            row(4+3,16),
+            row(6+3,12),
+            row(7+3,10),
+            row(8+3,8),
+            row(8+3,8),
+            row(8+3,8),
+            row(7+3,10)
           ]),
 
           near: section("#2A2D30", [
-            row(6,12),
-            row(4,16),
+            row(6+3,12),
+            row(4+3,16),
           ])
         }
       }
@@ -8558,60 +8568,69 @@ function getDesignStars(fitValue) {
       stars: {
         d35: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(11,2,11),
-            row(1,22),
+            row(0,30),
+            row(0,30),
+            row(0,30),
+            redRow(13,2,13,1),
+            row(4,22),
           ]),
 
           mid: section("#727375", [
-            row(4,16),
-            row(7,10),
-            row(9,6),
-            row(8,8),
-            row(7,10)
+            row(7,16),
+            row(9,12),
+            row(10,10),
+            row(11,8),
+            row(10,10),
+
           ]),
 
           near: section("#2A2D30", [
-            row(6,12),
-            row(4,16),
-            row(3,18),
-            row(3,18)
+            row(9,12),
+            row(7,16),
+            row(6,18),
+            row(5,20),
+            row(5,20)
+
 
           ])
         },
 
         d45: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(11,2,11),
-            row(1,22),
+            row(0,30),
+
+            row(0,30),
+            row(0,30),
+            redRow(13,2,13,1),
+            row(4,22),
           ]),
 
           mid: section("#727375", [
-            row(4,16),
-            row(6,12),
-            row(7,10),
-            row(8,8),
-            row(8,8),
-            row(7,10)
+            row(6,18),
+            row(8,14),
+            row(9,12),
+            row(10,10),
+            row(11,8),
+            row(11,8),
+            row(10,10)
           ]),
 
           near: section("#2A2D30", [
-            row(6,12),
-            row(4,16),
-            row(3,18)
+            row(6+3,12),
+            row(4+3,16),
+            row(3+3,18)
 
           ])
         },
 
         d55: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(11,2,11),
-            row(1,22),
+            row(0,30),
+
+            row(0,30),
+            row(0,30),
+            redRow(13,2,13,1),
+            row(4,22),
           ]),
 
           mid: section("#727375", [
@@ -8640,61 +8659,68 @@ function getDesignStars(fitValue) {
       },
 
       stars: {
-                  d35: {
+        d35: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(10,2,10,1),
+            row(0,30),
+            row(0,30),
+            row(1,28),
+            redRow(10,2,10,4),
           ]),
 
           mid: section("#727375", [
-            row(4,16),
-            row(6,12),
-            row(7,10),
-            row(8,8),
-            row(8,8),
-            row(7,10)
+
+            row(7,16),
+            row(8,14),
+            row(9,12),
+            row(10,10),
+            row(11,8),
+            row(10,10)
           ]),
 
           near: section("#2A2D30", [
-            row(6,12),
-            row(4,16),
-            row(3,18),
-            row(3,18)
+            row(9,12),
+            row(7,16),
+            row(6,18),
+            row(5,20),
+            row(5,20)
+
 
           ])
         },
 
         d45: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(10,2,10,1),
+            row(0,30),
+            row(0,30),
+            row(1,28),
+            redRow(10,2,10,4),
           ]),
 
           mid: section("#727375", [
-            row(4,16),
-            row(6,12),
-            row(7,10),
-            row(8,8),
-            row(8,8),
-            row(8,8),
-            row(7,10)
+            row(6,18),
+            row(7,16),
+            row(8,14),
+            row(9,12),
+            row(10,10),
+            row(11,8),
+            row(11,8),
+            row(10,10)
           ]),
 
           near: section("#2A2D30", [
-            row(6,12),
-            row(4,16),
-            row(3,18)
+            row(6+3,12),
+            row(4+3,16),
+            row(3+3,18)
 
           ])
         },
 
         d55: {
           far: section("#368BE0", [
-            row(0,24),
-            row(0,24),
-            redRow(10,2,10,1),
+            row(0,30),
+            row(0,30),
+            row(1,28),
+            redRow(10,2,10,4),
           ]),
 
           mid: section("#727375", [
@@ -8738,7 +8764,7 @@ const stars = getDesignStars(fitValue);
 
   if (isNaN(pd) || isNaN(wd_cm) || isNaN(vd) || isNaN(ph)) {
     document.getElementById('output').innerHTML =
-      '<span style="color:#888;font-size:13px">Please fill all fields above.</span>';
+      '<span style="color:black;font-size:11px">Please fill all fields above.</span>';
     return;
   }
 
