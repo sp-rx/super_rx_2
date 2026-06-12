@@ -883,9 +883,25 @@ function setFitAndCalculate(btn, value) {
 
 Whatsapp : <input type="text" id="customerWhatsapp" style="margin-right:2%; width:25%; height:20px"placeholder="6012 3456 789" oninput="updateCustomerWhatsapp()">
 
+  <input type="text" id="notes" style="width:74%; border-radius:5px; border:1px solid lightgrey; height:25px; vertical-align:middle; display:none" placeholder="Notes To Whatsapp"></textarea>
 
 
 <button style="border-radius:10px; height:25px; width:10%" id="sendWhatsappBtn"> WA</button>
+
+<script>
+function sendWhatsapp() {
+  const number = document.getElementById("customerWhatsapp").value.trim().replace(/\D/g,'');
+  const name = document.getElementById("customerName").value.trim();
+  const notes = document.getElementById("notes").value.trim();
+
+  if(!number) return;
+
+  const msg = `Greetings ${name} from Kiara Optometry! ${notes}`;
+  window.open(`https://wa.me/${number}?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+document.getElementById("sendWhatsappBtn").addEventListener("click", sendWhatsapp);
+</script>
 
 </td>
 
@@ -5891,20 +5907,7 @@ document.querySelectorAll(".toggleMask4").forEach(btn => {
 
 
 
-<script>
-function sendWhatsapp() {
-  const number = document.getElementById("customerWhatsapp").value.trim().replace(/\D/g,'');
-  const name = document.getElementById("customerName").value.trim();
-  const notes = document.getElementById("notes").value.trim();
 
-  if(!number) return;
-
-  const msg = `Greetings ${name} from Kiara Optometry! ${notes}`;
-  window.open(`https://wa.me/${number}?text=${encodeURIComponent(msg)}`, "_blank");
-}
-
-document.getElementById("sendWhatsappBtn").addEventListener("click", sendWhatsapp);
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
