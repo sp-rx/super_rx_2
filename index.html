@@ -239,7 +239,11 @@ border: 1px dotted;
 .vbtn {
 padding:2px 12px;
 }
-
+.graph_button{
+width:90%;
+border:1px grey dotted;
+border-radius:20px;
+}
 
 body, table, th, td, input, button {
   font-size: 11px;
@@ -708,6 +712,40 @@ function setFitAndCalculate(btn, value) {
   <!-- WORKING DISTANCE GRAPH -->
 </td></tr>
 
+<tr class="">
+<td colspan="1">Comments:</td>
+<td colspan="3">
+
+
+<input type="text" class="current_comments1"
+  style="text-align:left; width:95%; height:20px"
+  placeholder="Purpose of prescription; Far? Near? Contact lens? etc">
+
+<div style="height:5px"></div>
+
+<input type="text" class="current_comments2"
+  style="text-align:left; width:95%; height:20px"
+  placeholder="Any special plan for this prescription?">
+
+<div style="height:5px"></div>
+
+<input type="text" class="current_comments3"
+  style="text-align:left; width:95%; height:20px"
+  placeholder="Leave empty if not used">
+
+<div style="height:5px"></div>
+
+<input type="text" class="current_comments4"
+  style="text-align:left; width:95%; height:20px"
+  placeholder="Leave empty if not used">
+
+<div style="height:5px"></div>
+
+</td>
+</tr>
+
+
+
 <tr><td style="border-bottom:none" colspan="4">
       <button class="normal-btn" onclick="toggle('graph-body')">Near Vision Graph Show / Hide</button>
     </div>
@@ -1028,35 +1066,35 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
 </tr>
 
 
-<tr><th class="red" colspan="4">Please Press Update All! 
-<button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
+<tr><th class="red" colspan="4"><button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
 </th></tr>
 
 <tr>
 <td colspan="1">Comments:</td>
 <td colspan="3">
-<input type="text" id="current_comments1"
+
+<input type="text" class="current_comments1"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Purpose of prescription; Far? Near? Contact lens? etc"
-  oninput="updateCurrentSummary()">
+  placeholder="Purpose of prescription; Far? Near? Contact lens? etc">
+
 <div style="height:5px"></div>
 
-<input type="text" id="current_comments2"
+<input type="text" class="current_comments2"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Any special plan for this prescription?"
-  oninput="updateCurrentSummary()">
+  placeholder="Any special plan for this prescription?">
+
 <div style="height:5px"></div>
 
-<input type="text" id="current_comments3"
+<input type="text" class="current_comments3"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Leave empty if not used"
-  oninput="updateCurrentSummary()">
+  placeholder="Leave empty if not used">
+
 <div style="height:5px"></div>
 
-<input type="text" id="current_comments4"
+<input type="text" class="current_comments4"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Leave empty if not used"
-  oninput="updateCurrentSummary()">
+  placeholder="Leave empty if not used">
+
 <div style="height:5px"></div>
 
 
@@ -1212,7 +1250,7 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
       </div>
     </td>
   </tr>
-<tr><th class="red" colspan="4">Please Press Update All! 
+<tr><th class="red" colspan="4">
 <button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
 </th></tr>
 
@@ -1254,8 +1292,8 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 </th></tr>
 
 
-<tr class="yellow be-row" data-eye="both" style="display:none; border-bottom:none">
-<td style="border-bottom:none" colspan="4">
+<tr class="yellow be-row" data-eye="both" style="display:none; border:none">
+<td style="border:none" colspan="4">
 
 <div class="SPhelper-row" style="display:grid;grid-template-columns:repeat(9,1fr);gap:5px;max-width:100%;">
 
@@ -1359,7 +1397,7 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 
 
 <tr class="yellow be-row" style="display:none; border-top:1px dotted lightgrey">
-<td style="border-top:none"colspan="4">
+<td style="border:none"colspan="4">
 <span id="foggingBoth"></span><span id="perpendicular-axis-ou"></span><br><br>
 
 <div class="fc-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:5%;width:100%;">
@@ -1472,28 +1510,53 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 
 </div>
 <br>
-<button style="margin:5px 0; border-radius:10px; width:50%; height:25px" id="fillBalance">Calculate into Delta BE</button>
-<br><br>
-DC SPH: <span style="margin-right:30px" id="balanceBoth"></span>FC CYL: <span id="balance-ou"></span>
+
+<button style="margin:5px 0; border-radius:10px; width:50%; height:50px" id="fillBalance">
+  DC SPH: <span style="margin-right:30px" id="balanceBoth"></span>
+  FC CYL: <span id="balance-ou"></span>
+  <br><br>
+  Calculate into Delta BE
+</button>
+
 </td></tr>
 
 
 <tr class="befinal-row yellow" style="border-top:none; border-bottom:none; padding:10px 0 0 0">
 <td style="border-top:none; border-bottom:none" colspan="4">
-Delta BE <button style="margin-right:4%;"class="vtbn" onclick="toggleBE()"> + </button>
+<button class="graph_button" onclick="toggleBE()"> Graph </button><br><br>
+<span style="margin-right:4%;">Full Delta BE </span>
 
-     DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouS">
+     DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_ouS">
  
-    CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_ouC">
+    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_ouC">
 
-    Darker Axis : <input style="width:60px" type="number" step="15" min="0" max="180" id="vd_ouA">
+    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_ouA">
+
+<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="copyFullToAdjusted('ou')">C</button>
+
+<br><br>
+
+<span style="margin-right:4%;"> Adjusted BE </span> 
+
+     DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_ouS">
+ 
+    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_ouC">
+
+    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_ouA">
+
+<button style="border-radius:20px; border:1px dotted grey; width:5%; margin-left:2%" class="vtbn" onclick="dashOU()">-</button>
+
   </td>
 </tr>
 <tr><td style="font-weight:600; border-top:none; padding:0 0 10px 0" class="yellow" colspan="4">
- Finalized Delta RX over Both Eyes  
+ 
+
+Finalized Delta RX over Both Eyes  
     <span style="margin:0 15px" id="vd_out_ouS">-</span> / 
     <span style="margin:0 15px" id="vd_out_ouC">-</span> x 
     <span style="margin:0 15px" id="vd_out_ouA">-</span>
+
+
 
 </td>
 </tr>
@@ -1507,27 +1570,40 @@ Delta BE <button style="margin-right:4%;"class="vtbn" onclick="toggleBE()"> + </
 
 <script>
 document.getElementById("fillBalance").addEventListener("click", () => {
-    // Get raw text
+
     const sphText = document.getElementById("balanceBoth").innerText;
     const cylText = document.getElementById("balance-ou").innerText;
 
-    // Extract numbers
     const sphMatch = sphText.match(/[-+]?\d+(\.\d+)?/);
     const cylMatch = cylText.match(/[-+]?\d+(\.\d+)?/);
     const axisMatch = cylText.match(/AXIS:\s*(\d+)/);
 
-    // Helper to set value AND trigger input event
     function setAndTrigger(id, value) {
         const input = document.getElementById(id);
         if (!input) return;
         input.value = value;
-        input.dispatchEvent(new Event('input', { bubbles: true })); // triggers listeners
-        input.dispatchEvent(new Event('change', { bubbles: true })); // sometimes needed
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
-    if (sphMatch) setAndTrigger("vd_ouS", parseFloat(sphMatch[0]));
-    if (cylMatch) setAndTrigger("vd_ouC", parseFloat(cylMatch[0]));
-    if (axisMatch) setAndTrigger("vd_ouA", parseInt(axisMatch[1]));
+    if (sphMatch) {
+        const sph = parseFloat(sphMatch[0]);
+        setAndTrigger("vd_ouS", sph);
+        setAndTrigger("full_vd_ouS", sph);
+    }
+
+    if (cylMatch) {
+        const cyl = parseFloat(cylMatch[0]);
+        setAndTrigger("vd_ouC", cyl);
+        setAndTrigger("full_vd_ouC", cyl);
+    }
+
+    if (axisMatch) {
+        const axis = parseInt(axisMatch[1]);
+        setAndTrigger("vd_ouA", axis);
+        setAndTrigger("full_vd_ouA", axis);
+    }
+
 });
 </script>
 
@@ -1643,8 +1719,8 @@ document.getElementById("fillBalance").addEventListener("click", () => {
 
 
 
-<tr class="re-row purp" style="display:none; border-top:1px dotted lightgrey">
-<td style="border-top:none" colspan="4">
+<tr class="re-row purp" style="display:none; border:none">
+<td style="border:none" colspan="4">
 <span id="foggingRight"></span><span id="perpendicular-axis-re"></span><br><br>
 
 <div class="fc-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:5%;width:100%;">
@@ -1759,28 +1835,46 @@ document.getElementById("fillBalance").addEventListener("click", () => {
 </div>
 
 <br>
-<button style="margin:5px 0; border-radius:10px; width:50%; height:25px" id="fillBalanceRE">Calculate into Delta R</button>
 
+
+<button style="margin:5px 0; border-radius:10px; width:50%; height:50px" id="fillBalanceRE">
+  DC SPH: <span style="margin-right:30px" id="balanceRight"></span>
+  FC CYL: <span id="balance-re"></span>
+  <br><br>
+  Calculate into Delta RE
+</button>
 
 </td></tr>
-<tr class="re-row purp" style="display:none">
-<td style="border-top:none; border-bottom:none" colspan="4">
-DC SPH: <span style="margin-right:30px" id="balanceRight"></span>FC CYL: <span id="balance-re"></span>
-
-</td>
-</tr>
-
 
 
 <tr class="refinal-row purp" style="border-top:none; border-bottom:none; padding: 10px 0 0 0">
 <td style="border-top:none; border-bottom:none;" colspan="4">
-Delta R <button style="margin-right:4%" class="vtbn" onclick="toggleRE()"> + </button>
 
-     DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_odS">
+
+<button class="graph_button" onclick="toggleRE()"> Graph </button><br><br>
+
+<span style="margin-right:4%;">Full Delta RE </span>
+
+     DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_odS">
  
-    CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_odC">
+    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_odC">
 
-    Darker Axis : <input style="width:60px" type="number" step="15" min="0" max="180" id="vd_odA">
+    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_odA">
+
+<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn"  onclick="copyFullToAdjusted('od')">
+C
+</button>
+
+<br><br>
+<span style="margin-right:5%;"> Adjusted RE </span> 
+
+     DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_odS">
+ 
+    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_odC">
+
+    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_odA">
+
+<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOD()">-</button>
 
   </td>
 </tr>
@@ -1816,15 +1910,30 @@ document.getElementById("fillBalanceRE").addEventListener("click", () => {
         input.dispatchEvent(new Event('change', { bubbles: true })); // sometimes needed
     }
 
-    if (sphMatch) setAndTrigger("vd_odS", parseFloat(sphMatch[0]));
-    if (cylMatch) setAndTrigger("vd_odC", parseFloat(cylMatch[0]));
-    if (axisMatch) setAndTrigger("vd_odA", parseInt(axisMatch[1]));
+    if (sphMatch) {
+        const sph = parseFloat(sphMatch[0]);
+        setAndTrigger("vd_odS", sph);
+        setAndTrigger("full_vd_odS", sph);
+    }
+
+    if (cylMatch) {
+        const cyl = parseFloat(cylMatch[0]);
+        setAndTrigger("vd_odC", cyl);
+        setAndTrigger("full_vd_odC", cyl);
+    }
+
+    if (axisMatch) {
+        const axis = parseInt(axisMatch[1]);
+        setAndTrigger("vd_odA", axis);
+        setAndTrigger("full_vd_odA", axis);
+    }
+
 });
 </script>
 
 
 
-<tr class="le-row turq" data-eye="left" style="display:none; border-bottom:none">
+<tr class="le-row turq" data-eye="left" style="display:none; border-bottom:none; background:#D8C5E6;">
 <td style="border-bottom:none"colspan="4">
 <div class="SPhelper-row" style="display:grid;grid-template-columns:repeat(9,1fr);gap:5px;width:100%;">
 
@@ -1927,7 +2036,7 @@ document.getElementById("fillBalanceRE").addEventListener("click", () => {
 </div>
 </td></tr>
 
-<tr class="le-row turq" style="display:none;" >
+<tr class="le-row turq" style="display:none; background:#D8C5E6;" >
 <td style="border-top:none;" colspan="4">
 <span id="foggingLeft"></span><span id="perpendicular-axis-le"></span><br><br>
 
@@ -2041,34 +2150,48 @@ document.getElementById("fillBalanceRE").addEventListener("click", () => {
 
 </div>
 <br>
-<button style="margin:5px 0; border-radius:10px; width:50%; height:25px" id="fillBalanceLE">Calculate into Delta L</button>
-
+<button style="margin:5px 0; border-radius:10px; width:50%; height:50px" id="fillBalanceLE">
+DC SPH: <span style="margin-right:30px" id="balanceLeft"></span>
+FC CYL: <span id="balance-le"></span>
+<br><br>
+Calculate into Delta LE 
+</button>
 
 </td></tr>
 
-<tr class="le-row turq" style="display:none">
-<td style="border-top:none; border-bottom:none" colspan="4">
-DC SPH: <span style="margin-right:30px" id="balanceLeft"></span>FC CYL: <span id="balance-le"></span>
-
-</td>
-</tr>
 
 
-<tr class="lefinal-row turq" style="border-top:none; border-bottom:none; padding:10px 0 0 0"><td style="border-top:none; border-bottom:none" colspan="4">
+<tr class="lefinal-row turq" style="background:#D8C5E6; border-top:none; border-bottom:none; padding:10px 0 0 0"><td style="border-top:none; border-bottom:none" colspan="4">
 
-Delta L <button style="margin-right:4%" class="vtbn" onclick="toggleLE()"> + </button>
+<button class="graph_button" onclick="toggleLE()"> Graph </button><br><br>
+<span style="margin-right:4%;">Full Delta LE </span>
 
-     DC Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_osS">
+ DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_osS">
  
-    CYL Bal : <input style="width:60px; margin-right:4%" type="number" step="0.25" id="vd_osC">
+    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_osC">
 
-    Darker Axis : <input style="width:60px" type="number" step="15" min="0" max="180" id="vd_osA">
+    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_osA">
+
+<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn"  onclick="copyFullToAdjusted('os')">
+C
+</button>
+
+<br><br>
+<span style="margin-right:5%;"> Adjusted LE </span> 
+
+     DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_osS">
+ 
+    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_osC">
+
+    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_osA">
+
+<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOS()">-</button>
 
   </td>
 </tr>
 
 <tr>
-<td style="font-weight:600; border-top:none; padding:0 0 10px 0" class="turq" colspan="4">Finalized Delta RX over Left Eye Only
+<td style="background:#D8C5E6; font-weight:600; border-top:none; padding:0 0 10px 0" class="turq" colspan="4">Finalized Delta RX over Left Eye Only
     <span style="margin:0 15px" id="vd_out_osS">-</span> / 
     <span style="margin:0 15px" id="vd_out_osC">-</span> x 
     <span style="margin:0 15px" id="vd_out_osA">-</span>
@@ -2097,9 +2220,23 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
         input.dispatchEvent(new Event('change', { bubbles: true })); // sometimes needed
     }
 
-    if (sphMatch) setAndTrigger("vd_osS", parseFloat(sphMatch[0]));
-    if (cylMatch) setAndTrigger("vd_osC", parseFloat(cylMatch[0]));
-    if (axisMatch) setAndTrigger("vd_osA", parseInt(axisMatch[1]));
+    if (sphMatch) {
+        const sph = parseFloat(sphMatch[0]);
+        setAndTrigger("vd_osS", sph);
+        setAndTrigger("full_vd_osS", sph);
+    }
+
+    if (cylMatch) {
+        const cyl = parseFloat(cylMatch[0]);
+        setAndTrigger("vd_osC", cyl);
+        setAndTrigger("full_vd_osC", cyl);
+    }
+
+    if (axisMatch) {
+        const axis = parseInt(axisMatch[1]);
+        setAndTrigger("vd_osA", axis);
+        setAndTrigger("full_vd_osA", axis);
+    }
 });
 </script>
 
@@ -2107,7 +2244,7 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 
 <tr class="red"><td colspan="4">
 
-<button class="yellow" onclick="runBE()" style="margin-left:30px; border-radius:10px; width:150px; height:25px">Calculate Delta BE</button>
+<button class="yellow" onclick="runBE()" style="margin-left:30px; border-radius:10px; width:120px; height:25px">Calculate BE</button>
 
 
 <button class="yellow" style="border-radius:10px; margin-right:20px" onclick="resetLogBE()">X</button>
@@ -2129,8 +2266,8 @@ function resetLogBE() {
 
 
 <button class="purp" onclick="runRELE()" 
-style="border-radius:10px; width:150px; height:25px">
-  Calculate Delta RE + LE
+style="border-radius:10px; width:120px; height:25px">
+  Calculate RE LE
 </button>
 
 
@@ -2219,7 +2356,7 @@ function runBE() {
   <td id="vc_crossA">-</td>
 </tr>
 
-<tr style="display:none" ><th class="red" colspan="4">Please Press Update All! 
+<tr style="display:none" ><th class="red" colspan="4">
 <button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
 </th></tr>
 </table>
@@ -2966,28 +3103,40 @@ function captureRELE_CL() {
 </tr>
 
 <tr class="red"><td colspan="4">
-<button style="height:25px; width:85px" class="exportBtn">
+
+<button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
+
+<button style="border-radius:10px; height:25px; width:85px" class="exportBtn">
     Save Data </button>
 
 
 
 </td></tr>
 
-<tr class="red">
+<tr class="">
 <td colspan="1">Comments:</td>
 <td colspan="3">
-<input type="text" id="SP_comments1"
+<input type="text" class="current_comments1"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Purpose of prescription; Far? Near? Contact lens? etc"
-  oninput="updateSPSummary()">
+  placeholder="Purpose of prescription; Far? Near? Contact lens? etc">
+
 <div style="height:5px"></div>
 
-<input type="text" id="SP_comments2"
+<input type="text" class="current_comments2"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Any special plan for this prescription?"
-  oninput="updateSPSummary()">
+  placeholder="Any special plan for this prescription?">
+
 <div style="height:5px"></div>
 
+<input type="text" class="current_comments3"
+  style="text-align:left; width:95%; height:20px"
+  placeholder="Leave empty if not used">
+
+<div style="height:5px"></div>
+
+<input type="text" class="current_comments4"
+  style="text-align:left; width:95%; height:20px"
+  placeholder="Leave empty if not used">
 
 <div style="height:5px"></div>
 
@@ -3192,8 +3341,8 @@ Status : <button id="statusSP"
 
 
 
-<button style="margin-left:10px; border-radius:10px; height:25px; width:65px" class="exportBtn">
-    Save
+<button style="border-radius:10px; height:25px; width:85px" class="exportBtn">
+    Save Data
   </button>
 </th></tr>
 
@@ -3388,9 +3537,8 @@ Add : <input style="width:60px" type="number" step="0.25" min="0" max="5" id="ne
 </td>
 
 </tr>
-<tr><th class="blue" colspan="4">Please Press Update All! 
-<button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
-<br><br>
+<tr><th class="blue" colspan="4">
+<button style="margin-right:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
 Status : <button id="statusManual"
         data-value="Not Done - Invalid"
         style="font-size:11px; border-radius:10px; height:25px; margin-left:2px; width:120px"
@@ -3398,8 +3546,8 @@ Status : <button id="statusManual"
   Not Done - Invalid
 </button>
 
-<button style="margin-left:10px; border-radius:10px; height:25px; width:65px" class="exportBtn">
-    Save
+<button style="border-radius:10px; height:25px; width:85px" class="exportBtn">
+    Save Data
   </button>
 
 </th>
@@ -3409,28 +3557,30 @@ Status : <button id="statusManual"
 <tr class="">
 <td colspan="1">Comments:</td>
 <td colspan="3">
-<input type="text" id="manual_comments1"
+
+
+<input type="text" class="current_comments1"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Purpose of prescription; Far? Near? Contact lens? etc"
-  oninput="updateManualSummary()">
+  placeholder="Purpose of prescription; Far? Near? Contact lens? etc">
+
 <div style="height:5px"></div>
 
-<input type="text" id="manual_comments2"
+<input type="text" class="current_comments2"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Any special plan for this prescription"
-  oninput="updateManualSummary()">
+  placeholder="Any special plan for this prescription?">
+
 <div style="height:5px"></div>
 
-<input type="text" id="manual_comments3"
+<input type="text" class="current_comments3"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Leave empty if not used"
-  oninput="updateManualSummary()">
+  placeholder="Leave empty if not used">
+
 <div style="height:5px"></div>
 
-<input type="text" id="manual_comments4"
+<input type="text" class="current_comments4"
   style="text-align:left; width:95%; height:20px"
-  placeholder="Leave empty if not used"
-  oninput="updateManualSummary()">
+  placeholder="Leave empty if not used">
+
 <div style="height:5px"></div>
 
 </td>
@@ -5358,8 +5508,14 @@ window.addEventListener("DOMContentLoaded", ()=>{
   'od_origS', 'od_origC', 'os_origS', 'os_origC',
   'od_finalS', 'od_finalC', 'os_finalS', 'os_finalC',
   'vc_odS', 'vc_odC', 'vc_osS', 'vc_osC', 'vc_ouS', 'vc_ouC',
-  'vd_odS', 'vd_odC', 'vd_osS', 'vd_osC', 'vd_ouS', 'vd_ouC',
+'vd_odS', 'full_vd_odS',
+'vd_odC', 'full_vd_odC',
+'vd_osS', 'full_vd_osS',
+'vd_osC', 'full_vd_osC',
+'vd_ouS', 'full_vd_ouS',
+'vd_ouC', 'full_vd_ouC',
   'vd_out_odS', 'vd_out_odC', 'vd_out_osS', 'vd_out_osC', 'vd_out_ouS', 'vd_out_ouC',
+
   // new Problem inputs
   'od_rectS', 'od_rectC',  
   'os_rectS', 'os_rectC',
@@ -9244,8 +9400,83 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
+<script>
+function syncCommentGroup(className){
+  document.querySelectorAll("." + className).forEach(input => {
+    input.addEventListener("input", function(){
+      document.querySelectorAll("." + className).forEach(other => {
+        if(other !== this){
+          other.value = this.value;
+        }
+      });
+
+      if(typeof updateCurrentSummary === "function"){
+        updateCurrentSummary();
+      }
+    });
+  });
+}
+
+syncCommentGroup("current_comments1");
+syncCommentGroup("current_comments2");
+syncCommentGroup("current_comments3");
+syncCommentGroup("current_comments4");
+</script>
 
 
+
+
+<script>
+function dashEye(prefix) {
+  const inputs = [`vd_${prefix}S`, `vd_${prefix}C`, `vd_${prefix}A`];
+  const outputs = [`vd_out_${prefix}S`, `vd_out_${prefix}C`, `vd_out_${prefix}A`];
+
+  inputs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "-";
+  });
+
+  outputs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = "-";
+  });
+}
+
+function dashOU() {
+  dashEye("ou");
+}
+
+function dashOD() {
+  dashEye("od");
+}
+
+function dashOS() {
+  dashEye("os");
+}
+</script>
+
+
+<script>
+function copyFullToAdjusted(prefix) {
+  const map = [
+    [`full_vd_${prefix}S`, `vd_${prefix}S`],
+    [`full_vd_${prefix}C`, `vd_${prefix}C`],
+    [`full_vd_${prefix}A`, `vd_${prefix}A`]
+  ];
+
+  map.forEach(([from, to]) => {
+    const src = document.getElementById(from);
+    const dest = document.getElementById(to);
+
+    if (!src || !dest) return;
+
+    dest.value = src.value;
+
+    dest.dispatchEvent(new Event("input", { bubbles: true }));
+    dest.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+}
+</script>
 
 
 
