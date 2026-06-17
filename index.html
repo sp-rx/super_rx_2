@@ -3463,19 +3463,33 @@ Use this to know what RX to fit next based on patient's response.
   <td>Cyl : <input type="number" step="0.25" id="os_finalC"></td>
   <td>Axis : <input type="number" step="5" min="0" max="180" id="os_finalA"></td>
 </tr>
-<tr class="">
+<tr class="" style="display:none">
   <td>Right FC DC</td>
   <td id="od_roundS"></td>
   <td id="od_roundC"></td>
   <td id="od_roundA"></td>
 </tr>
+<tr>
+  <td>Right FC DC</td>
+  <td id="od_minusS"></td>
+  <td id="od_minusC"></td>
+  <td id="od_minusA"></td>
+</tr>
 
-<tr class="">
+
+<tr class="" style="display:none">
   <td>Left FC DC</td>
   <td id="os_roundS"></td>
   <td id="os_roundC"></td>
   <td id="os_roundA"></td>
 </tr>
+<tr>
+  <td>Left FC DC</td>
+  <td id="os_minusS"></td>
+  <td id="os_minusC"></td>
+  <td id="os_minusA"></td>
+</tr>
+
 <tr class="">
   <td>Bino Imbalance</td>
   <td id="diffCrossS"></td>
@@ -4566,6 +4580,8 @@ function combinePair(leftIds,rightIds){
     new MutationObserver(crossPrescriptions2).observe(el,{childList:true,characterData:true,subtree:true});
   });
 
+
+
   let fallbackCount1=0;
   const fallbackInterval1=setInterval(()=>{
     crossPrescriptionsToOScrossedSpan();
@@ -4584,6 +4600,8 @@ function combinePair(leftIds,rightIds){
   window.crossPrescriptionsToOScrossedSpan=crossPrescriptionsToOScrossedSpan;
   window.crossPrescriptions2=crossPrescriptions2;
 })();
+
+
 </script>
 
 
@@ -5883,6 +5901,8 @@ function updateCombinedRound(){
   if(!el) return;
   new MutationObserver(updateCombinedRound).observe(el, { childList:true, characterData:true, subtree:true });
 });
+
+
 
 // Initial update
 updateCombinedRound();
@@ -9477,6 +9497,53 @@ function copyFullToAdjusted(prefix) {
   });
 }
 </script>
+
+<script>
+function fmtPower(n){
+  return (n >= 0 ? "+" : "") + n.toFixed(2);
+}
+
+function updateMinusCyl() {
+
+  function convert(sId, cId, aId, outS, outC, outA) {
+
+    let sph  = parseFloat(document.getElementById(sId).textContent) || 0;
+    let cyl  = parseFloat(document.getElementById(cId).textContent) || 0;
+    let axis = parseInt(document.getElementById(aId).textContent) || 0;
+
+    let newS = sph + cyl;
+    let newC = -cyl;
+    let newA = axis + 90;
+
+    if (newA > 180) newA -= 180;
+
+document.getElementById(outS).textContent = fmtPower(newS);
+document.getElementById(outC).textContent = fmtPower(newC);
+    document.getElementById(outA).textContent = newA;
+  }
+
+  convert(
+    "od_roundS","od_roundC","od_roundA",
+    "od_minusS","od_minusC","od_minusA"
+  );
+
+  convert(
+    "os_roundS","os_roundC","os_roundA",
+    "os_minusS","os_minusC","os_minusA"
+  );
+}
+["od_roundS","od_roundC","od_roundA",
+ "os_roundS","os_roundC","os_roundA"]
+.forEach(id => {
+  new MutationObserver(updateMinusCyl)
+    .observe(document.getElementById(id), {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+});
+</script>
+
 
 
 
