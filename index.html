@@ -239,8 +239,9 @@ border: 1px dotted;
 .vbtn {
 padding:2px 12px;
 }
+
 .graph_button{
-width:90%;
+width:20px;
 border:1px grey dotted;
 border-radius:20px;
 }
@@ -416,13 +417,9 @@ body, table, th, td, input, button {
 
 /* General dropdown styling */
 select {
-  padding: 5px 10px;
-  font-size: 12px;
-  border: 1px dotted black;
-  border-radius: 6px;
-  background-color: #fff;
-  color: black;
-  transition: 0.1s;
+  border-radius: 8px;
+font-size:11px;
+text-align:center;
 }
 
 /* Hover effect */
@@ -1026,23 +1023,8 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
     &nbsp;&nbsp;&nbsp;&nbsp;
     Cyl : <input type="number" step="0.25" id="od_origC">
     &nbsp;&nbsp;&nbsp;&nbsp;
-    Axis : <input type="number" step="5" min="0" max="180" id="od_origA"><br><br>
+    Axis : <input type="number" step="5" min="0" max="180" id="od_origA">
 
-Visual Acuity :
-<select id="od_va" style="height:30px; padding:1px 6px; width:20%; font-size:11px; line-height:1; box-sizing:border-box;">
-  <option value="6/6">6/6</option>
-  <option value="6/9">6/9</option>
-  <option value="6/12">6/12</option>
-  <option value="6/18">6/18</option>
-  <option value="6/24">6/24</option>
-  <option value="6/36">6/36</option>
-  <option value="6/48">6/48</option>
-</select>
-
-<select id="od_va_type" style="height:30px; padding:1px 6px; width:20%; font-size:11px; line-height:1; box-sizing:border-box;">
-  <option value="full">Full</option>
-  <option value="partial">Partial</option>
-</select>
 
   </td>
 </tr>
@@ -1054,23 +1036,7 @@ Visual Acuity :
     &nbsp;&nbsp;&nbsp;&nbsp;
     Cyl : <input type="number" step="0.25" id="os_origC">
     &nbsp;&nbsp;&nbsp;&nbsp;
-    Axis : <input type="number" step="5" min="0" max="180" id="os_origA"><br><br>
-
-Visual Acuity :
-<select id="os_va" style="height:25px; padding:1px 6px; width:20%; font-size:11px; line-height:1; box-sizing:border-box;">
-  <option value="6/6">6/6</option>
-  <option value="6/9">6/9</option>
-  <option value="6/12">6/12</option>
-  <option value="6/18">6/18</option>
-  <option value="6/24">6/24</option>
-  <option value="6/36">6/36</option>
-  <option value="6/48">6/48</option>
-</select>
-
-<select id="os_va_type" style="height:25px; padding:1px 6px; width:20%; font-size:11px; line-height:1; box-sizing:border-box;">
-  <option value="full">Full</option>
-  <option value="partial">Partial</option>
-</select>
+    Axis : <input type="number" step="5" min="0" max="180" id="os_origA">
 
   </td>
 </tr>
@@ -1335,7 +1301,6 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 
 </th></tr>
 
-
 <tr class="yellow be-row" data-eye="both" style="display:none; border:none">
 <td style="border:none" colspan="4">
 
@@ -1567,40 +1532,65 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 
 <tr class="befinal-row yellow" style="border-top:none; border-bottom:none; padding:10px 0 0 0">
 <td style="border-top:none; border-bottom:none" colspan="4">
-<button class="graph_button" onclick="toggleBE()"> Graph </button><br><br>
-<span style="margin-right:4%;">Full Delta BE </span>
+
+<div id="toggleDivou">
+<span> Delta Both Eye &nbsp;- - - - - - - - - - - - - - - - - &nbsp;</span>
+
+Current RX Visual Acuity :
+<select id="ou_va" style="height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
+  <option value="6/6">6/6</option>
+  <option value="6/9">6/9</option>
+  <option value="6/12">6/12</option>
+  <option value="6/18">6/18</option>
+  <option value="6/24">6/24</option>
+  <option value="6/36">6/36</option>
+  <option value="6/48">6/48</option>
+</select>
+
+<select id="ou_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+  <option value="full">Full</option>
+  <option value="partial">Partial</option>
+</select>
+<span> &nbsp;&nbsp;&nbsp;- - - &nbsp;&nbsp;&nbsp;</span>
+<div style="height:15px"></div>
+
+
+<button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleBE()"> G </button>
+<span style="margin-right:4%;">Full </span> 
+
 
      DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_ouS">
  
-    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_ouC">
+    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_ouC">
 
-    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_ouA">
+    <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_ouA">
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="copyFullToAdjusted('ou')">C</button>
 
 <div style="height:5px"></div>
 
-<span style="margin-right:4%;"> Adjusted BE </span> 
+<span style="margin-right:5%;"> Prescribed </span> 
 
      DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_ouS">
  
-    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_ouC">
+    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="vd_ouC">
 
-    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_ouA">
+    <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_ouA">
 
-<button style="border-radius:20px; border:1px dotted grey; width:5%; margin-left:2%" class="vtbn" onclick="dashOU()">-</button>
+<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn onclick="dashOU()">-</button>
 
-  </td>
-</tr>
-<tr><td style="font-weight:600; border-top:none; padding:0 0 10px 0" class="yellow" colspan="4">
+<div style="height:10px"></div>
+
  
-
+<b>
 Finalized Delta RX over Both Eyes  
     <span style="margin:0 15px" id="vd_out_ouS">-</span> / 
     <span style="margin:0 15px" id="vd_out_ouC">-</span> x 
     <span style="margin:0 15px" id="vd_out_ouA">-</span>
+</b>
 
 
+</div>
 
 </td>
 </tr>
@@ -1894,41 +1884,64 @@ document.getElementById("fillBalance").addEventListener("click", () => {
 <tr class="refinal-row purp" style="border-top:none; border-bottom:none; padding: 10px 0 0 0">
 <td style="border-top:none; border-bottom:none;" colspan="4">
 
+<div class="toggleDivodos" style="display:none">
+<span> Delta Right Eye &nbsp;- - - - - - - - - - - - - - - - - &nbsp;</span>
 
-<button class="graph_button" onclick="toggleRE()"> Graph </button><br><br>
+Current RX Visual Acuity :
+<select id="od_va" style="height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
+  <option value="6/6">6/6</option>
+  <option value="6/9">6/9</option>
+  <option value="6/12">6/12</option>
+  <option value="6/18">6/18</option>
+  <option value="6/24">6/24</option>
+  <option value="6/36">6/36</option>
+  <option value="6/48">6/48</option>
+</select>
 
-<span style="margin-right:4%;">Full Delta RE </span>
+<select id="od_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+  <option value="full">Full</option>
+  <option value="partial">Partial</option>
+</select>
+<span> &nbsp;&nbsp;&nbsp;- - - &nbsp;&nbsp;&nbsp;</span>
+<div style="height:15px"></div>
+
+<button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleRE()"> G </button>
+
+<span style="margin-right:4%;">Full </span>
 
      DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_odS">
  
-    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_odC">
+    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_odC">
 
-    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_odA">
+    <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_odA">
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn"  onclick="copyFullToAdjusted('od')">
 C
 </button>
 
 <div style="height:5px"></div>
-<span style="margin-right:5%;"> Adjusted RE </span> 
+<span style="margin-right:5%;"> Prescribed </span> 
 
      DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_odS">
  
-    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_odC">
+    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="vd_odC">
 
-    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_odA">
+     <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_odA">
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOD()">-</button>
 
-  </td>
-</tr>
 
+<div style="height:10px"></div>
 
-<tr>
-<td style="font-weight:600; border-top:none; padding:0 0 10px 0 "class="purp" colspan="4">Finalized Delta RX over Right Eye Only 
+  <b>
+
+Finalized Delta RX over Right Eye Only 
     <span style="margin:0 15px" id="vd_out_odS">-</span> / 
     <span style="margin:0 15px" id="vd_out_odC">-</span> x 
     <span style="margin:0 15px" id="vd_out_odA">-</span>
+</b>
+</div>
+
 </td>
 </tr>
 
@@ -2207,38 +2220,62 @@ Calculate into Delta LE
 
 <tr class="lefinal-row turq" style="background:#D8C5E6; border-top:none; border-bottom:none; padding:10px 0 0 0"><td style="border-top:none; border-bottom:none" colspan="4">
 
-<button class="graph_button" onclick="toggleLE()"> Graph </button><br><br>
-<span style="margin-right:4%;">Full Delta LE </span>
+
+<div class="toggleDivodos" style="display:none">
+<span> Delta Left Eye &nbsp;- - - - - - - - - - - - - - - - - &nbsp;</span>
+
+Current RX Visual Acuity :
+<select id="os_va" style="height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
+  <option value="6/6">6/6</option>
+  <option value="6/9">6/9</option>
+  <option value="6/12">6/12</option>
+  <option value="6/18">6/18</option>
+  <option value="6/24">6/24</option>
+  <option value="6/36">6/36</option>
+  <option value="6/48">6/48</option>
+</select>
+
+<select id="os_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+  <option value="full">Full</option>
+  <option value="partial">Partial</option>
+</select>
+<span> &nbsp;&nbsp;&nbsp;- - - &nbsp;&nbsp;&nbsp;</span>
+<div style="height:15px"></div>
+
+<button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleLE()"> G </button>
+<span style="margin-right:4%;">Full </span>
 
  DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_osS">
  
-    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_osC">
+    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_osC">
 
-    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_osA">
+    <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_osA">
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn"  onclick="copyFullToAdjusted('os')">
 C
 </button>
 
 <div style="height:5px"></div>
-<span style="margin-right:5%;"> Adjusted LE </span> 
+<span style="margin-right:5%;">Prescribed </span> 
 
      DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_osS">
  
-    CYL Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="vd_osC">
+    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="vd_osC">
 
-    Darker Axis : <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_osA">
+    <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_osA">
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOS()">-</button>
 
-  </td>
-</tr>
+<div style="height:10px"></div>
 
-<tr>
-<td style="background:#D8C5E6; font-weight:600; border-top:none; padding:0 0 10px 0" class="turq" colspan="4">Finalized Delta RX over Left Eye Only
+<b>
+Finalized Delta RX over Left Eye Only
     <span style="margin:0 15px" id="vd_out_osS">-</span> / 
     <span style="margin:0 15px" id="vd_out_osC">-</span> x 
     <span style="margin:0 15px" id="vd_out_osA">-</span>
+</b>
+</div>
+
 </td>
 </tr>
 
@@ -2291,7 +2328,9 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 <button class="yellow" onclick="runBE()" style="margin-left:30px; border-radius:10px; width:120px; height:25px">Calculate BE</button>
 
 
-<button class="yellow" style="border-radius:10px; margin-right:20px" onclick="resetLogBE()">X</button>
+<button class="yellow" style="border-radius:10px;" onclick="resetLogBE()">X</button>
+
+<button class="yellow" style="border-radius:10px; margin-right:20px"onclick="toggleHideShowou()">H</button>
 
 
 <script>
@@ -2318,8 +2357,9 @@ style="border-radius:10px; width:120px; height:25px">
 
 
 
-<button class="purp" style="border-radius:10px; margin-right:20px" onclick="resetLogRELE()">X</button>
+<button class="purp" style="border-radius:10px; " onclick="resetLogRELE()">X</button>
 
+<button class="purp" style="border-radius:10px; margin-right:20px"onclick="toggleHideShowodos()">H</button>
 
 <script>
 function resetLogRELE() {
@@ -2901,7 +2941,7 @@ function toggleHideShow4() {
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
-<tr><td colspan="4">Spectacle Lens Results</td></tr>
+<tr><td colspan="4">Spectacle Lens Results <button class="vbtn" onclick="toggleHideShowCL()">CL</button></td></tr>
 
 <tr>
 <td class="red">Current SL</td>
@@ -2933,15 +2973,23 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 
   <td id="logRELE" colspan="3"><i>Loading....</i></td>
 </tr>
+</table>
+<div style="margin-top:-20px"></div>
 
+<div class="toggleDivCL" style="display:none">
+<table>
 <tr style="border:none; height:10px;">
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
+
 	
-<tr><td style="color: #042747" colspan="4">Contact Lens With Astigmatism Results</td></tr>
+<tr><td style="color: #042747" colspan="4">
+Contact Lens With Astigmatism Results
+
+</td></tr>
 <tr>
   <td style="color: #042747" class="red">Current CLA</td>
   <td style="color: #042747" colspan="3" class="red">
@@ -2989,9 +3037,15 @@ L: <span id="SE_os_origCombined">OS -</span>
   <td style="color: #042747" colspan="1"">Delta R/L CLSE</td>
   <td style="color: #042747" colspan="3" id="logRELE_CL_SE"><i>Loading....</i></td>
 </tr>
-
-
-
+</table>
+</div>
+<table>
+<tr style="border:none; height:10px; display:none">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
 
 
 <tr style="display:none">
@@ -9587,6 +9641,49 @@ document.getElementById(outC).textContent = fmtPower(newC);
     });
 });
 </script>
+
+
+
+
+<script>
+function toggleHideShowou() {
+  const div = document.getElementById("toggleDivou");
+
+  if (div.style.display === "none") {
+    div.style.display = "";
+  } else {
+    div.style.display = "none";
+  }
+}
+function toggleHideShowodos() {
+  document.querySelectorAll(".toggleDivodos").forEach(div => {
+    div.style.display = (div.style.display === "none") ? "" : "none";
+  });
+}
+function toggleHideShowCL() {
+  document.querySelectorAll(".toggleDivCL").forEach(div => {
+    div.style.display = (div.style.display === "none") ? "" : "none";
+  });
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
