@@ -41,7 +41,9 @@ html, body, table, {
 .fc-row{
 max-width:570px;
 }
-
+.SPhelper-row{
+max-width:570px;
+}
     .card {width:100%; }
     .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
 
@@ -1280,14 +1282,14 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
   <th class="yellow" colspan="4">Delta Refraction</th></tr>
 <tr style="border-bottom:none"><td style="border-bottom:none" colspan="4">1. Measure and input the amount of sph needed to shift DC to balance.<br>2. Apply fogging, measure and input the amount of cyl and axis needed to balance FC.<br><br>
 
-<button style="width:80%" id="toggleBtn">Show / Hide Inputs</button>
+<button style="display:none; width:80%" id="toggleBtn">Show / Hide Inputs</button>
 
  </td></tr>
 </table>
 
-<div style="margin-top:-10px"></div>
+<div style="margin-top:-30px"></div>
 <div class="hide_show">
-<table style="max-width:100%">
+<table style="max-width:90%">
 
 <tr style="border:none; height:1px;">
   <td style="border:none; height:1px; padding:0; width:10%"></td>
@@ -1409,7 +1411,7 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 <td style="border:none"colspan="4">
 <span id="foggingBoth"></span><span id="perpendicular-axis-ou"></span><br><br>
 
-<div class="fc-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:5%;width:100%;">
+<div class="fc-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:2%;width:100%;">
 
   <!-- +0.00 FC -->
   <div id="fc-block-ou" class="fc-block" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
@@ -1534,29 +1536,36 @@ RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span cl
 <td style="border-top:none; border-bottom:none" colspan="4">
 
 <div id="toggleDivou">
-<span> Delta Both Eye &nbsp;- - - - - - - - - - - - - - - - - &nbsp;</span>
+<span> Delta Both Eye &nbsp;&nbsp; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - &nbsp;</span>
 
-Current RX Visual Acuity :
-<select id="ou_va" style="height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
-  <option value="6/6">6/6</option>
-  <option value="6/9">6/9</option>
-  <option value="6/12">6/12</option>
-  <option value="6/18">6/18</option>
-  <option value="6/24">6/24</option>
-  <option value="6/36">6/36</option>
-  <option value="6/48">6/48</option>
+
+&nbsp; <button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleBE()"> G </button>
+
+<div style="height:15px"></div>
+
+<div style="text-align:left; margin-left:5%">
+Current RX VA :
+<select onchange="updateVAEstimate('ou')" id="ou_va" style="margin-left:9%; height:20px; padding:1px 6px; width:95px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
+  <option value="N/A">N/A</option>  
+  <option value="6/6">6394 ; 6/6</option>
+  <option value="6/9">792 ; 6/9</option>
+  <option value="6/15">31 ; 6/15</option>
+
 </select>
 
-<select id="ou_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+<select onchange="updateVAEstimate('ou')" id="ou_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+  <option value="N/A">N/A</option>  
   <option value="full">Full</option>
   <option value="partial">Partial</option>
 </select>
-<span> &nbsp;&nbsp;&nbsp;- - - &nbsp;&nbsp;&nbsp;</span>
-<div style="height:15px"></div>
 
 
-<button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleBE()"> G </button>
-<span style="margin-right:4%;">Full </span> 
+<span style="margin-left:5%">Estimated : </span><span id="ou_va_result">...</span>.
+</div>
+
+<div style="height:9px"></div>
+
+<span style="margin-right:5%;">Full FCDC</span>
 
 
      DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_ouS">
@@ -1580,6 +1589,8 @@ Current RX Visual Acuity :
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn onclick="dashOU()">-</button>
 
 <div style="height:10px"></div>
+<div id="ou_va_result">...</div>
+<div style="height:10px"></div>
 
  
 <b>
@@ -1594,12 +1605,7 @@ Finalized Delta RX over Both Eyes
 
 </td>
 </tr>
-<tr style="border:none; height:10px;">
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-</tr>
+
 
 
 <script>
@@ -1757,7 +1763,7 @@ document.getElementById("fillBalance").addEventListener("click", () => {
 <td style="border:none" colspan="4">
 <span id="foggingRight"></span><span id="perpendicular-axis-re"></span><br><br>
 
-<div class="fc-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:5%;width:100%;">
+<div class="fc-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:2%;width:100%;">
 
   <!-- +0.00 FC -->
   <div id="fc-block-re" class="fc-block" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
@@ -1885,29 +1891,34 @@ document.getElementById("fillBalance").addEventListener("click", () => {
 <td style="border-top:none; border-bottom:none;" colspan="4">
 
 <div class="toggleDivodos" style="display:none">
-<span> Delta Right Eye &nbsp;- - - - - - - - - - - - - - - - - &nbsp;</span>
+<span> Delta Right Eye &nbsp;&nbsp; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - &nbsp;</span>
 
-Current RX Visual Acuity :
-<select id="od_va" style="height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
-  <option value="6/6">6/6</option>
-  <option value="6/9">6/9</option>
-  <option value="6/12">6/12</option>
-  <option value="6/18">6/18</option>
-  <option value="6/24">6/24</option>
-  <option value="6/36">6/36</option>
-  <option value="6/48">6/48</option>
+
+&nbsp; <button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleRE()"> G </button>
+
+<div style="height:15px"></div>
+
+<div style="text-align:left; margin-left:5%">
+Current RX VA :
+<select onchange="updateVAEstimate('od')" id="od_va" style="margin-left:9%; height:20px; padding:1px 6px; width:95px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
+  <option value="N/A">N/A</option>  
+  <option value="6/6">6394 ; 6/6</option>
+  <option value="6/9">792 ; 6/9</option>
+  <option value="6/15">31 ; 6/15</option>
 </select>
 
-<select id="od_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+<select onchange="updateVAEstimate('od')" id="od_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+  <option value="N/A">N/A</option>  
   <option value="full">Full</option>
   <option value="partial">Partial</option>
 </select>
-<span> &nbsp;&nbsp;&nbsp;- - - &nbsp;&nbsp;&nbsp;</span>
-<div style="height:15px"></div>
 
-<button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleRE()"> G </button>
+<span style="margin-left:5%">Estimated : </span><span id="od_va_result">...</span>.
+</div>
 
-<span style="margin-right:4%;">Full </span>
+<div style="height:9px"></div>
+
+<span style="margin-right:5%;">Full FCDC</span>
 
      DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_odS">
  
@@ -1932,6 +1943,9 @@ C
 
 
 <div style="height:10px"></div>
+<div id="od_va_result">...</div>
+<div style="height:10px"></div>
+
 
   <b>
 
@@ -2098,7 +2112,7 @@ document.getElementById("fillBalanceRE").addEventListener("click", () => {
 <span id="foggingLeft"></span><span id="perpendicular-axis-le"></span><br><br>
 
 
-<div class="fc-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:5%;width:100%;">
+<div class="fc-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:2%;width:100%;">
 
   <!-- +0.00 FC -->
   <div id="fc-block-le" class="fc-block" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
@@ -2222,28 +2236,36 @@ Calculate into Delta LE
 
 
 <div class="toggleDivodos" style="display:none">
-<span> Delta Left Eye &nbsp;- - - - - - - - - - - - - - - - - &nbsp;</span>
+<span> Delta Left Eye &nbsp;&nbsp; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - &nbsp;</span>
 
-Current RX Visual Acuity :
-<select id="os_va" style="height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
-  <option value="6/6">6/6</option>
-  <option value="6/9">6/9</option>
-  <option value="6/12">6/12</option>
-  <option value="6/18">6/18</option>
-  <option value="6/24">6/24</option>
-  <option value="6/36">6/36</option>
-  <option value="6/48">6/48</option>
+
+&nbsp; <button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleLE()"> G </button>
+
+<div style="height:15px"></div>
+
+<div style="text-align:left; margin-left:5%">
+Current RX VA :
+<select onchange="updateVAEstimate('os')" id="os_va" style="margin-left:9%; height:20px; padding:1px 6px; width:95px; font-size:11px; line-height:1; box-sizing:border-box;border:1px grey dotted">
+  <option value="N/A">N/A</option>  
+  <option value="6/6">6394 ; 6/6</option>
+  <option value="6/9">792 ; 6/9</option>
+  <option value="6/15">31 ; 6/15</option>
+
 </select>
 
-<select id="os_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+<select onchange="updateVAEstimate('os')" id="os_va_type" style="margin-left:1%; margin-right:1%; height:20px; padding:1px 6px; width:65px; font-size:11px; line-height:1; box-sizing:border-box; border:1px grey dotted">
+  <option value="N/A">N/A</option>  
   <option value="full">Full</option>
   <option value="partial">Partial</option>
 </select>
-<span> &nbsp;&nbsp;&nbsp;- - - &nbsp;&nbsp;&nbsp;</span>
-<div style="height:15px"></div>
 
-<button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleLE()"> G </button>
-<span style="margin-right:4%;">Full </span>
+
+<span style="margin-left:5%">Estimated : </span><span id="os_va_result">...</span>.
+</div>
+
+<div style="height:9px"></div>
+
+<span style="margin-right:5%;">Full FCDC</span>
 
  DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_osS">
  
@@ -2267,6 +2289,7 @@ C
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOS()">-</button>
 
 <div style="height:10px"></div>
+
 
 <b>
 Finalized Delta RX over Left Eye Only
@@ -2323,9 +2346,9 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 
 
 
-<tr class="red"><td colspan="4">
+<tr class="red" style="border-bottom:none"><td colspan="4" style="border-bottom:none">
 
-<button class="yellow" onclick="runBE()" style="margin-left:30px; border-radius:10px; width:120px; height:25px">Calculate BE</button>
+<button class="yellow" onclick="runBE()" style="margin-left:2%; border-radius:10px; width:120px; height:25px">Calculate BE</button>
 
 
 <button class="yellow" style="border-radius:10px;" onclick="resetLogBE()">X</button>
@@ -2482,7 +2505,7 @@ function runBE() {
 
 
 
-<div style="display:none">
+<div style="display:none;">
 <div style="
   display:grid;
   grid-template-columns: repeat(3, 25%);
@@ -9675,10 +9698,34 @@ function toggleHideShowCL() {
 
 </script>
 
+<script>
+const vaLookup = {
+"6/6_full": "±0.25 Sph",
+"6/6_partial": "±0.25 Sph with ±0.25 Cyl",
 
+"6/9_full": "±0.50 Sph",
+"6/9_partial": "±0.50 Sph with ±0.50 Cyl",
 
+"6/15_full": "±1.00 Sph",
+"6/15_partial": "±1.00 Sph with ±1.00 Cyl",
 
+};
 
+function updateVAEstimate(prefix) {
+  const va = document.getElementById(prefix + "_va").value;
+  const type = document.getElementById(prefix + "_va_type").value;
+
+  const result = document.getElementById(prefix + "_va_result");
+
+  if (va === "N/A" || type === "N/A") {
+    result.innerText = "...";
+    return;
+  }
+
+  result.innerText = vaLookup[`${va}_${type}`] || "";
+}
+
+</script>
 
 
 
