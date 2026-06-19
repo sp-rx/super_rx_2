@@ -2941,7 +2941,7 @@ function toggleHideShow4() {
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
-<tr><td colspan="4">Spectacle Lens Results <button class="vbtn" onclick="toggleHideShowCL()">CL</button></td></tr>
+<tr><td colspan="4">Spectacle Lens Results </td></tr>
 
 <tr>
 <td class="red">Current SL</td>
@@ -2974,7 +2974,10 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
   <td id="logRELE" colspan="3"><i>Loading....</i></td>
 </tr>
 </table>
-<div style="margin-top:-20px"></div>
+
+<div style="margin-top:-21px"></div>
+
+
 
 <div class="toggleDivCL" style="display:none">
 <table>
@@ -2987,7 +2990,7 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 
 	
 <tr><td style="color: #042747" colspan="4">
-Contact Lens With Astigmatism Results
+Contact Lens Results
 
 </td></tr>
 <tr>
@@ -2998,6 +3001,9 @@ R: <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
 L: <span id="CL_os_origCombined">OS -</span>
   </td>
 </tr>
+
+
+
 
 <tr style="color: #042747" class="yellow">
   <td style="color: #042747" colspan="1">Delta BE CLA</td>
@@ -3018,7 +3024,6 @@ L: <span id="CL_os_origCombined">OS -</span>
 </tr>
 
 
-<tr><td style="color: #042747" colspan="4">Contact Lens SE Only Results</td></tr>
 <tr>
   <td style="color: #042747" class="red">Current CLSE</td>
   <td style="color: #042747" colspan="3" class="red">
@@ -3201,8 +3206,10 @@ function captureRELE_CL() {
 </tr>
 
 <tr class="red"><td colspan="4">
+<button style="color: #042747; border-radius:10px; height:25px; width:150px" onclick="toggleHideShowCL()">Contact Lens Results</button>
 
-<button style="margin-left:10px; border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
+
+<button style="border-radius:10px; height:25px; width:100px" class="updateAllBtn">Update All</button>
 
 <button style="border-radius:10px; height:25px; width:85px" class="exportBtn">
     Save Data </button>
