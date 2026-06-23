@@ -130,6 +130,16 @@ th.yellow, tr.yellow, td.yellow, button.yellow {
   color: black;
 }
 
+th.blue1, tr.blue1, td.blue1, button.blue1 {
+  background: #B0DAEB;
+  color: black;
+}
+
+th.blue2, tr.blue2, td.blue2, button.blue2 {
+  background: #87B5C7;
+  color: black;
+}
+
 th.turq, tr.turq, td.turq, button.turq {
   background: #EEDCF5;
   color: black;
@@ -1570,11 +1580,11 @@ Current RX VA :
 <span style="margin-right:5%;">Full FCDC</span>
 
 
-     DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_ouS">
+     DC Bal : <input style="width:50px; opacity:0.5; margin-right:3%" type="number" step="0.25" id="full_vd_ouS">
  
-    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_ouC">
+    CYL Bal x Darker Axis : <input style="opacity:0.5; width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_ouC">
 
-    <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_ouA">
+    <input style="opacity:0.5; width:50px" type="number" step="15" min="0" max="180" id="full_vd_ouA">
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="copyFullToAdjusted('ou')">C</button>
 
@@ -1922,11 +1932,11 @@ Current RX VA :
 
 <span style="margin-right:5%;">Full FCDC</span>
 
-     DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_odS">
+     DC Bal : <input style="opacity:0.5; width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_odS">
  
-    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_odC">
+    CYL Bal x Darker Axis : <input style="opacity:0.5; width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_odC">
 
-    <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_odA">
+    <input style="opacity:0.5; width:50px" type="number" step="15" min="0" max="180" id="full_vd_odA">
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn"  onclick="copyFullToAdjusted('od')">
 C
@@ -2269,11 +2279,11 @@ Current RX VA :
 
 <span style="margin-right:5%;">Full FCDC</span>
 
- DC Bal : <input style="width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_osS">
+ DC Bal : <input style="opacity:0.5; width:50px; margin-right:3%" type="number" step="0.25" id="full_vd_osS">
  
-    CYL Bal x Darker Axis : <input style="width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_osC">
+    CYL Bal x Darker Axis : <input style="opacity:0.5; width:50px; margin-right:1%" type="number" step="0.25" id="full_vd_osC">
 
-    <input style="width:50px" type="number" step="15" min="0" max="180" id="full_vd_osA">
+    <input style="opacity:0.5; width:50px" type="number" step="15" min="0" max="180" id="full_vd_osA">
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn"  onclick="copyFullToAdjusted('os')">
 C
@@ -3579,52 +3589,73 @@ Use this to know what RX to fit next based on patient's response.
 
 
 <table>
-<tr><th class="red" colspan="4"> Finalized Manual RX </th></tr>
+<tr><th class="blue" colspan="4"> Finalized Manual RX </th></tr>
 
-<tr class="">
-  <td>Right RX</td>
-  <td>Sph : <input type="number" step="0.25" id="od_finalS"></td>
-  <td>Cyl : <input type="number" step="0.25" id="od_finalC"></td>
-  <td>Axis : <input type="number" step="5" min="0" max="180" id="od_finalA"></td>
+<tr class="" style="border-bottom:none">
+  <td style="border-bottom:none">Right SL</td>
+  <td style="border-bottom:none">Sph : <input type="number" step="0.25" id="od_finalS"></td>
+  <td style="border-bottom:none">Cyl : <input type="number" step="0.25" id="od_finalC"></td>
+  <td style="border-bottom:none">Axis : <input type="number" step="5" min="0" max="180" id="od_finalA"></td>
+
+
+
 </tr>
-<tr class="">
-  <td>Left RX</td>
-  <td>Sph : <input type="number" step="0.25" id="os_finalS"></td>
-  <td>Cyl : <input type="number" step="0.25" id="os_finalC"></td>
-  <td>Axis : <input type="number" step="5" min="0" max="180" id="os_finalA"></td>
+
+
+<tr class="" style="border-top:none">
+  <td style="border-top:none">Left SL</td>
+  <td style="border-top:none">Sph : <input type="number" step="0.25" id="os_finalS"></td>
+  <td style="border-top:none">Cyl : <input type="number" step="0.25" id="os_finalC"></td>
+  <td style="border-top:none">Axis : <input type="number" step="5" min="0" max="180" id="os_finalA"></td>
 </tr>
+
+
+
 <tr class="" style="display:none">
   <td>Right FC DC</td>
   <td id="od_roundS"></td>
   <td id="od_roundC"></td>
   <td id="od_roundA"></td>
 </tr>
-<tr>
-  <td>Right FC DC</td>
-  <td id="od_minusS"></td>
-  <td id="od_minusC"></td>
-  <td id="od_minusA"></td>
-</tr>
-
-
 <tr class="" style="display:none">
   <td>Left FC DC</td>
   <td id="os_roundS"></td>
   <td id="os_roundC"></td>
   <td id="os_roundA"></td>
 </tr>
-<tr>
-  <td>Left FC DC</td>
-  <td id="os_minusS"></td>
-  <td id="os_minusC"></td>
-  <td id="os_minusA"></td>
+
+
+
+<tr style="border-bottom:none">
+  <td style="border-bottom:none">Delta FCDC</td>
+<td style="border-bottom:none" colspan="3">R : <span style="margin-right:80px;">
+  <span id="od_minusS"></span> /
+  <span id="od_minusC"></span> x
+  <span id="od_minusA"></span>
+</span> L : <span>
+  <span id="os_minusS"></span> /
+  <span id="os_minusC"></span> x
+  <span id="os_minusA"></span>
+</td>
+
 </tr>
 
-<tr class="">
-  <td>Bino Imbalance</td>
-  <td id="diffCrossS"></td>
-  <td id="diffCrossC"></td>
-  <td id="diffCrossA"></td>
+<tr style="display:none;" class="" >
+  <td >Bino Imbalance</td>
+<td  colspan="3">
+  <span id="diffCrossS"></span> /
+  <span id="diffCrossC"></span> x
+  <span id="diffCrossA"></span>
+</td>
+</tr>
+
+<tr class="" style="border-top:none">
+  <td style="border-top:none">Bino Imbalance</td>
+<td style="border-top:none" colspan="3">
+<span id="diffCross_minusS"></span> /
+<span id="diffCross_minusC"></span> x
+<span id="diffCross_minusA"></span>
+</td>
 </tr>
 
 
@@ -3647,7 +3678,22 @@ Use this to know what RX to fit next based on patient's response.
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
-<tr><th class="red" colspan="4"> SPized Corrected </th></tr>
+
+
+<tr><th class="blue" colspan="4"> Contact Lens Results</th></tr>
+  <td>CLA</td>
+  <td colspan="3">R : <span style="margin-right: 80px;" id="od_result"></span> L : <span id="os_result"></span> </td>
+</tr>
+
+
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
+
+<tr><th class="blue" colspan="4"> Delta Adjusted </th></tr>
 <tr class="">
 <td class="red">Current Rx</td>
 <td class="red" colspan="3">
@@ -3672,7 +3718,7 @@ L: <span id="os_SPDisplay">- / - × -</span>
 
 </td>
 </tr>
-<tr><td>
+<tr style="display:none"><td>
 Add : <input style="width:60px" type="number" step="0.25" min="0" max="5" id="nearAddFinal"></td>
 
 <td colspan="3">
@@ -6541,9 +6587,9 @@ function toggleTbody(tbodyId){
 (function(){
   const CL_CYL_STEPS = [-0.75,-1.25,-1.75,-2.25,-2.75];
 
-  function glassesToCL(F){ const d=0.01; return F/(1 - d*F); }
+  function glassesToCL(F){ const d=0.009; return F/(1 - d*F); }
   function r025(x){ return Math.round(x/0.25)*0.25; }
-  function roundUp025(x){ return Math.ceil(x/0.25)*0.25; }
+  function roundUp025(x){ return Math.round(x/0.25)*0.25; }
   function fmt(x){ x=parseFloat(x)||0; const s=x>=0?"+":""; return s+x.toFixed(2); }
   function nearest(arr,val){ return arr.reduce((b,v)=>Math.abs(v-val)<Math.abs(b-val)?v:b,arr[0]); }
 function flatterAxis(a){
@@ -6562,6 +6608,28 @@ function flatterAxis(a){
   return Math.round(a / 10) * 10;
 }
 
+function convertFromInputs(sId, cId, aId, outId){
+  const s = document.getElementById(sId);
+  const c = document.getElementById(cId);
+  const a = document.getElementById(aId);
+  const out = document.getElementById(outId);
+
+  if(!s || !c || !a || !out) return;
+
+  function update(){
+    const result = convertOne(s.value, c.value, a.value);
+    out.textContent = result;
+  }
+
+  s.addEventListener("input", update);
+  c.addEventListener("input", update);
+  a.addEventListener("input", update);
+
+  update(); // initial run
+}
+
+convertFromInputs("od_finalS","od_finalC","od_finalA","od_result");
+convertFromInputs("os_finalS","os_finalC","os_finalA","os_result");
 
   function roundClipDiff(x){ return Math.round(x/0.50)*0.50; }
 
@@ -9647,26 +9715,49 @@ function updateMinusCyl() {
 
     if (newA > 180) newA -= 180;
 
-document.getElementById(outS).textContent = fmtPower(newS);
-document.getElementById(outC).textContent = fmtPower(newC);
+    document.getElementById(outS).textContent = fmtPower(newS);
+    document.getElementById(outC).textContent = fmtPower(newC);
     document.getElementById(outA).textContent = newA;
   }
 
+  // =========================
+  // OD ROUND → OD MINUS
+  // =========================
   convert(
     "od_roundS","od_roundC","od_roundA",
     "od_minusS","od_minusC","od_minusA"
   );
 
+  // =========================
+  // OS ROUND → OS MINUS
+  // =========================
   convert(
     "os_roundS","os_roundC","os_roundA",
     "os_minusS","os_minusC","os_minusA"
   );
+
+  // =========================
+  // DIFFCROSS → DIFFCROSS MINUS
+  // =========================
+  convert(
+    "diffCrossS","diffCrossC","diffCrossA",
+    "diffCross_minusS","diffCross_minusC","diffCross_minusA"
+  );
 }
-["od_roundS","od_roundC","od_roundA",
- "os_roundS","os_roundC","os_roundA"]
-.forEach(id => {
+
+// =========================
+// OBSERVERS (trigger system)
+// =========================
+[
+  "od_roundS","od_roundC","od_roundA",
+  "os_roundS","os_roundC","os_roundA",
+  "diffCrossS","diffCrossC","diffCrossA"
+].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+
   new MutationObserver(updateMinusCyl)
-    .observe(document.getElementById(id), {
+    .observe(el, {
       childList: true,
       characterData: true,
       subtree: true
