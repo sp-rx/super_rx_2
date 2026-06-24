@@ -79,7 +79,11 @@ max-width:570px;
   margin-top: 1.5rem;
 }
 
-
+.vtbn.active {
+  background: #163d6d;
+  color: white;
+  border: 1px solid #163d6d;
+}
     .toggle-btn {
       font-size: 11px; padding: 10px 20px;
       border: 1px solid #ddd; border-radius: 8px;
@@ -1292,28 +1296,30 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
 <!-- SP Refraction -->
 <tr>
   <th class="yellow" colspan="4">Delta Refraction</th></tr>
-<tr style="border-bottom:none"><td style="border-bottom:none" colspan="4">1. Measure and input the amount of sph needed to shift DC to balance.<br>2. Apply fogging, measure and input the amount of cyl and axis needed to balance FC.<br><br>
+<tr style="border:none"><th style="border:none" colspan="4">
+RX Profile for <span style="margin-right:10%" class="customerName_summary">...</span> Whatsapp <span class="customerWhatsapp_summary">...</span>
+
+</th></tr>
+
+
+<tr style="border:none"><td style="border:none" colspan="4">
 
 <button style="display:none; width:80%" id="toggleBtn">Show / Hide Inputs</button>
 
  </td></tr>
 </table>
 
-<div style="margin-top:-30px"></div>
+<div style="margin-top:-40px"></div>
 <div class="hide_show">
 <table style="max-width:90%">
 
-<tr style="border:none; height:1px;">
-  <td style="border:none; height:1px; padding:0; width:10%"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
-  <td style="border:none; height:1px; padding:0;"></td>
+<tr style="border-top:none; height:1px;">
+  <td style="border-top:none; height:1px; padding:0; width:10%"></td>
+  <td style="border-top:none; height:1px; padding:0;"></td>
+  <td style="border-top:none; height:1px; padding:0;"></td>
+  <td style="border-top:none; height:1px; padding:0;"></td>
 </tr>
 
-<tr><th colspan="4">
-RX Profile for <span class="customerName_summary">...</span> , Whatsapp <span class="customerWhatsapp_summary">...</span>
-
-</th></tr>
 
 <tr class="yellow be-row" data-eye="both" style="display:none; border:none">
 <td style="border:none" colspan="4">
@@ -2976,7 +2982,7 @@ function toggleHideShow4() {
   <td style="border:none; height:1px; padding:0;"></td>
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
-<tr><td colspan="4">Spectacle Lens Results </td></tr>
+<tr><td class="yellow" colspan="4"><b>Spectacle Lens Results</b> </td></tr>
 
 <tr>
 <td class="red">Current SL</td>
@@ -3024,8 +3030,8 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 </tr>
 
 	
-<tr><td style="color: #042747" colspan="4">
-Contact Lens Results
+<tr><td class="yellow" style="color: #042747" colspan="4"><b>
+Contact Lens Results</b>
 
 </td></tr>
 <tr>
@@ -3067,6 +3073,46 @@ R: <span id="SE_od_origCombined" style="margin-right: 80px;">OD -</span>
 L: <span id="SE_os_origCombined">OS -</span>
   </td>
 </tr>
+
+<script>
+(function(){
+
+  const sources = [
+    "CL_od_origCombined",
+    "CL_os_origCombined",
+    "SE_od_origCombined",
+    "SE_os_origCombined"
+  ];
+
+  function update(sourceId){
+    const source = document.getElementById(sourceId);
+    if(!source) return;
+
+    document
+      .querySelectorAll(`.mirror[data-source="${sourceId}"]`)
+      .forEach(el => {
+        el.textContent = source.textContent;
+      });
+  }
+
+  sources.forEach(sourceId => {
+    const source = document.getElementById(sourceId);
+    if(!source) return;
+
+    update(sourceId);
+
+    new MutationObserver(() => update(sourceId))
+      .observe(source,{
+        childList:true,
+        characterData:true,
+        subtree:true
+      });
+  });
+
+})();
+
+</script>
+
 
 <tr style="color: #042747" class="yellow">
   <td style="color: #042747" colspan="1">Delta BE CLSE</td>
@@ -3502,19 +3548,24 @@ Status : <button id="statusSP"
 
 Manual Refraction
 
+</th></tr>
+<tr style="border:none"><th style="border:none" colspan="4">
+RX Profile for <span style="margin-right:10%" class="customerName_summary">...</span> Whatsapp <span class="customerWhatsapp_summary">...</span>
+<br><br>
+<span style="user-select:none" id="toggleBtn2">Open Troubleshooter</span>
 
 </th></tr>
 
-<tr style="border:none"><td style="border:none">
-<button style="width:80%" id="toggleBtn2">Show / Hide Helper</button>
-</td></tr>
+
+
 
 </table>
-<div style="margin-top:-20px"></div>
+<div style="margin-top:-19px"></div>
 
 
 <div class="hide_show2" style="display:none">
 <table>
+<div style="margin-top:10px"></div>
 
 <tr style="border:none"><td style="border:none" colspan="4"><b><i>
 <b><i>Troubleshooter</b></i><br>  
@@ -3589,26 +3640,123 @@ Use this to know what RX to fit next based on patient's response.
 
 
 <table>
-<tr><th class="blue" colspan="4"> Finalized Manual RX </th></tr>
+<tr><td class="blue" colspan="4">
+<b>Spectacle Lens Results</b>
 
-<tr class="" style="border-bottom:none">
-  <td style="border-bottom:none">Right SL</td>
-  <td style="border-bottom:none">Sph : <input type="number" step="0.25" id="od_finalS"></td>
-  <td style="border-bottom:none">Cyl : <input type="number" step="0.25" id="od_finalC"></td>
-  <td style="border-bottom:none">Axis : <input type="number" step="5" min="0" max="180" id="od_finalA"></td>
+</td></tr>
+<tr class="">
+<td class="red">
+  <div style="text-align:left">
+<button class="vtbn set-btn" data-set="orig" onclick="selectSet(this)">✓</button>&nbsp;&nbsp;
+Current Rx
+</div>
+</td>
+<td class="red" colspan="3">
+R: <span class="od_summary" style="margin-right: 80px;">+0.00 / +0.00 × 0</span>
+L: <span class="os_summary">+0.00 / +0.00 × 0</span>
+</td>
+</tr>
+
+<tr>
+<td>
+  <div style="text-align:left">
+<button class="vtbn set-btn" data-set="full" onclick="selectSet(this)">✓</button> &nbsp;&nbsp;
+Full RX
+</div>
+</td>
+<td colspan="3" style="border-bottom:none">
+R : 
+<input style="width:40px" type="text" step="0.25" id="od_fullS"> /
+<input style="width:40px" type="text" step="0.25" id="od_fullC"> X
+<input style="margin-right:8%; width:40px" type="text" step="5" min="0" max="180" id="od_fullA">
+L : 
+<input style="width:40px" type="text" step="0.25" id="os_fullS"> /
+<input style="width:40px" type="text" step="0.25" id="os_fullC"> X
+<input style="width:40px" type="text" step="5" min="0" max="180" id="os_fullA">
+</td>
+</tr>
+
+<tr>
+<td>
+  <div style="text-align:left">
+<button class="vtbn set-btn" data-set="adjusted" onclick="selectSet(this)">✓</button>&nbsp;&nbsp;
+ Adjust RX</td>
+</div>
+<td colspan="3" style="border-bottom:none">
+R : 
+<input style="width:40px" type="text" step="0.25" id="od_adjustedS"> /
+<input style="width:40px" type="text" step="0.25" id="od_adjustedC"> X
+<input style="margin-right:8%; width:40px" type="text" step="5" min="0" max="180" id="od_adjustedA">
+L : 
+<input style="width:40px" type="text" step="0.25" id="os_adjustedS"> /
+<input style="width:40px" type="text" step="0.25" id="os_adjustedC"> X
+<input style="width:40px" type="text" step="5" min="0" max="180" id="os_adjustedA">
+</td>
+</tr>
+
+<tr class="blue" style="border-bottom:none">
+  <td style="border-bottom:none">
 
 
+
+Final RX 
+</td>
+
+
+  <td colspan="3" style="border-bottom:none">
+R : 
+<input style="width:40px" type="text" step="0.25" id="od_finalS"> / <input style="width:40px" type="text" step="0.25" id="od_finalC"> X <input style="margin-right:8%; width:40px" type="text" step="5" min="0" max="180" id="od_finalA">
+L : 
+<input style="width:40px" type="text" step="0.25" id="os_finalS"> / <input style="width:40px" type="text" step="0.25" id="os_finalC"> X <input style="width:40px" type="text" step="5" min="0" max="180" id="os_finalA"></td>
 
 </tr>
 
+<script>
+function selectSet(btn) {
 
-<tr class="" style="border-top:none">
-  <td style="border-top:none">Left SL</td>
-  <td style="border-top:none">Sph : <input type="number" step="0.25" id="os_finalS"></td>
-  <td style="border-top:none">Cyl : <input type="number" step="0.25" id="os_finalC"></td>
-  <td style="border-top:none">Axis : <input type="number" step="5" min="0" max="180" id="os_finalA"></td>
-</tr>
+  // active state (only one highlighted)
+  document.querySelectorAll('.set-btn')
+    .forEach(b => b.classList.remove('active'));
 
+  btn.classList.add('active');
+
+  // detect which row was clicked
+  const set = btn.dataset.set;
+
+  copyToFinal(set);
+}
+
+function copyToFinal(set) {
+
+  function copy(side) {
+    document.getElementById(`od_final${side}`).value =
+      document.getElementById(`od_${set}${side}`).value;
+
+    document.getElementById(`os_final${side}`).value =
+      document.getElementById(`os_${set}${side}`).value;
+  }
+
+  ["S","C","A"].forEach(copy);
+
+  // trigger listeners
+  ["od_finalS","od_finalC","od_finalA",
+   "os_finalS","os_finalC","os_finalA"]
+  .forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.dispatchEvent(new Event("input", { bubbles:true }));
+  });
+}
+</script>
+
+<script>
+function setActive(btn) {
+  document.querySelectorAll('.set-btn').forEach(b => {
+    b.classList.remove('active');
+  });
+
+  btn.classList.add('active');
+}
+</script>
 
 
 <tr class="" style="display:none">
@@ -3627,7 +3775,7 @@ Use this to know what RX to fit next based on patient's response.
 
 
 <tr style="border-bottom:none">
-  <td style="border-bottom:none">Delta FCDC</td>
+  <td style="border-bottom:none">FCDC Delta</td>
 <td style="border-bottom:none" colspan="3">R : <span style="margin-right:80px;">
   <span id="od_minusS"></span> /
   <span id="od_minusC"></span> x
@@ -3658,6 +3806,33 @@ Use this to know what RX to fit next based on patient's response.
 </td>
 </tr>
 
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
+
+<tr class="blue">
+<td colspan="4"><b>To Improve Comfort, Use Either Delta Dominant Right or Left</b></td></tr>
+
+<tr class="" style="border:none">
+  <td style="border:none">Dominant Right</td>
+  <td style="border:none" colspan="3">
+R: <span id="od_SPDisplay" style="margin-right: 80px;">- / - × -</span>
+L: <span id="OScrossedSpan">- / - × -</span>
+
+</td>
+</tr>
+
+<tr class="" style="border-top:none">
+  <td style="border-top:none">Dominant Left</td>
+  <td style="border-top:none" colspan="3">
+R: <span id="ODcrossedSpan" style="margin-right: 80px;">- / - × -</span>
+L: <span id="os_SPDisplay">- / - × -</span>
+
+</td>
+</tr>
 
 <tr style="display:none" class="">
   <td colspan="1">Crossed OD</td>
@@ -3680,11 +3855,17 @@ Use this to know what RX to fit next based on patient's response.
 </tr>
 
 
-<tr><th class="blue" colspan="4"> Contact Lens Results</th></tr>
-  <td>CLA</td>
+<tr><th class="blue" style="color:#042747" colspan="4"> Contact Lens Results</th></tr>
+
+<tr class="red">
+  <td >Current CLA</td>
+  <td colspan="3">R : <span style="margin-right: 80px;" class="mirror" data-source="CL_od_origCombined"></span> L : <span class="mirror" data-source="CL_os_origCombined"></span> </td>
+</tr>  
+
+<tr class="blue">
+<td>Manual CLA</td>
   <td colspan="3">R : <span style="margin-right: 80px;" id="od_result"></span> L : <span id="os_result"></span> </td>
 </tr>
-
 
 <tr style="border:none; height:10px;">
   <td style="border:none; height:1px; padding:0;"></td>
@@ -3693,30 +3874,22 @@ Use this to know what RX to fit next based on patient's response.
   <td style="border:none; height:1px; padding:0;"></td>
 </tr>
 
-<tr><th class="blue" colspan="4"> Delta Adjusted </th></tr>
-<tr class="">
-<td class="red">Current Rx</td>
-<td class="red" colspan="3">
-R: <span class="od_summary" style="margin-right: 80px;">+0.00 / +0.00 × 0</span>
-L: <span class="os_summary">+0.00 / +0.00 × 0</span>
-</td>
+<tr class="red">
 
-<tr class="">
-  <td>Right Dominant</td>
-  <td colspan="3">
-R: <span id="od_SPDisplay" style="margin-right: 80px;">- / - × -</span>
-L: <span id="OScrossedSpan">- / - × -</span>
-
-</td>
+  <td>Current CLSE</td>
+  <td colspan="3">R : <span style="margin-right: 80px;" class="mirror" data-source="SE_od_origCombined"></span> L : <span class="mirror" data-source="SE_os_origCombined"></span> </td>
 </tr>
 
-<tr class="">
-  <td>Left Dominant</td>
-  <td colspan="3">
-R: <span id="ODcrossedSpan" style="margin-right: 80px;">- / - × -</span>
-L: <span id="os_SPDisplay">- / - × -</span>
+<tr class="blue">
+  <td>CLSE</td>
+  <td colspan="3">R : <span style="margin-right: 80px;" id="od_resultSE"></span> L : <span id="os_resultSE"></span> </td>
+</tr>
 
-</td>
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
 </tr>
 <tr style="display:none"><td>
 Add : <input style="width:60px" type="number" step="0.25" min="0" max="5" id="nearAddFinal"></td>
@@ -5702,6 +5875,13 @@ window.addEventListener("DOMContentLoaded", ()=>{
   'od_origS', 'od_origC', 'os_origS', 'os_origC',
   'od_finalS', 'od_finalC', 'os_finalS', 'os_finalC',
   'vc_odS', 'vc_odC', 'vc_osS', 'vc_osC', 'vc_ouS', 'vc_ouC',
+  'od_fullS','od_fullC',
+  'os_fullS','os_fullC',
+
+  // ADJUSTED
+  'od_adjustedS','od_adjustedC',
+  'os_adjustedS','os_adjustedC',
+
 'vd_odS', 'full_vd_odS',
 'vd_odC', 'full_vd_odC',
 'vd_osS', 'full_vd_osS',
@@ -5709,6 +5889,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 'vd_ouS', 'full_vd_ouS',
 'vd_ouC', 'full_vd_ouC',
   'vd_out_odS', 'vd_out_odC', 'vd_out_osS', 'vd_out_osC', 'vd_out_ouS', 'vd_out_ouC',
+
 
   // new Problem inputs
   'od_rectS', 'od_rectC',  
@@ -6503,6 +6684,7 @@ let latest = { re: null, le: null };
   function flattenAxis(a){ a=parseFloat(a)||180; if(a<=0)a=180; return Math.round(a/10)*10; }
 
   function convertOne_CLtoSpec(S,C,A){
+
     S=parseFloat(S)||0; C=parseFloat(C)||0; A=parseFloat(A)||0;
     const total = S+C;
     const specS = CLtoGlasses(S);
@@ -6616,10 +6798,15 @@ function convertFromInputs(sId, cId, aId, outId){
 
   if(!s || !c || !a || !out) return;
 
-  function update(){
-    const result = convertOne(s.value, c.value, a.value);
-    out.textContent = result;
+function update(){
+  const result = convertOne(s.value, c.value, a.value);
+  out.textContent = result;
+
+  const seOut = document.getElementById(outId + "SE");
+  if (seOut) {
+    seOut.textContent = getSEfromCL(result);
   }
+}
 
   s.addEventListener("input", update);
   c.addEventListener("input", update);
