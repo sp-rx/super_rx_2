@@ -1604,7 +1604,7 @@ Current RX VA :
 
     <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_ouA">
 
-<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn onclick="dashOU()">-</button>
+<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOU()">-</button>
 
 <div style="height:10px"></div>
 <div id="ou_va_result">...</div>
@@ -2417,7 +2417,6 @@ function resetLogRELE() {
 
 <button style="border-radius:10px; width:100px; height:25px" id="toggleBtn3">Show Charts</button>
 
-
 <script>
 function runRELE() {
   const odS = document.getElementById("vd_odS")?.value?.trim();
@@ -2497,7 +2496,7 @@ function runBE() {
 
 
 
-<div style="margin-top:-10px; display:flex; align-items:center; gap:10px; justify-content:center">
+<div style="margin-top:-0px; display:flex; align-items:center; gap:10px; justify-content:center">
 
 <button class="rx-btn" data-rx="ou" onclick="loadRX('ou', this)" style="width:100px">
   RX BE<br>
@@ -2680,9 +2679,7 @@ Duochrome :
 <input type="range" id="darkSlider" min="0" max="100" value="0" style="width:300px;">
 </div>
 
-<button class="normal" onclick="window.open('https://sp-rx.github.io/mobile_FCDC/', '_blank')" style="cursor:pointer; width:90%; margin-right:5%">
-  Click to open FCDC Simulator in a new window
-</button>
+
 
 <script>
 const slider = document.getElementById("darkSlider");
@@ -2721,7 +2718,9 @@ slider.oninput = function () {
 <br><br>
 <span id="fcdcbal_astig"></span><br>
 <span id="fcdcbal_duo"></span><br><br>
-
+<button class="normal" onclick="window.open('https://sp-rx.github.io/mobile_FCDC/', '_blank')" style="cursor:pointer; border:1px grey dotted; width:95%; margin-bottom:2%">
+  Open FCDC Visualizer in a new window
+</button>
 
 
 <script>
