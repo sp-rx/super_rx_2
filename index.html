@@ -3012,14 +3012,32 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 <tr class="yellow">
   <td colspan="1">Delta BE SL</td>
   <td colspan="3">
-<span id="logBE"><i>Loading....</i></span></td>
+<span id="logBE"><i>Loading....</i></span><br><br>
+&Delta; : 
+<span id="vd_out_ouS_mirror">-</span> /
+<span id="vd_out_ouC_mirror">-</span> x
+<span id="vd_out_ouA_mirror">-</span>
+
+
+</td>
 </tr>
 
 
 <tr class="purp">
   <td colspan="1">Delta R/L SL</td>
 
-  <td id="logRELE" colspan="3"><i>Loading....</i></td>
+  <td colspan="3"><span id="logRELE" colspan="3"><i>Loading....</i></span><br><br>
+
+&Delta; : 
+<span id="vd_out_odS_mirror">-</span> /
+<span id="vd_out_odC_mirror">-</span> x
+<span style="margin-right:13%" id="vd_out_odA_mirror">-</span>
+
+&Delta; : 
+<span id="vd_out_osS_mirror">-</span> /
+<span id="vd_out_osC_mirror">-</span> x
+<span id="vd_out_osA_mirror">-</span>
+</td>
 </tr>
 </table>
 
@@ -5569,14 +5587,25 @@ outS = roundDownQuarter(outS);
 
 
 
-  const outC = C;
-  const outA = A;
+const outC = C;
+const outA = A;
 
-  const fmt = v => (v > 0 ? "+" : "") + v.toFixed(2);
+const fmt = v => (v > 0 ? "+" : "") + v.toFixed(2);
 
-  document.getElementById(`vd_out_${side}S`).textContent = fmt(outS);
-  document.getElementById(`vd_out_${side}C`).textContent = fmt(outC);
-  document.getElementById(`vd_out_${side}A`).textContent = outA;
+const s = fmt(outS);
+const c = fmt(outC);
+
+document.getElementById(`vd_out_${side}S`).textContent = s;
+document.getElementById(`vd_out_${side}C`).textContent = c;
+document.getElementById(`vd_out_${side}A`).textContent = outA;
+
+const sMirror = document.getElementById(`vd_out_${side}S_mirror`);
+const cMirror = document.getElementById(`vd_out_${side}C_mirror`);
+const aMirror = document.getElementById(`vd_out_${side}A_mirror`);
+
+if (sMirror) sMirror.textContent = s;
+if (cMirror) cMirror.textContent = c;
+if (aMirror) aMirror.textContent = outA;
 }
 
 
