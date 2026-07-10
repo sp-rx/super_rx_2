@@ -2375,6 +2375,10 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 function resetLogBE() {
   document.getElementById('logBE').innerHTML = '<i>-</i>';
   document.getElementById('logBE_CL').innerHTML = '<i>-</i>';
+
+  document.getElementById('vd_out_ouS_mirror').textContent = '-';
+  document.getElementById('vd_out_ouC_mirror').textContent = '-';
+  document.getElementById('vd_out_ouA_mirror').textContent = '-';
 }
 </script>
 
@@ -2403,6 +2407,14 @@ style="border-radius:10px; width:120px; height:25px">
 function resetLogRELE() {
   document.getElementById('logRELE').innerHTML = '<i>-</i>';
   document.getElementById('logRELE_CL').innerHTML = '<i>-</i>';
+
+  document.getElementById('vd_out_odS_mirror').textContent = '-';
+  document.getElementById('vd_out_odC_mirror').textContent = '-';
+  document.getElementById('vd_out_odA_mirror').textContent = '-';
+
+  document.getElementById('vd_out_osS_mirror').textContent = '-';
+  document.getElementById('vd_out_osC_mirror').textContent = '-';
+  document.getElementById('vd_out_osA_mirror').textContent = '-';
 }
 </script>
 
@@ -2426,6 +2438,9 @@ function runRELE() {
   copyVD_OS();   // LE
   captureRELE();
   captureRELE_CL();
+  calcVD("od");   
+  calcVD("os");   
+
 }
 
 function runBE() {
@@ -2437,6 +2452,8 @@ function runBE() {
   copyVD_OU_to_ODOS();
   captureBE();
   captureBE_CL();
+
+  calcVD("ou");   // <-- add this
 }
 </script>
 
