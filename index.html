@@ -32,6 +32,7 @@ html, body, table, {
   background: #CFEBFC;
 }
 
+
   #meyImage {
     transition: opacity 0.3s ease;
     opacity: 1;
@@ -6898,35 +6899,42 @@ convertFromInputs("os_finalS","os_finalC","os_finalA","os_result");
 
   function roundClipDiff(x){ return Math.round(x/0.50)*0.50; }
 
+function roundSphere(sph){
+  // Contact lens sphere powers are in 0.50D steps from ±6.00D onwards
+  if (Math.abs(sph) >= 6.00){
+    return Math.round(sph / 0.50) * 0.50;
+  }
+  return r025(sph);
+}
+
 function convertOne(S, C, A){
-  S = parseFloat(S)||0;
-  C = parseFloat(C)||0;
-  A = parseFloat(A)||0;
+  S = parseFloat(S) || 0;
+  C = parseFloat(C) || 0;
+  A = parseFloat(A) || 0;
 
   const total = S + C;
   const convS = glassesToCL(S);
   const convT = glassesToCL(total);
   const rawCyl = convT - convS;
 
-const nearestCyl = nearest(CL_CYL_STEPS, rawCyl);
+  const nearestCyl = nearest(CL_CYL_STEPS, rawCyl);
 
-// Decide whether to keep cyl or drop it
-if (Math.abs(rawCyl) < Math.abs(nearestCyl - rawCyl)) {
-  // Closer to 0 → sphere only
-  if (Math.abs(convS) > 6){
-    return fmt(Math.round((convS + Number.EPSILON)/0.50)*0.50);
-  } else {
-    return fmt(r025(convS));
+  // Decide whether to keep cyl or drop it
+  if (Math.abs(rawCyl) < Math.abs(nearestCyl - rawCyl)) {
+    // Closer to 0 → sphere only
+    return fmt(roundSphere(convS));
   }
-}
 
-  const rS = r025(convS);
+  const rS = roundSphere(convS);
   const rClipC = nearest(CL_CYL_STEPS, rawCyl);
   const axis = flatterAxis(A);
   const clipDiffRounded = roundClipDiff(rawCyl - rClipC);
-  const correctedSphere = roundUp025(rS + clipDiffRounded/2);
 
-  // OUTPUT FORMAT CHANGE HERE: S / C x AXXX
+  const correctedSphere = roundSphere(
+    roundUp025(rS + clipDiffRounded / 2)
+  );
+
+  // OUTPUT FORMAT: S / C x AXXX
   return `${fmt(correctedSphere)} / ${fmt(rClipC)} x ${axis}`;
 }
 
@@ -6950,6 +6958,13 @@ function parseText(txt){
   ];
 }
 
+function roundSphere(sph){
+  if (Math.abs(sph) >= 6.00){
+    return Math.round(sph / 0.50) * 0.50;
+  }
+  return Math.round(sph * 4) / 4;
+}
+
 function getSEfromCL(clText) {
   if (!clText) return "";
 
@@ -6960,18 +6975,15 @@ function getSEfromCL(clText) {
     const sphere = parseFloat(fullMatch[1]);
     const cyl = parseFloat(fullMatch[2]) || 0;
 
-    let se = sphere + (cyl / 2);
+    const se = roundSphere(sphere + (cyl / 2));
 
-    const scaled = se * 4;
-    const rounded = Math.round(scaled) / 4; // safer rounding to 0.25
-
-    return (rounded >= 0 ? "+" : "") + rounded.toFixed(2);
+    return (se >= 0 ? "+" : "") + se.toFixed(2);
   }
 
   // Case 2: SPH only (no cyl present)
   const sphOnly = clText.match(/([+-]?\d+\.?\d*)/);
   if (sphOnly) {
-    const sph = parseFloat(sphOnly[1]);
+    const sph = roundSphere(parseFloat(sphOnly[1]));
     return (sph >= 0 ? "+" : "") + sph.toFixed(2);
   }
 
