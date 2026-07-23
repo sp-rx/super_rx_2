@@ -3241,30 +3241,55 @@ function getSE(rxText) {
 
     let se = sphere + (cyl / 2);
 
-    // round to nearest 0.25, ties toward negative
-    const scaled = se * 4;
-    const floorVal = Math.floor(scaled);
-    const frac = scaled - floorVal;
-
-    let roundedScaled;
-    if (frac < 0.5) {
-      roundedScaled = floorVal;
-    } else if (frac > 0.5) {
-      roundedScaled = floorVal + 1;
+    if (Math.abs(se) >= 6.00) {
+      // Round to nearest 0.50
+      se = Math.round(se / 0.50) * 0.50;
     } else {
-      roundedScaled = floorVal;
-    }
+      // Round to nearest 0.25, ties toward negative
+      const scaled = se * 4;
+      const floorVal = Math.floor(scaled);
+      const frac = scaled - floorVal;
 
-    se = roundedScaled / 4;
+      let roundedScaled;
+      if (frac < 0.5) {
+        roundedScaled = floorVal;
+      } else if (frac > 0.5) {
+        roundedScaled = floorVal + 1;
+      } else {
+        roundedScaled = floorVal;
+      }
+
+      se = roundedScaled / 4;
+    }
 
     return formatRx(se);
   }
 
-  // Case 2: SPH only (e.g. "-2.50")
+  // Case 2: SPH only
   match = clean.match(/([+-]?\d+(\.\d+)?)/);
 
   if (match) {
-    const sph = parseFloat(match[1]);
+    let sph = parseFloat(match[1]);
+
+    if (Math.abs(sph) >= 6.00) {
+      sph = Math.round(sph / 0.50) * 0.50;
+    } else {
+      const scaled = sph * 4;
+      const floorVal = Math.floor(scaled);
+      const frac = scaled - floorVal;
+
+      let roundedScaled;
+      if (frac < 0.5) {
+        roundedScaled = floorVal;
+      } else if (frac > 0.5) {
+        roundedScaled = floorVal + 1;
+      } else {
+        roundedScaled = floorVal;
+      }
+
+      sph = roundedScaled / 4;
+    }
+
     return formatRx(sph);
   }
 
