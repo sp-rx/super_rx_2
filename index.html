@@ -631,19 +631,29 @@ Length (cm) : <input style="margin-right:4%; width:60px" placeholder="33" type="
 <tr><td style="border:none" colspan="4">
 
     <div id="graph-body" style="display:none">
-      <div class="slider-row">
-        <span style="min-width:80px">Near (cm)</span>
-        <input style="accent-color:#163d6d;" type="range" id="leftSlider" min="10" max="50" value="20" step="5">
-        <span id="leftValue" style="min-width:24px">20</span>
-      </div>
+
       <div class="slider-row">
         <span style="min-width:80px">Mid (cm)</span>
-        <input style="accent-color:#163d6d;" type="range" id="rightSlider" min="20" max="160" value="60" step="5">
-        <span id="rightValue" style="min-width:24px">60</span>
+        <input style="accent-color:#163d6d;" type="range" id="rightSlider" min="20" max="185" value="185" step="5">
+        <span id="rightValue" style="min-width:24px">185</span>
+      </div>
+
+
+      <div class="slider-row">
+        <span style="min-width:80px">Near (cm)</span>
+        <input style="accent-color:#163d6d;" type="range" id="leftSlider" min="10" max="50" value="30" step="5">
+        <span id="leftValue" style="min-width:24px">30</span>
       </div>
 
 
       <canvas id="addGraph" style="margin-top:0.5rem;width:100%;max-height:320px;max-width:550px"></canvas>
+
+<div class="slider-row">
+  Add (D): 
+  <input style="accent-color:#163d6d;" type="range" id="addSlider" min="0" max="3.5" step="0.25" value="2">
+  <span id="addValue">2</span>
+</div>
+
     </div>
   </div>
 </div>
@@ -701,8 +711,9 @@ Bino PD : <input style="width:40px; margin-right:2%"  placeholder="65" type="num
 
       Pupil H : <input style="width:40px; margin-right:2%" placeholder="25" type="number" id="ph">
 
-Drop : <input style="width:40px; margin-right:2%" placeholder="4" type="number" step="1" id="drop"> 
-
+<div style="display:none">
+  Drop : <input style="width:40px; margin-right:2%" placeholder="4" type="number" step="1" id="drop" value="0"> 
+</div>
 
 </div>
 
@@ -9691,10 +9702,15 @@ function plotGraph() {
     tension: 0
   });
 
-// Inverse dots (every 0.5D)
+// Inverse dots
 const inverseDots = [];
-for (let d = 0.5; d <= 5; d += 0.5) {
-let cm = (100 / d) * 0.9;
+const maxAdd = parseFloat(document.getElementById('addSlider').value);
+
+for (let d = 0; d <= maxAdd; d += 0.25) {
+  let cm = d === 0
+    ? 300
+    : Math.min((100 / d) * 0.9, 300);
+
   if (cm >= 5 && cm <= 300) {
     inverseDots.push({ x: cm, y: d });
   }
@@ -9708,24 +9724,38 @@ datasets.push({
   showLine: false
 });
 
-// Horizontal connectors (same add plane)
+// Horizontal connectors
 const hLines = [];
 
-for (let d = 0.5; d <= 5; d += 0.5) {
-  const xMax = (100 / d) * 0.9; // inverse line
 
-  // balance line intersection (only if available)
+for (let d = 0; d <= maxAdd; d += 0.25) {
+
+  // Maximum WD
+  // 0.00 = full 300 cm
+  // 0.25 would be 360 cm, so cap it at 300
+  const xMax = d === 0
+    ? 300
+    : Math.min((100 / d) * 0.9, 300);
+
+  // Balance line intersection
   if (eyeAccommodationB !== null) {
-    const xBal = 100 / (eyeAccommodationB + d);
 
-    if (xBal >= 5 && xBal <= 160 && xMax >= 5 && xMax <= 300) {
+const xBal = 100 / (eyeAccommodationB + d);
+
+    if (xBal >= 5 && xBal <= 160 && xMax >= 5) {
+
       hLines.push({
         label: 'plane',
         data: [
           { x: xBal, y: d },
           { x: xMax, y: d }
         ],
-        borderColor: '#163d6d',
+
+        borderColor:
+          d <= 1.0 ? '#163d6d' :
+          d <= 2.0 ? '#ef9f27' :
+          '#e24b4a',
+
         borderWidth: 10,
         pointRadius: 0,
         fill: false,
@@ -9735,9 +9765,7 @@ for (let d = 0.5; d <= 5; d += 0.5) {
   }
 }
 
-// push all horizontal lines
 datasets.push(...hLines);
-
 
   const ctx = document.getElementById('addGraph').getContext('2d');
 
@@ -9751,6 +9779,8 @@ datasets.push(...hLines);
     data: { datasets },
     options: {
       responsive: true,
+    animation: false,
+
 plugins: {
   legend: {
     display: false
@@ -9777,16 +9807,22 @@ x: {
   },
   grid: { color: 'rgba(0,0,0,0.3)' }
 },
-        y: {
-          title: {
-            display: true,
-            text: 'Add',
-            font: { size: 11 }
-          },
-          min: 0,
-          max: 4,
-          grid: { color: 'rgba(0,0,0,0.05)' }
-        }
+y: {
+  reverse: true,
+  title: {
+    display: true,
+    text: 'Add',
+    font: { size: 11 }
+  },
+  min: -0.25,
+  max: 3.5,
+  ticks: {
+    callback: function(value) {
+      return value === -0.25 ? '' : value;
+    }
+  },
+  grid: { color: 'rgba(0,0,0,0.05)' }
+}
       }
     }
   });
@@ -9821,6 +9857,13 @@ document.getElementById('rightSlider').addEventListener('input', e => {
 );
 
 plotGraph();
+
+document.getElementById('addSlider').addEventListener('input', e => {
+  document.getElementById('addValue').textContent =
+    parseFloat(e.target.value).toFixed(2);
+
+  plotGraph();
+});
 
 
 function calcBothWd1() {
