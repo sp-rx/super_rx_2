@@ -501,7 +501,10 @@ button.active {
 	<a data-target="s-1">Intro</a>
 	<a data-target="s0">Current Rx</a>
 	<a data-target="s2">Delta RX</a>
+	<a data-target="snear">Near RX</a>
+
 	<a data-target="s3">Manual RX</a>
+
 
 	<a style="display:none" data-target="s1">Results</a>
 
@@ -513,9 +516,10 @@ button.active {
 <div>
   <div style="display:flex; gap:10px; justify-content:flex-start;">
 
-	<a data-target="snear">Near RX</a>
-	<a data-target="myocon">MyoCon</a>
 
+
+
+	<a style="display:none;" data-target="myocon">MyoCon</a>
     <a style="display:none; opacity:0.1;" data-target="s4">Summary</a>
     <a style="display:none; opacity:0.1;" data-target="s-2">Bino Test</a>
     <a style="display:none; opacity:0.1;" data-target="s5">Lenses</a>
@@ -589,8 +593,8 @@ button.active {
 
 <tr><td class="red" style="border-bottom:none" colspan="4">
 
-<span><b> Nearest Balance - Pull until nearest point of balance. </b></span><br><br>
-<span>1. Key in Age to calculate and use the 'Add' Power.<br>2. Pull as near as possible while still maintaining both side duochrome balance.<br>3. Find the nearest distance of balance. </span>
+<span><b>The distance where letters in red starts to blur.</b></span><br><br>
+<span><i>1. Key in Age to calculate the 'Add' power for the 'Testing Add'.<br>2. Apply 'Testing Add' Power on Far Duochrome Balance RX. <br>3. Pull to nearest point where red side duochrome letters are blur.</i> </span>
 
 </td></tr>
 
@@ -602,10 +606,57 @@ Testing Add : <span id="autoFillMsg" style="display:none; margin-right:8px;">
 </span><input style="margin-right:1%; width:60px"  placeholder="1.50" type="number" step="0.25" id="add1b">
 
 
-Length (cm) : <input style="margin-right:4%; width:60px" placeholder="33" type="number" step="1" id="np1b">
+Length (cm) : <input style="margin-right:4%; width:60px" placeholder="33" type="number" step="1=5" id="np1b">
 
-        <button class="normal-btn" id="btn1b" onclick="calcAccomB()">Set</button>&nbsp;
+Remaining Near Vision <span id="remainingAccomB">...</span> <span id="remainingDistanceB"></span>
+
+<br><br>
+
+
+<button class="normal-btn" id="btn1b" onclick="calcAccomB(); calculateRemainingAccomB()">Set</button>&nbsp;
+
       <button class="normal-btn" onclick="toggle('graph-body')">Near Vision Graph</button>
+
+
+
+<script>
+
+function calculateRemainingAccomB() {
+  const add = parseFloat(document.getElementById("add1b").value);
+  const np = parseFloat(document.getElementById("np1b").value);
+
+  const result = document.getElementById("remainingAccomB");
+  const distanceResult = document.getElementById("remainingDistanceB");
+
+  if (isNaN(add) || isNaN(np) || np <= 0) {
+    result.textContent = "";
+    distanceResult.textContent = "";
+    return;
+  }
+
+  // Remaining accommodation
+  const remaining = (100 / np) - add;
+
+  result.textContent =
+    `${remaining.toFixed(2)} D`;
+
+  // Equivalent distance of remaining accommodation
+  if (remaining > 0) {
+    const distance = 100 / remaining;
+
+    distanceResult.textContent =
+      `; ${distance.toFixed(0)} cm `;
+  } else {
+    distanceResult.textContent =
+      `= ∞ `;
+  }
+}
+</script>
+
+
+
+
+
 
 
       <div style="display:flex;gap:8px">
@@ -634,7 +685,7 @@ Length (cm) : <input style="margin-right:4%; width:60px" placeholder="33" type="
 
       <div class="slider-row">
         <span style="min-width:80px">Mid (cm)</span>
-        <input style="accent-color:#163d6d;" type="range" id="rightSlider" min="20" max="185" value="185" step="5">
+        <input style="accent-color:#163d6d;" type="range" id="rightSlider" min="20" max="600" value="200" step="5">
         <span id="rightValue" style="min-width:24px">185</span>
       </div>
 
@@ -645,14 +696,16 @@ Length (cm) : <input style="margin-right:4%; width:60px" placeholder="33" type="
         <span id="leftValue" style="min-width:24px">30</span>
       </div>
 
+<div class="slider-row">
+        <span style="min-width:80px">Add (D)</span>
+  <input style="accent-color:#163d6d;" type="range" id="addSlider" min="0" max="3.5" step="0.25" value="1">
+  <span style="min-width:24px" id="addValue">1</span>
+</div>
+
 
       <canvas id="addGraph" style="margin-top:0.5rem;width:100%;max-height:320px;max-width:550px"></canvas>
 
-<div class="slider-row">
-  Add (D): 
-  <input style="accent-color:#163d6d;" type="range" id="addSlider" min="0" max="3.5" step="0.25" value="2">
-  <span id="addValue">2</span>
-</div>
+
 
     </div>
   </div>
@@ -662,7 +715,7 @@ Length (cm) : <input style="margin-right:4%; width:60px" placeholder="33" type="
 
 <tr><td class="red" style="border-bottom:none" colspan="4">
 
-    <span><b>Calculate Near &amp; Mid Length Add Suitability</span></b>
+    <span><b>Calculate Minimum Near &amp; Minimum Mid Length Add Suitability</span></b>
 
 </td></tr>
 
@@ -761,10 +814,6 @@ function setFitAndCalculate(btn, value) {
     <div id="output" style="margin-top:0.75rem"></div>
 
 
-<div style="height:15px"></div>
-
-    <span><i>Did you know! Standard multifocal distance are designed for 40 cm.<br>For every 10 cm difference, 20% visual field loss occur.</i></span>
-  </div>
 
   <!-- WORKING DISTANCE GRAPH -->
 </td></tr>
@@ -9026,6 +9075,7 @@ function clearLine2() {
 
 function calculateAdd(inputId, resultId, accommodation) {
   const wd = parseFloat(document.getElementById(inputId).value);
+
   if (isNaN(wd) || wd <= 0) {
     document.getElementById(resultId).textContent = '—';
     return;
@@ -9036,9 +9086,7 @@ function calculateAdd(inputId, resultId, accommodation) {
   if (addNeeded < 0) addNeeded = 0;
   if (addNeeded > 4) addNeeded = 4;
 
-  let finalAdd = roundUp025(addNeeded) + 0.25;
-
-
+  let finalAdd = roundUp025(addNeeded);
 
   document.getElementById(resultId).textContent =
     '+' + finalAdd.toFixed(2);
@@ -9665,7 +9713,7 @@ function plotGraph() {
   }
 
     const pts = [];
-    for (let d = 5; d <= 160; d++) {
+    for (let d = 5; d <= 600; d++) {
       let add = 100 / d - eyeAccommodationB;
       if (add < 0) add = 0;
       if (add > 5) add = 5;
@@ -9685,7 +9733,7 @@ function plotGraph() {
 
   // Inverse line (cm → diopter)
   const inversePts = [];
-  for (let cm = 5; cm <= 160; cm += 1) {
+  for (let cm = 5; cm <= 600; cm += 1) {
     inversePts.push({
       x: cm,
       y: 100 / cm
@@ -9708,10 +9756,10 @@ const maxAdd = parseFloat(document.getElementById('addSlider').value);
 
 for (let d = 0; d <= maxAdd; d += 0.25) {
   let cm = d === 0
-    ? 300
-    : Math.min((100 / d) * 0.9, 300);
+    ? 600
+    : Math.min((100 / d) * 0.9, 600);
 
-  if (cm >= 5 && cm <= 300) {
+  if (cm >= 5 && cm <= 600) {
     inverseDots.push({ x: cm, y: d });
   }
 }
@@ -9731,18 +9779,18 @@ const hLines = [];
 for (let d = 0; d <= maxAdd; d += 0.25) {
 
   // Maximum WD
-  // 0.00 = full 300 cm
-  // 0.25 would be 360 cm, so cap it at 300
+  // 0.00 = full 600 cm
+  // 0.25 would be 360 cm, so cap it at 600
   const xMax = d === 0
-    ? 300
-    : Math.min((100 / d) * 0.9, 300);
+    ? 600
+  : Math.min(100 / (d), 600);
 
   // Balance line intersection
   if (eyeAccommodationB !== null) {
 
 const xBal = 100 / (eyeAccommodationB + d);
 
-    if (xBal >= 5 && xBal <= 160 && xMax >= 5) {
+    if (xBal >= 5 && xBal <= 600 && xMax >= 5) {
 
       hLines.push({
         label: 'plane',
@@ -9815,7 +9863,7 @@ y: {
     font: { size: 11 }
   },
   min: -0.25,
-  max: 3.5,
+  max: 3.0,
   ticks: {
     callback: function(value) {
       return value === -0.25 ? '' : value;
