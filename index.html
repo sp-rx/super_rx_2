@@ -685,7 +685,7 @@ function calculateRemainingAccomB() {
 
       <div class="slider-row">
         <span style="min-width:80px">Mid (cm)</span>
-        <input style="accent-color:#163d6d;" type="range" id="rightSlider" min="20" max="600" value="200" step="5">
+        <input style="accent-color:#c;" type="range" id="rightSlider" min="20" max="600" value="200" step="5">
         <span id="rightValue" style="min-width:24px">185</span>
       </div>
 
@@ -2782,7 +2782,7 @@ Duochrome :
 
 <button class="btn-0" style="width:40px; margin-right:20px" onclick="resetRx()">R</button>
 <div>
-<input type="range" id="darkSlider" min="0" max="100" value="0" style="width:300px;">
+<input type="range" id="darkSlider" min="0" max="100" value="0" style="width:300px;  accent-color:grey;"">
 </div>
 
 
@@ -3490,7 +3490,7 @@ function captureRELE_CL() {
 </td></tr>
 
 <tr><td colspan="4">
-<button class="vtbn" onclick="togglevisualizer()">Delta Graph Show / Hide</button>
+<button style="border-radius:10px; width:300px; height:25px" onclick="togglevisualizer()">Show Delta Graph</button>
 </td></tr>
 
 <tr class="vi-row" style="display:none;"><td colspan="4">
@@ -3617,7 +3617,7 @@ updateRXDisplay2();
 <br>
 
 
-  <span style="font-size:15px; font-weight:400">Final RX <span id="lastLoaded"> </span>&nbsp<span id="visual_combinedSpan">0.00 0.00 x 0</span>
+  <span style="font-size:12px; font-weight:400">Final RX <span id="lastLoaded"> </span>&nbsp<span id="visual_combinedSpan">0.00 0.00 x 0</span>
   </span>
 
 
@@ -3635,22 +3635,19 @@ updateRXDisplay2();
 </div>
 
 <div>
-<button id="toggleBaseScale">Demo</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button id="togglePlano">Plano</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button style="display:none" id="toggleBaseScale">Demo</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button style="display:none" id="togglePlano">Plano</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <button id="toggleAxis">Axis</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <button id="switchBtn">Lines</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
   Zoom:
   <button id="zoomOut">−</button>
-  <button id="zoomIn">+</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+  <button id="zoomIn">+</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
   <span style="color:black;">— Current RX</span> &nbsp;&nbsp;&nbsp;
   <span style="color:red;">— New RX</span> &nbsp;&nbsp;&nbsp;
-    <span style="color:black;">⋯⋯ Zero RX</span><br><br>
 
-
-<span> A zero powered eye is roughly 24mm. Every 1.00 diopters of correction is roughyly 0.33mm difference from baseline. </span>
 
 <div style="display:none">
   <b>Final RX</b><br>
@@ -8449,8 +8446,8 @@ function drawEllipse(S,C,A,color){
 
 const scale = actualScale ? BASE_SCALE_ACTUAL : BASE_SCALE_VISUAL;
 
-const rAxis = (planoRadius - (S * scale)) * zoomLevel;
-const rPerp = (planoRadius - ((S + C) * scale)) * zoomLevel;
+const rAxis = (planoRadius + (S * scale)) * zoomLevel;
+const rPerp = (planoRadius + ((S + C) * scale)) * zoomLevel;
 
 ctx.save();
 ctx.translate(cx, cy);
@@ -8459,7 +8456,7 @@ ctx.rotate(A*Math.PI/180);
 ctx.beginPath();
 ctx.ellipse(0,0,rAxis,rPerp,0,0,2*Math.PI);
 ctx.strokeStyle = color;
-ctx.lineWidth = 1;
+ctx.lineWidth = color === "grey" ? 2 : 1;
 ctx.stroke();
 
 /* Axis guide line */
@@ -8565,11 +8562,11 @@ if(bgImage.complete){
 
   drawPlanoBaseline();   // baseline first
 
-  if(showCurrent)
-    drawEllipse(+s1.value,+c1.value,+a1.value,"black");
-
   if(showFinal)
     drawEllipse(+s3.value,+c3.value,+a3.value,"red");
+
+  if(showCurrent)
+    drawEllipse(+s1.value,+c1.value,+a1.value,"grey");
 
   combinePrescriptions();
 
