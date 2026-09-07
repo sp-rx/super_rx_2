@@ -484,6 +484,88 @@ button.active {
 }
 
 
+.app {
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.visual-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-right: 1px solid #e1dbd0;
+}
+
+.shape-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+svg {
+    width: 50%;
+    height: 50%;
+    overflow: visible;
+}
+
+#cyldx_referenceSquare {
+    fill: #fff;
+    stroke: #777;
+    stroke-width: 2;
+    opacity: .28;
+}
+
+.meridian {
+    stroke: #aaa;
+    stroke-width: 1;
+    stroke-dasharray: 5 5;
+}
+
+#cyldx_astigShape {
+    fill: #fff;
+    stroke: #222;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    transition: all .15s ease;
+}
+
+.shape-label {
+    margin-top: 5px;
+    color: #888;
+}
+
+.controlscyldx {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.control-group { flex:1; margin:0; }
+.control-top { display:flex; align-items:center; gap:8px; margin:0; }
+.control-name { white-space:nowrap; }
+.control-value { white-space:nowrap; }
+.control-top::after { content:""; }
+.control-group input[type="text"], .control-group input[type="number"] { display:none; }
+.control-group input[type="range"] { flex:1; width:auto; margin:0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 
 </head>
@@ -501,9 +583,7 @@ button.active {
 	<a data-target="s-1">Intro</a>
 	<a data-target="s0">Current Rx</a>
 	<a data-target="s2">Delta RX</a>
-	<a data-target="snear">Near RX</a>
 
-	<a data-target="s3">Manual RX</a>
 
 
 	<a style="display:none" data-target="s1">Results</a>
@@ -515,6 +595,11 @@ button.active {
   <!-- Second row -->
 <div>
   <div style="display:flex; gap:10px; justify-content:flex-start;">
+
+	<a data-target="s-4">Cyl DX</a>
+
+	<a data-target="snear">Near RX</a>
+	<a data-target="s3">Manual RX</a>
 
 
 
@@ -533,8 +618,199 @@ button.active {
 
 <div class="layout">
   <main id="content" class="content">
+    <div id="s-4" class="section">
+<div style="height:90px"></div>
 
 
+<table>
+<tr><th class="red" colspan="4">Cyl DX - Cylinder Difference</th></tr>
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
+<tr style="border:none">
+<td style="border:none" colspan="4">
+
+<div class="app">
+
+<div class="header">
+
+
+
+
+
+
+
+
+
+
+<div class="header">
+  <div class="header-left">
+    <div class="title">Astigmatism Visualizer; See how the view changes.</div>
+<br>
+  </div>
+<div style="margin-top:3%; display:flex;align-items:center;justify-content:center;gap:8px;">
+  <div style="display:none" class="rx-display" id="cyldx_rxDisplay">-0.75 × 90°</div>
+  <button class="axis-btn" onclick="logFullRX()">Set Current RX</button>
+  <button style="margin-right:5%" class="axis-btn" onclick="resetVisualizer()">Reset</button>
+
+
+
+
+<div style="width:30%;">
+  <div style="display:flex; align-items:center; justify-content:center;">
+    <b><div style="margin-right:10px" class="rx-display">Current RX : </div></b>
+    <b><div class="rx-display" id="cyldx_loggedRXDisplay">.. × ..</div></b>
+  </div>
+
+  <br>
+
+  <div style="margin-top:-10px; display:flex; align-items:center; justify-content:center;">
+
+  <b><div class="rx-display" style="margin-right:10px">Manifest RX : </div></b>
+<b><div class="rx-display"><span style="min-width:24px" class="control-value" id="cyldx_cylValue">-0.75</span>
+<span style="min-width:36px" class="control-value" id="cyldx_axisValue">90°</span>
+</div>
+
+</div>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+  <div style="margin-top:3%" class="controlscyldx">
+<div class="control-group">
+  <div class="control-top"><span style="min-width:80px" class="control-name">Cylinder</span>
+  <input style="display:none" id="cyldx_cyl" type="text" inputmode="decimal" value="-0.75" oninput="updateShape()">
+  <input id="cyldx_cylSlider" style="accent-color:#163d6d" type="range" min="-3" max="0" step="0.25" value="-0.75" oninput="syncCyl(this.value)"></div>
+</div>
+
+<div class="control-group">
+  <div class="control-top"><span style="min-width:80px" class="control-name">Axis</span>
+  <input style="display:none" id="cyldx_axis" type="number" min="0" max="180" step="5" value="90" oninput="updateShape()">
+  <input id="cyldx_axisSlider" style="accent-color:#163d6d" type="range" min="0" max="180" step="5" value="90" oninput="syncAxis(this.value)"></div>
+</div>
+
+
+      <div style="display:none" class="axis-presets">
+        <button class="axis-btn" onclick="setAxis(0)">0°</button>
+        <button class="axis-btn" onclick="setAxis(30)">30°</button>
+        <button class="axis-btn" onclick="setAxis(45)">45°</button>
+        <button class="axis-btn" onclick="setAxis(60)">60°</button>
+        <button class="axis-btn" onclick="setAxis(90)">90°</button>
+        <button class="axis-btn" onclick="setAxis(120)">120°</button>
+        <button class="axis-btn" onclick="setAxis(135)">135°</button>
+        <button class="axis-btn" onclick="setAxis(180)">180°</button>
+      </div>
+
+    <div class="info">The faint square is the zero-distortion reference. The solid shape shows the effect of the current cylinder power and axis.</div>
+  </div>
+</div>
+
+
+
+<div class="main">
+  <div class="visual-panel">
+    <div class="shape-wrap">
+      <svg viewBox="0 0 300 300">
+        <rect id="cyldx_referenceSquare" x="75" y="75" width="150" height="150"></rect>
+        <line class="meridian" x1="150" y1="20" x2="150" y2="280"></line>
+        <line class="meridian" x1="20" y1="150" x2="280" y2="150"></line>
+        <polygon id="cyldx_astigShape" points="75,75 225,75 225,225 75,225"></polygon>
+      </svg>
+    </div>
+    <div class="shape-label" id="cyldx_shapeLabel">Axis 90°</div>
+  </div>
+
+
+
+</div></td></tr></table>
+
+<script>
+let loggedRX=null;
+
+function updateShape(){
+  let cyl=parseFloat(document.getElementById("cyldx_cyl").value),axis=parseFloat(document.getElementById("cyldx_axis").value);
+  if(isNaN(cyl))cyl=0;if(isNaN(axis))axis=0;
+  axis=Math.max(0,Math.min(180,axis));cyl=Math.max(-3,Math.min(0,cyl));
+
+  document.getElementById("cyldx_cyl").value=cyl.toFixed(2);
+  document.getElementById("cyldx_axis").value=axis;
+  document.getElementById("cyldx_cylSlider").value=cyl;
+  document.getElementById("cyldx_axisSlider").value=axis;
+  document.getElementById("cyldx_cylValue").textContent=cyl.toFixed(2);
+  document.getElementById("cyldx_axisValue").textContent=axis+"°";
+  document.getElementById("cyldx_rxDisplay").textContent=cyl.toFixed(2)+" × "+axis+"°";
+  document.getElementById("cyldx_shapeLabel").textContent="Axis "+axis+"°";
+
+  let power=Math.min(Math.abs(cyl),3),distortion=power*45,cx=150,cy=150,baseWidth=150,baseHeight=150;
+  let angle=axis*Math.PI/180,sinA=Math.abs(Math.sin(angle)),cosA=Math.abs(Math.cos(angle));
+  let width=Math.max(baseWidth+distortion*cosA-distortion*sinA,30);
+  let height=Math.max(baseHeight+distortion*sinA-distortion*cosA,30);
+  let skewStrength=distortion*Math.sin(2*angle)*0.45;
+  let left=cx-width/2,right=cx+width/2,top=cy-height/2,bottom=cy+height/2;
+  let p1=`${left+skewStrength},${top}`,p2=`${right+skewStrength},${top}`,p3=`${right-skewStrength},${bottom}`,p4=`${left-skewStrength},${bottom}`;
+
+  let shape=document.getElementById("cyldx_astigShape");
+  shape.setAttribute("points",`${p1} ${p2} ${p3} ${p4}`);
+
+  let blur=0;
+  if(loggedRX!==null){
+    let cylDifference=Math.abs(cyl-loggedRX.cyl);
+    let axisDifference=Math.abs(axis-loggedRX.axis);
+    axisDifference=Math.min(axisDifference,180-axisDifference);
+    let cylSeverity=Math.abs(cyl);
+    blur=cylDifference*2+(axisDifference/10)*cylSeverity*2;
+    blur=Math.min(12,blur);
+  }
+
+  shape.style.filter=blur>0?`blur(${blur}px) drop-shadow(${blur}px 0 0 rgba(0,0,0,0.5))`:"none";
+}
+
+function logFullRX(){
+  let cyl=parseFloat(document.getElementById("cyldx_cyl").value),axis=parseFloat(document.getElementById("cyldx_axis").value);
+  if(isNaN(cyl))cyl=0;if(isNaN(axis))axis=0;
+  loggedRX={cyl,axis};
+  document.getElementById("cyldx_loggedRXDisplay").textContent=cyl.toFixed(2)+" × "+axis+"°";
+  updateShape();
+}
+
+function syncCyl(value){document.getElementById("cyldx_cyl").value=value;updateShape();}
+function syncAxis(value){document.getElementById("cyldx_axis").value=value;updateShape();}
+function setAxis(value){document.getElementById("cyldx_axis").value=value;updateShape();}
+
+function resetVisualizer(){
+  loggedRX=null;
+  document.getElementById("cyldx_loggedRXDisplay").textContent=".. × ..";
+  document.getElementById("cyldx_cyl").value="-0.75";
+  document.getElementById("cyldx_axis").value="90";
+  document.getElementById("cyldx_astigShape").style.filter="none";
+  updateShape();
+}
+
+updateShape();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
 
 
     <div id="snear" class="section">
@@ -685,7 +961,7 @@ function calculateRemainingAccomB() {
 
       <div class="slider-row">
         <span style="min-width:80px">Mid (cm)</span>
-        <input style="accent-color:#c;" type="range" id="rightSlider" min="20" max="600" value="200" step="5">
+        <input style="accent-color:#163d6d;" type="range" id="rightSlider" min="20" max="600" value="200" step="5">
         <span id="rightValue" style="min-width:24px">185</span>
       </div>
 
