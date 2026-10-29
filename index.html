@@ -1918,7 +1918,12 @@ Exam Date : <input style="height:20px; width:25%" type="text" id="dateInput">
 <tr class="befinal-row yellow" style="border-top:none; border-bottom:none; padding:10px 0 0 0">
 <td style="border-top:none; border-bottom:none" colspan="4">
 
-<div id="toggleDivou">
+
+<button class="yellow" style="border-radius:10px; margin-right:5px"onclick="toggleHideShowou()">H</button>
+<span>Both Eye</span>
+
+<div class="toggleDivou" style="display:none">
+
 <span> Delta Both Eye &nbsp;&nbsp; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - &nbsp;</span>
 
 
@@ -1969,11 +1974,10 @@ Current RX VA :
 
     <input style="width:50px" type="number" step="15" min="0" max="180" id="vd_ouA">
 
-<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOU()">-</button>
+<button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOU()">X</button>
 
-<div style="height:10px"></div>
-<div id="ou_va_result">...</div>
-<div style="height:10px"></div>
+<div style="height:15px"></div>
+<div style="display:none" id="ou_va_result">...</div>
 
  
 <b>
@@ -1982,8 +1986,11 @@ Finalized Delta RX over Both Eyes
     <span style="margin:0 15px" id="vd_out_ouC">-</span> x 
     <span style="margin:0 15px" id="vd_out_ouA">-</span>
 </b>
+<br><br>
+<button class="yellow" onclick="runBE()" style="margin-left:6%; border-radius:10px; width:90px; height:25px">Calculate BE</button>
 
 
+<button class="yellow" style="display:none; border-radius:10px;" onclick="resetLogBE()">X</button>
 </div>
 
 </td>
@@ -2273,7 +2280,16 @@ document.getElementById("fillBalance").addEventListener("click", () => {
 <tr class="refinal-row purp" style="border-top:none; border-bottom:none; padding: 10px 0 0 0">
 <td style="border-top:none; border-bottom:none;" colspan="4">
 
-<div class="toggleDivodos" style="display:none">
+
+
+<button class="purp" style="border-radius:10px; margin-right:5px"onclick="toggleHideShowodos()">H</button>
+
+<span>Right & Left Eye</span>
+
+
+<div class="toggleDivodos" style="display:none; margin-top:15px">
+
+
 <span> Delta Right Eye &nbsp;&nbsp; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - &nbsp;</span>
 
 
@@ -2326,8 +2342,7 @@ C
 
 
 <div style="height:10px"></div>
-<div id="od_va_result">...</div>
-<div style="height:10px"></div>
+<div style="display:none" id="od_va_result">...</div>
 
 
   <b>
@@ -2615,11 +2630,10 @@ Calculate into Delta LE
 
 
 
-<tr class="lefinal-row turq" style="background:#D8C5E6; border-top:none; border-bottom:none; padding:10px 0 0 0"><td style="border-top:none; border-bottom:none" colspan="4">
+<tr class="lefinal-row purp toggleDivodos" style="display:none; border-top:none; border-bottom:none; padding:10px 0 0 0"><td style="border-top:none; border-bottom:none" colspan="4">
 
 
-<div class="toggleDivodos" style="display:none">
-<span> Delta Left Eye &nbsp;&nbsp; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - &nbsp;</span>
+<span> Delta Left Eye &nbsp;&nbsp; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - &nbsp;</span>
 
 
 &nbsp; <button style="margin-left:0%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="toggleLE()"> G </button>
@@ -2671,7 +2685,7 @@ C
 
 <button style="margin-left:2%; border-radius:20px; border:1px dotted grey; width:5%; margin-right:1%" class="vtbn" onclick="dashOS()">-</button>
 
-<div style="height:10px"></div>
+<div style="height:15px"></div>
 
 
 <b>
@@ -2680,6 +2694,18 @@ Finalized Delta RX over Left Eye Only
     <span style="margin:0 15px" id="vd_out_osC">-</span> x 
     <span style="margin:0 15px" id="vd_out_osA">-</span>
 </b>
+<br><br>
+<button class="purp" onclick="runRELE()" 
+style="border-radius:10px; width:120px; height:25px">
+  Calculate RE LE
+</button>
+
+
+
+
+
+<button class="purp" style="display:none; border-radius:10px; " onclick="resetLogRELE()">X</button>
+
 </div>
 
 </td>
@@ -2731,12 +2757,9 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 
 <tr class="red" style="border-bottom:none"><td colspan="4" style="border-bottom:none">
 
-<button class="yellow" onclick="runBE()" style="margin-left:2%; border-radius:10px; width:120px; height:25px">Calculate BE</button>
 
 
-<button class="yellow" style="border-radius:10px;" onclick="resetLogBE()">X</button>
 
-<button class="yellow" style="border-radius:10px; margin-right:20px"onclick="toggleHideShowou()">H</button>
 
 
 <script>
@@ -2758,18 +2781,9 @@ function resetLogBE() {
 </button>
 
 
-<button class="purp" onclick="runRELE()" 
-style="border-radius:10px; width:120px; height:25px">
-  Calculate RE LE
-</button>
 
 
 
-
-
-<button class="purp" style="border-radius:10px; " onclick="resetLogRELE()">X</button>
-
-<button class="purp" style="border-radius:10px; margin-right:20px"onclick="toggleHideShowodos()">H</button>
 
 <script>
 function resetLogRELE() {
@@ -3375,10 +3389,17 @@ function toggleHideShow4() {
 RX Profile for <span style="margin-right:10%" class="customerName_summary">...</span> Whatsapp <span class="customerWhatsapp_summary">...</span>
 
 </th></tr>
-<tr><td class="yellow" colspan="4"><b>Spectacle Lens Results</b> </td></tr>
+
+<tr style="border:none; height:10px;">
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+  <td style="border:none; height:1px; padding:0;"></td>
+</tr>
 
 <tr>
-<td class="red">Current SL</td>
+
+<td class="red">Current Spectacles</td>
 <td class="red" colspan="3">
 R: <span class="od_summary" style="margin-right: 80px;">+0.00 / +0.00 × 0</span>
 L: <span class="os_summary">+0.00 / +0.00 × 0</span>
@@ -3395,8 +3416,8 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 </td>
 </tr>
 
-<tr class="yellow">
-  <td colspan="1">Delta BE SL</td>
+<tr class="yellow toggleDivou" style="display:none" >
+  <td colspan="1">New BE Spectacles</td>
   <td colspan="3">
 <span id="logBE"><i>-</i></span><br><br>
 &Delta; : 
@@ -3409,8 +3430,8 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 </tr>
 
 
-<tr class="purp">
-  <td colspan="1">Delta R/L SL</td>
+<tr class="purp toggleDivodos" style="display:none">
+  <td colspan="1">New R/L Spectacles</td>
 
   <td colspan="3"><span id="logRELE" colspan="3"><i>-</i></span><br><br>
 
@@ -3425,6 +3446,7 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 <span id="vd_out_osA_mirror">-</span>
 </td>
 </tr>
+
 </table>
 
 <div style="margin-top:-21px"></div>
@@ -3441,12 +3463,9 @@ L: <span id="os_vcFinalS">0.00</span> / <span id="os_vcFinalC">0.00</span> x <sp
 </tr>
 
 	
-<tr><td class="yellow" style="color: #042747" colspan="4"><b>
-Contact Lens Results</b>
 
-</td></tr>
 <tr>
-  <td style="color: #042747" class="red">Current CLA</td>
+  <td style="color: #042747" class="red">Current CL Toric</td>
   <td style="color: #042747" colspan="3" class="red">
 
 R: <span id="CL_od_origCombined" style="margin-right: 80px;">OD -</span>
@@ -3457,13 +3476,13 @@ L: <span id="CL_os_origCombined">OS -</span>
 
 
 
-<tr style="color: #042747" class="yellow">
-  <td style="color: #042747" colspan="1">Delta BE CLA</td>
+<tr style="color: #042747; display:none" class="yellow toggleDivou">
+  <td style="color: #042747" colspan="1">New BE CL Toric</td>
   <td style="color: #042747" colspan="3" id="logBE_CL"><i>-</i></td>
 </tr>
 
-<tr style="color: #042747" class="purp">
-  <td style="color: #042747" colspan="1">Delta R/L CLA</td>
+<tr style="color: #042747; display:none" class="purp toggleDivodos">
+  <td style="color: #042747" colspan="1">New R/L CL Toric</td>
 
   <td style="color: #042747" id="logRELE_CL" colspan="3"><i>-</i></td>
 </tr>
@@ -3477,7 +3496,7 @@ L: <span id="CL_os_origCombined">OS -</span>
 
 
 <tr>
-  <td style="color: #042747" class="red">Current CLSE</td>
+  <td style="color: #042747" class="red">Current CL SE</td>
   <td style="color: #042747" colspan="3" class="red">
 
 R: <span id="SE_od_origCombined" style="margin-right: 80px;">OD -</span>
@@ -3525,13 +3544,13 @@ L: <span id="SE_os_origCombined">OS -</span>
 </script>
 
 
-<tr style="color: #042747" class="yellow">
-  <td style="color: #042747" colspan="1">Delta BE CLSE</td>
+<tr style="color: #042747; display:none" class="yellow toggleDivou">
+  <td style="color: #042747" colspan="1">New BE CL SE</td>
   <td style="color: #042747" colspan="3" id="logBE_CL_SE"><i>-</i></td>
 </tr>
 
-<tr style="color: #042747" class="purp">
-  <td style="color: #042747" colspan="1"">Delta R/L CLSE</td>
+<tr style="color: #042747; display:none" class="purp toggleDivodos">
+  <td style="color: #042747" colspan="1"">New R/L CL SE</td>
   <td style="color: #042747" colspan="3" id="logRELE_CL_SE"><i>-</i></td>
 </tr>
 </table>
@@ -10424,15 +10443,13 @@ function updateMinusCyl() {
 
 
 <script>
-function toggleHideShowou() {
-  const div = document.getElementById("toggleDivou");
 
-  if (div.style.display === "none") {
-    div.style.display = "";
-  } else {
-    div.style.display = "none";
-  }
+function toggleHideShowou() {
+  document.querySelectorAll(".toggleDivou").forEach(div => {
+    div.style.display = (div.style.display === "none") ? "" : "none";
+  });
 }
+
 function toggleHideShowodos() {
   document.querySelectorAll(".toggleDivodos").forEach(div => {
     div.style.display = (div.style.display === "none") ? "" : "none";
