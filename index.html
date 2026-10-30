@@ -1987,7 +1987,7 @@ Finalized Delta RX over Both Eyes
     <span style="margin:0 15px" id="vd_out_ouA">-</span>
 </b>
 <br><br>
-<button class="yellow" onclick="runBE()" style="margin-left:6%; border-radius:10px; width:90px; height:25px">Calculate BE</button>
+<button class="yellow" onclick="runBE()" style="border-radius:10px; width:80%; height:25px">Calculate BE</button>
 
 
 <button class="yellow" style="display:none; border-radius:10px;" onclick="resetLogBE()">X</button>
@@ -2755,7 +2755,7 @@ document.getElementById("fillBalanceLE").addEventListener("click", () => {
 
 
 
-<tr class="red" style="border-bottom:none"><td colspan="4" style="border-bottom:none">
+<tr class="red" style="display:none; border-bottom:none"><td colspan="4" style="border-bottom:none">
 
 
 
@@ -2806,7 +2806,6 @@ function resetLogRELE() {
   Capture RE / LE
 </button>
 
-<button style="border-radius:10px; width:100px; height:25px" id="toggleBtn3">Show Charts</button>
 
 <script>
 function runRELE() {
@@ -3749,6 +3748,7 @@ function captureRELE_CL() {
 
 <button style="border-radius:10px; height:25px; width:85px" class="exportBtn">
     Save Data </button>
+<button style="border-radius:10px; width:100px; height:25px" id="toggleBtn3">Show Charts</button>
 
 
 
